@@ -3,11 +3,11 @@ SRC = $(wildcard *.java)
 CLASSES = $(SRC:.java=.class)
 TAR_NAME = fractals.tar.gz
 
-FractalToGIF = FractalToGIF  # Change this to the name of your runner class
+FractalToGIF = FractalToGIF
+FractalToPNG = FractalToPNG
 
 EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
 
-# Get all class file names except the runner's class and the excluded classes
 OTHER_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class) $(FractalToGIF).class, $(CLASSES))
 
 .PHONY: all
@@ -24,6 +24,10 @@ cleanclass:
 cleanjpg:
 	rm -f *.jpg
 
+.PHONY: cleanpng
+cleanpng:
+	rm -f *.png
+
 .PHONY: cleangif
 cleangif:
 	rm -f *.gif
@@ -37,11 +41,15 @@ tar: all
 
 .PHONY: gif
 gif: all
-	java $(FractalToGIF) -w 800 -h 600 -d 500 $(OTHER_CLASSES)
+	java $(FractalToGIF) $(OTHER_CLASSES)
 	$(MAKE) cleanjpg
 
+.PHONY: png
+png: all
+	java $(FractalToPNG) $(OTHER_CLASSES)
+
 .PHONY: veryclean
-veryclean: clean cleangif
+veryclean: clean cleanpng cleangif
 	rm -f $(TAR_NAME)
 
 .PHONY: tell
