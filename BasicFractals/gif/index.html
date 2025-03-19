@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fractals</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+			background: #f0f0f0;
+		}
+		.tabs {
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		.tab-button {
+			padding: 10px 20px;
+			margin: 0 5px;
+			cursor: pointer;
+			border: none;
+			background-color: #4285f4;
+			color: white;
+			border-radius: 5px;
+			font-size: 16px;
+			transition: background-color 0.2s;
+		}
+		.tab-button:hover {
+			background-color: #3367d6;
+		}
+		.tab-button.active {
+			background-color: #34a853;
+		}
+		.tab-content {
+			display: none;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+		img {
+			max-width: 500px;
+			border: 2px solid #ccc;
+			border-radius: 10px;
+			box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+			transition: transform 0.2s;
+		}
+		img:hover {
+			transform: scale(1.05);
+		}
+	</style>
+</head>
+<body>
+	<div class="tabs">
+		<button class="tab-button" data-index="0" onclick="showTab(0)">Page 1</button>
+		<button class="tab-button" data-index="1" onclick="showTab(1)">Page 2</button>
+		<button class="tab-button" data-index="2" onclick="showTab(2)">Page 3</button>
+		<button class="tab-button" data-index="3" onclick="showTab(3)">Page 4</button>
+		<button class="tab-button" data-index="4" onclick="showTab(4)">Page 5</button>
+		<button class="tab-button" data-index="5" onclick="showTab(5)">Page 6</button>
+		<button class="tab-button" data-index="6" onclick="showTab(6)">Page 7</button>
+		<button class="tab-button" data-index="7" onclick="showTab(7)">Page 8</button>
+		<button class="tab-button" data-index="8" onclick="showTab(8)">Page 9</button>
+	</div>
+	
+	<div class="tab-content" id="tab-0">
+		<img src="ApollonianGasket.gif" alt="ApollonianGasket.gif">
+		<img src="BoxFractal.gif" alt="BoxFractal.gif">
+		<img src="Branches.gif" alt="Branches.gif">
+		<img src="CesaroFractal.gif" alt="CesaroFractal.gif">
+		<img src="Christmas.gif" alt="Christmas.gif">
+		<img src="ChristmasApollonianGasket.gif" alt="ChristmasApollonianGasket.gif">
+		<img src="ChristmasKochSnowflake.gif" alt="ChristmasKochSnowflake.gif">
+		<img src="ChristmasSierpinskiCarpet.gif" alt="ChristmasSierpinskiCarpet.gif">
+		<img src="ChristmasSierpinskiTriangle.gif" alt="ChristmasSierpinskiTriangle.gif">
+		<img src="CircleInversion.gif" alt="CircleInversion.gif">
+		<img src="CircleInversion2.gif" alt="CircleInversion2.gif">
+		<img src="CircleInversion2Mod.gif" alt="CircleInversion2Mod.gif">
+	</div>
+	<div class="tab-content" id="tab-1">
+		<img src="CircleInversionMod.gif" alt="CircleInversionMod.gif">
+		<img src="CircleLimitSet.gif" alt="CircleLimitSet.gif">
+		<img src="CircleLimitSet1.gif" alt="CircleLimitSet1.gif">
+		<img src="CircleLimitSet2.gif" alt="CircleLimitSet2.gif">
+		<img src="CircleLimitSet3.gif" alt="CircleLimitSet3.gif">
+		<img src="CircleLimitSet4.gif" alt="CircleLimitSet4.gif">
+		<img src="CircleLimitSetNew.gif" alt="CircleLimitSetNew.gif">
+		<img src="CirclePacking.gif" alt="CirclePacking.gif">
+		<img src="Circles.gif" alt="Circles.gif">
+		<img src="Cross.gif" alt="Cross.gif">
+		<img src="Cross2.gif" alt="Cross2.gif">
+		<img src="Crosses.gif" alt="Crosses.gif">
+	</div>
+	<div class="tab-content" id="tab-2">
+		<img src="Curlicue.gif" alt="Curlicue.gif">
+		<img src="DimondFlake.gif" alt="DimondFlake.gif">
+		<img src="Dragon.gif" alt="Dragon.gif">
+		<img src="DragonColor.gif" alt="DragonColor.gif">
+		<img src="DragonLSystem.gif" alt="DragonLSystem.gif">
+		<img src="DragonMod.gif" alt="DragonMod.gif">
+		<img src="Edge.gif" alt="Edge.gif">
+		<img src="EdgeMod.gif" alt="EdgeMod.gif">
+		<img src="Fern.gif" alt="Fern.gif">
+		<img src="HFractal.gif" alt="HFractal.gif">
+		<img src="HenonAttractor.gif" alt="HenonAttractor.gif">
+		<img src="HexagonalTile.gif" alt="HexagonalTile.gif">
+	</div>
+	<div class="tab-content" id="tab-3">
+		<img src="HilbertCurve.gif" alt="HilbertCurve.gif">
+		<img src="InwardCircle.gif" alt="InwardCircle.gif">
+		<img src="IslandsLakes.gif" alt="IslandsLakes.gif">
+		<img src="KochAntisnowflake.gif" alt="KochAntisnowflake.gif">
+		<img src="KochCubes.gif" alt="KochCubes.gif">
+		<img src="KochCurve.gif" alt="KochCurve.gif">
+		<img src="KochLine.gif" alt="KochLine.gif">
+		<img src="KochLineMod.gif" alt="KochLineMod.gif">
+		<img src="KochMoss.gif" alt="KochMoss.gif">
+		<img src="KochSnowflake.gif" alt="KochSnowflake.gif">
+		<img src="LRepTile.gif" alt="LRepTile.gif">
+		<img src="LRepTileMod.gif" alt="LRepTileMod.gif">
+	</div>
+	<div class="tab-content" id="tab-4">
+		<img src="Lace.gif" alt="Lace.gif">
+		<img src="LevyCurve.gif" alt="LevyCurve.gif">
+		<img src="LevyCurves.gif" alt="LevyCurves.gif">
+		<img src="LevyTapestry.gif" alt="LevyTapestry.gif">
+		<img src="Lines.gif" alt="Lines.gif">
+		<img src="MangoKolam.gif" alt="MangoKolam.gif">
+		<img src="MinkowskiLine.gif" alt="MinkowskiLine.gif">
+		<img src="MinkowskiSausage.gif" alt="MinkowskiSausage.gif">
+		<img src="MooreCurve.gif" alt="MooreCurve.gif">
+		<img src="NestedPentagram.gif" alt="NestedPentagram.gif">
+		<img src="OutwardCircle.gif" alt="OutwardCircle.gif">
+		<img src="Peano.gif" alt="Peano.gif">
+	</div>
+	<div class="tab-content" id="tab-5">
+		<img src="PeanoGosperCurve.gif" alt="PeanoGosperCurve.gif">
+		<img src="PenroseTiling.gif" alt="PenroseTiling.gif">
+		<img src="PentaFlake.gif" alt="PentaFlake.gif">
+		<img src="PentaFlakeMod.gif" alt="PentaFlakeMod.gif">
+		<img src="PentaFractal.gif" alt="PentaFractal.gif">
+		<img src="PentaStar.gif" alt="PentaStar.gif">
+		<img src="PentaStarMod.gif" alt="PentaStarMod.gif">
+		<img src="Pentadentrite.gif" alt="Pentadentrite.gif">
+		<img src="Pentagram.gif" alt="Pentagram.gif">
+		<img src="Pentigree.gif" alt="Pentigree.gif">
+		<img src="Plusses.gif" alt="Plusses.gif">
+		<img src="PythagorasShrub.gif" alt="PythagorasShrub.gif">
+	</div>
+	<div class="tab-content" id="tab-6">
+		<img src="PythagorasTree.gif" alt="PythagorasTree.gif">
+		<img src="QuadraticFlake.gif" alt="QuadraticFlake.gif">
+		<img src="RhombusFlake.gif" alt="RhombusFlake.gif">
+		<img src="SierpinskiArrowhead.gif" alt="SierpinskiArrowhead.gif">
+		<img src="SierpinskiCarpet.gif" alt="SierpinskiCarpet.gif">
+		<img src="SierpinskiMedian.gif" alt="SierpinskiMedian.gif">
+		<img src="SierpinskiSquare.gif" alt="SierpinskiSquare.gif">
+		<img src="SierpinskiTriangle.gif" alt="SierpinskiTriangle.gif">
+		<img src="SpiralSquare.gif" alt="SpiralSquare.gif">
+		<img src="Square.gif" alt="Square.gif">
+		<img src="SquareFlake.gif" alt="SquareFlake.gif">
+		<img src="SquareMesh.gif" alt="SquareMesh.gif">
+	</div>
+	<div class="tab-content" id="tab-7">
+		<img src="SquareStar.gif" alt="SquareStar.gif">
+		<img src="SquareStar2.gif" alt="SquareStar2.gif">
+		<img src="SquareTiling.gif" alt="SquareTiling.gif">
+		<img src="SquareTriangle.gif" alt="SquareTriangle.gif">
+		<img src="SquareTriangleMod.gif" alt="SquareTriangleMod.gif">
+		<img src="SquareTurn.gif" alt="SquareTurn.gif">
+		<img src="Squares.gif" alt="Squares.gif">
+		<img src="Squares2.gif" alt="Squares2.gif">
+		<img src="Squares2Mod.gif" alt="Squares2Mod.gif">
+		<img src="SquaresMod.gif" alt="SquaresMod.gif">
+		<img src="TSquare.gif" alt="TSquare.gif">
+		<img src="TernaryTree.gif" alt="TernaryTree.gif">
+	</div>
+	<div class="tab-content" id="tab-8">
+		<img src="TetraDragon.gif" alt="TetraDragon.gif">
+		<img src="Thorn.gif" alt="Thorn.gif">
+		<img src="ThreeBranch.gif" alt="ThreeBranch.gif">
+		<img src="TornSquare.gif" alt="TornSquare.gif">
+		<img src="Tree.gif" alt="Tree.gif">
+		<img src="TreeBlue.gif" alt="TreeBlue.gif">
+		<img src="TreeMod.gif" alt="TreeMod.gif">
+		<img src="TreePink.gif" alt="TreePink.gif">
+		<img src="TriCircle.gif" alt="TriCircle.gif">
+		<img src="TriangleFlake.gif" alt="TriangleFlake.gif">
+	</div>
+	<script>
+		function showTab(index) {
+			const tabs = document.querySelectorAll('.tab-content');
+			const buttons = document.querySelectorAll('.tab-button');
+			tabs.forEach((tab, i) => {
+				tab.style.display = (i === index) ? 'flex' : 'none';
+			});
+			buttons.forEach((btn, i) => {
+				if (i === index) {
+					btn.classList.add('active');
+				} else {
+					btn.classList.remove('active');
+				}
+			});
+		}
+		window.onload = () => showTab(0);
+	</script>
+</body>
+</html>
