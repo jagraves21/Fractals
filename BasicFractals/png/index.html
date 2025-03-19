@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fractals</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			padding: 20px;
+			background: #f0f0f0;
+		}
+		.tabs {
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		.tab-button {
+			padding: 10px 20px;
+			margin: 0 5px;
+			cursor: pointer;
+			border: none;
+			background-color: #4285f4;
+			color: white;
+			border-radius: 5px;
+			font-size: 16px;
+			transition: background-color 0.2s;
+		}
+		.tab-button:hover {
+			background-color: #3367d6;
+		}
+		.tab-button.active {
+			background-color: #34a853;
+		}
+		.tab-content {
+			display: none;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+		}
+		img {
+			max-width: 500px;
+			border: 2px solid #ccc;
+			border-radius: 10px;
+			box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+			transition: transform 0.2s;
+		}
+		img:hover {
+			transform: scale(1.05);
+		}
+	</style>
+</head>
+<body>
+	<div class="tabs">
+		<button class="tab-button" data-index="0" onclick="showTab(0)">Page 1</button>
+		<button class="tab-button" data-index="1" onclick="showTab(1)">Page 2</button>
+		<button class="tab-button" data-index="2" onclick="showTab(2)">Page 3</button>
+		<button class="tab-button" data-index="3" onclick="showTab(3)">Page 4</button>
+		<button class="tab-button" data-index="4" onclick="showTab(4)">Page 5</button>
+		<button class="tab-button" data-index="5" onclick="showTab(5)">Page 6</button>
+		<button class="tab-button" data-index="6" onclick="showTab(6)">Page 7</button>
+		<button class="tab-button" data-index="7" onclick="showTab(7)">Page 8</button>
+		<button class="tab-button" data-index="8" onclick="showTab(8)">Page 9</button>
+	</div>
+	
+	<div class="tab-content" id="tab-0">
+		<img src="ApollonianGasket.png" alt="ApollonianGasket.png">
+		<img src="BoxFractal.png" alt="BoxFractal.png">
+		<img src="Branches.png" alt="Branches.png">
+		<img src="CesaroFractal.png" alt="CesaroFractal.png">
+		<img src="Christmas.png" alt="Christmas.png">
+		<img src="ChristmasApollonianGasket.png" alt="ChristmasApollonianGasket.png">
+		<img src="ChristmasKochSnowflake.png" alt="ChristmasKochSnowflake.png">
+		<img src="ChristmasSierpinskiCarpet.png" alt="ChristmasSierpinskiCarpet.png">
+		<img src="ChristmasSierpinskiTriangle.png" alt="ChristmasSierpinskiTriangle.png">
+		<img src="CircleInversion.png" alt="CircleInversion.png">
+		<img src="CircleInversion2.png" alt="CircleInversion2.png">
+		<img src="CircleInversion2Mod.png" alt="CircleInversion2Mod.png">
+	</div>
+	<div class="tab-content" id="tab-1">
+		<img src="CircleInversionMod.png" alt="CircleInversionMod.png">
+		<img src="CircleLimitSet.png" alt="CircleLimitSet.png">
+		<img src="CircleLimitSet1.png" alt="CircleLimitSet1.png">
+		<img src="CircleLimitSet2.png" alt="CircleLimitSet2.png">
+		<img src="CircleLimitSet3.png" alt="CircleLimitSet3.png">
+		<img src="CircleLimitSet4.png" alt="CircleLimitSet4.png">
+		<img src="CircleLimitSetNew.png" alt="CircleLimitSetNew.png">
+		<img src="CirclePacking.png" alt="CirclePacking.png">
+		<img src="Circles.png" alt="Circles.png">
+		<img src="Cross.png" alt="Cross.png">
+		<img src="Cross2.png" alt="Cross2.png">
+		<img src="Crosses.png" alt="Crosses.png">
+	</div>
+	<div class="tab-content" id="tab-2">
+		<img src="Curlicue.png" alt="Curlicue.png">
+		<img src="DimondFlake.png" alt="DimondFlake.png">
+		<img src="Dragon.png" alt="Dragon.png">
+		<img src="DragonColor.png" alt="DragonColor.png">
+		<img src="DragonLSystem.png" alt="DragonLSystem.png">
+		<img src="DragonMod.png" alt="DragonMod.png">
+		<img src="Edge.png" alt="Edge.png">
+		<img src="EdgeMod.png" alt="EdgeMod.png">
+		<img src="Fern.png" alt="Fern.png">
+		<img src="HFractal.png" alt="HFractal.png">
+		<img src="HenonAttractor.png" alt="HenonAttractor.png">
+		<img src="HexagonalTile.png" alt="HexagonalTile.png">
+	</div>
+	<div class="tab-content" id="tab-3">
+		<img src="HilbertCurve.png" alt="HilbertCurve.png">
+		<img src="InwardCircle.png" alt="InwardCircle.png">
+		<img src="IslandsLakes.png" alt="IslandsLakes.png">
+		<img src="KochAntisnowflake.png" alt="KochAntisnowflake.png">
+		<img src="KochCubes.png" alt="KochCubes.png">
+		<img src="KochCurve.png" alt="KochCurve.png">
+		<img src="KochLine.png" alt="KochLine.png">
+		<img src="KochLineMod.png" alt="KochLineMod.png">
+		<img src="KochMoss.png" alt="KochMoss.png">
+		<img src="KochSnowflake.png" alt="KochSnowflake.png">
+		<img src="LRepTile.png" alt="LRepTile.png">
+		<img src="LRepTileMod.png" alt="LRepTileMod.png">
+	</div>
+	<div class="tab-content" id="tab-4">
+		<img src="Lace.png" alt="Lace.png">
+		<img src="LevyCurve.png" alt="LevyCurve.png">
+		<img src="LevyCurves.png" alt="LevyCurves.png">
+		<img src="LevyTapestry.png" alt="LevyTapestry.png">
+		<img src="Lines.png" alt="Lines.png">
+		<img src="MangoKolam.png" alt="MangoKolam.png">
+		<img src="MinkowskiLine.png" alt="MinkowskiLine.png">
+		<img src="MinkowskiSausage.png" alt="MinkowskiSausage.png">
+		<img src="MooreCurve.png" alt="MooreCurve.png">
+		<img src="NestedPentagram.png" alt="NestedPentagram.png">
+		<img src="OutwardCircle.png" alt="OutwardCircle.png">
+		<img src="Peano.png" alt="Peano.png">
+	</div>
+	<div class="tab-content" id="tab-5">
+		<img src="PeanoGosperCurve.png" alt="PeanoGosperCurve.png">
+		<img src="PenroseTiling.png" alt="PenroseTiling.png">
+		<img src="PentaFlake.png" alt="PentaFlake.png">
+		<img src="PentaFlakeMod.png" alt="PentaFlakeMod.png">
+		<img src="PentaFractal.png" alt="PentaFractal.png">
+		<img src="PentaStar.png" alt="PentaStar.png">
+		<img src="PentaStarMod.png" alt="PentaStarMod.png">
+		<img src="Pentadentrite.png" alt="Pentadentrite.png">
+		<img src="Pentagram.png" alt="Pentagram.png">
+		<img src="Pentigree.png" alt="Pentigree.png">
+		<img src="Plusses.png" alt="Plusses.png">
+		<img src="PythagorasShrub.png" alt="PythagorasShrub.png">
+	</div>
+	<div class="tab-content" id="tab-6">
+		<img src="PythagorasTree.png" alt="PythagorasTree.png">
+		<img src="QuadraticFlake.png" alt="QuadraticFlake.png">
+		<img src="RhombusFlake.png" alt="RhombusFlake.png">
+		<img src="SierpinskiArrowhead.png" alt="SierpinskiArrowhead.png">
+		<img src="SierpinskiCarpet.png" alt="SierpinskiCarpet.png">
+		<img src="SierpinskiMedian.png" alt="SierpinskiMedian.png">
+		<img src="SierpinskiSquare.png" alt="SierpinskiSquare.png">
+		<img src="SierpinskiTriangle.png" alt="SierpinskiTriangle.png">
+		<img src="SpiralSquare.png" alt="SpiralSquare.png">
+		<img src="Square.png" alt="Square.png">
+		<img src="SquareFlake.png" alt="SquareFlake.png">
+		<img src="SquareMesh.png" alt="SquareMesh.png">
+	</div>
+	<div class="tab-content" id="tab-7">
+		<img src="SquareStar.png" alt="SquareStar.png">
+		<img src="SquareStar2.png" alt="SquareStar2.png">
+		<img src="SquareTiling.png" alt="SquareTiling.png">
+		<img src="SquareTriangle.png" alt="SquareTriangle.png">
+		<img src="SquareTriangleMod.png" alt="SquareTriangleMod.png">
+		<img src="SquareTurn.png" alt="SquareTurn.png">
+		<img src="Squares.png" alt="Squares.png">
+		<img src="Squares2.png" alt="Squares2.png">
+		<img src="Squares2Mod.png" alt="Squares2Mod.png">
+		<img src="SquaresMod.png" alt="SquaresMod.png">
+		<img src="TSquare.png" alt="TSquare.png">
+		<img src="TernaryTree.png" alt="TernaryTree.png">
+	</div>
+	<div class="tab-content" id="tab-8">
+		<img src="TetraDragon.png" alt="TetraDragon.png">
+		<img src="Thorn.png" alt="Thorn.png">
+		<img src="ThreeBranch.png" alt="ThreeBranch.png">
+		<img src="TornSquare.png" alt="TornSquare.png">
+		<img src="Tree.png" alt="Tree.png">
+		<img src="TreeBlue.png" alt="TreeBlue.png">
+		<img src="TreeMod.png" alt="TreeMod.png">
+		<img src="TreePink.png" alt="TreePink.png">
+		<img src="TriCircle.png" alt="TriCircle.png">
+		<img src="TriangleFlake.png" alt="TriangleFlake.png">
+	</div>
+	<script>
+		function showTab(index) {
+			const tabs = document.querySelectorAll('.tab-content');
+			const buttons = document.querySelectorAll('.tab-button');
+			tabs.forEach((tab, i) => {
+				tab.style.display = (i === index) ? 'flex' : 'none';
+			});
+			buttons.forEach((btn, i) => {
+				if (i === index) {
+					btn.classList.add('active');
+				} else {
+					btn.classList.remove('active');
+				}
+			});
+		}
+		window.onload = () => showTab(0);
+	</script>
+</body>
+</html>
