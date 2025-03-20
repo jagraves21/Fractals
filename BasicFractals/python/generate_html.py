@@ -114,7 +114,7 @@ def main():
 	if image_files:
 		generate_webpage(image_files, images_per_tab=12)
 	else:
-		print("Usage: python generate_gallery.py file1.gif file2.gif file3.gif ...")
+		print("Usage: python generate_html.py file1 file2 file3 ...")
 
 if __name__ == "__main__":
 	main()
