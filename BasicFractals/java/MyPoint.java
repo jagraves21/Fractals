@@ -138,37 +138,11 @@ public class MyPoint extends FractalShape implements Comparable<MyPoint>
 		}
 	}
 	
-	public MyPoint translate(MyPoint p)
+	public MyPoint scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new MyPoint(x+p.x, y+p.y, paint);
-	}
-	
-	public MyPoint scale(double xFactor, double yFactor)
-	{
-		return new MyPoint(x*xFactor, y*yFactor, paint);
-	}
-	
-	public MyPoint scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new MyPoint(p.x+(x-p.x)*xFactor, p.y+(y-p.y)*yFactor, paint);
-	}
-	
-	public MyPoint rotate(double thetaOff)
-	{
-		double theta = Math.atan2(y,x);
-		double radius = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
-		theta -= thetaOff;
-		
-		return new MyPoint((radius * Math.cos(theta)), (radius * Math.sin(theta)));
-	}
-	
-	public MyPoint rotate(double thetaOff, MyPoint p)
-	{
-		double theta = Math.atan2(y-p.y,x-p.x);
-		double radius = this.distance(p);
-		theta -= thetaOff;
-		
-		return new MyPoint(p.x + (radius * Math.cos(theta)), p.y + (radius * Math.sin(theta)));
+		double newX = (((x - oldMinPoint.x) * newXRange) / oldXRange) + newMinPoint.x; 
+		double newY = (((y - oldMinPoint.y) * newYRange) / oldYRange) + newMinPoint.y;
+		return new MyPoint(newX,newY,paint);
 	}
 	
 	public static MyPoint rotate(MyPoint center, MyPoint point, double radius, double thetaOff)
@@ -179,9 +153,9 @@ public class MyPoint extends FractalShape implements Comparable<MyPoint>
 		return new MyPoint(center.x + (radius * Math.cos(theta)), center.y + (radius * Math.sin(theta)));
 	}
 	
-	public MyPoint rotate(MyPoint center, double radius, double thetaOff)
+	public MyPoint rotate(MyPoint point, double radius, double thetaOff)
 	{
-		return MyPoint.rotate(center, this, radius, thetaOff);
+		return MyPoint.rotate(this, point, radius, thetaOff);
 	}
 	
 	public void paint(Graphics2D g)
@@ -192,7 +166,7 @@ public class MyPoint extends FractalShape implements Comparable<MyPoint>
 			g.setPaint(paint);
 			
 			g.drawLine((int)x, (int)y, (int)x, (int)y);
-			//g.fillOval((int)Math.round(x), (int)Math.round(y), 2, 2);
+			//g.fillOval((int)x-5, (int)y-5, 10, 10);
 			//g.fillOval((int)x, (int)y, 5, 5);
 			//g.drawString((int)x + " " + (int)y, (int)x, (int)y+25);
 			
@@ -200,8 +174,10 @@ public class MyPoint extends FractalShape implements Comparable<MyPoint>
 		}
 		else
 		{
-			// i did this workign on complex fractals, not simple ones
-			g.drawLine((int)x, (int)y, (int)x, (int)y);
+			//g.drawLine((int)x, (int)y, (int)x, (int)y);
+			//g.fillOval((int)x-5, (int)y-5, 10, 10);
+			//g.fillOval((int)x, (int)y, 5, 5);
+			//g.drawString((int)x + " " + (int)y, (int)x, (int)y+25);
 		}
 	}
 }

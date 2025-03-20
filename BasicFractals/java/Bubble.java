@@ -41,28 +41,9 @@ class Bubble extends Circle
 		return this.c.equals(((Bubble)that).c);
 	}
 
-	public Bubble translate(MyPoint p)
+	public Bubble scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new Bubble(c.translate(p), radius, paint);
-	}
-	
-	public Bubble scale(double xFactor, double yFactor)
-	{
-		return new Bubble(c.scale(xFactor,yFactor), radius*xFactor, paint);
-	}
-	
-	public Bubble scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new Bubble(c.scale(xFactor,yFactor,p), radius*xFactor, paint);
-	}
-	
-	public Bubble rotate(double thetaOff)
-	{
-		return new Bubble(c.rotate(thetaOff), radius, paint);
-	}
-	
-	public Bubble rotate(double thetaOff, MyPoint p)
-	{
-		return new Bubble(c.rotate(thetaOff,p), radius, paint);
+		MyPoint nc = c.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		return new Bubble(nc, radius / (oldXRange) * (newXRange), paint);
 	}
 }

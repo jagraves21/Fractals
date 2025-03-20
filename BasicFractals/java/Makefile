@@ -5,10 +5,11 @@ TAR_NAME = fractals.tar.gz
 
 FractalToGIF = FractalToGIF
 FractalToPNG = FractalToPNG
+FractalToSVG = FractalToSVG
 
-EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
+EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
 
-OTHER_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class) $(FractalToGIF).class, $(CLASSES))
+OTHER_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
 
 .PHONY: all
 all: $(CLASSES)
@@ -47,6 +48,10 @@ gif: all
 .PHONY: png
 png: all
 	java $(FractalToPNG) $(OTHER_CLASSES)
+
+.PHONY: svg
+svg: all
+	java $(FractalToSVG) $(OTHER_CLASSES)
 
 .PHONY: veryclean
 veryclean: clean cleanpng cleangif

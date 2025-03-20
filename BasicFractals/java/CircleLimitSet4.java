@@ -24,8 +24,6 @@ public class CircleLimitSet4 extends SimpleFractal
 	{
 		super();
 		
-		REVERSE = false;
-		
 		nextCircles = new LinkedList<Circle>();
 		outerCircles = new LinkedList<Circle>();
 		circles = new LinkedList<FractalShape>();

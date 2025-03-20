@@ -58,9 +58,9 @@ public class PentaFlakeMod extends SimpleFractal
 		MyPoint p4 = new MyPoint(0, HEIGHT);
 		MyPoint p3 = new MyPoint(WIDTH, p4.y);
 		radius = p4.distance(p3);
-		MyPoint p2 = p4.rotate(p3, radius, -r108);
-		MyPoint p1 = p3.rotate(p2, radius, -r108);
-		MyPoint p5 = p2.rotate(p1, radius, -r108);
+		MyPoint p2 = translate(p3, p4, radius, -r108);
+		MyPoint p1 = translate(p2, p3, radius, -r108);
+		MyPoint p5 = translate(p1, p2, radius, -r108);
 		
 		Pentagon pent = new Pentagon(p1,p2,p3,p4,p5,null,true);
 		
@@ -133,41 +133,41 @@ public class PentaFlakeMod extends SimpleFractal
 			radius = np1.distance(np2);
 			
 			np6 = p1;
-			np7 = p2.rotate(p1,radius,0);
+			np7 = translate(p1,p2,radius,0);
 			np8 = np4;
 			np9 = np3;
-			np10 = p5.rotate(p1,radius,0);
+			np10 = translate(p1,p5,radius,0);
 			pent = new Pentagon(np6, np7, np8, np9, np10, null, true);
 			newPentagons.add(pent);
 			
-			np6 = p1.rotate(p2,radius,0);
+			np6 = translate(p2,p1,radius,0);
 			np7 = p2;
-			np8 = p3.rotate(p2,radius,0);
+			np8 = translate(p2,p3,radius,0);
 			np9 = np5;
 			np10 = np4;
 			pent = new Pentagon(np6, np7, np8, np9, np10, null, true);
 			newPentagons.add(pent);
 			
 			np6 = np5;
-			np7 = p2.rotate(p3,radius,0);
+			np7 = translate(p3,p2,radius,0);
 			np8 = p3;
-			np9 = p4.rotate(p3,radius,0);
+			np9 = translate(p3,p4,radius,0);
 			np10 = np1;
 			pent = new Pentagon(np6, np7, np8, np9, np10, null, true);
 			newPentagons.add(pent);
 			
 			np6 = np2;
 			np7 = np1;
-			np8 = p3.rotate(p4,radius,0);
+			np8 = translate(p4,p3,radius,0);
 			np9 = p4;
-			np10 = p5.rotate(p4,radius,0);
+			np10 = translate(p4,p5,radius,0);
 			pent = new Pentagon(np6, np7, np8, np9, np10, null, true);
 			newPentagons.add(pent);
 			
-			np6 = p1.rotate(p5,radius,0);
+			np6 = translate(p5,p1,radius,0);
 			np7 = np3;
 			np8 = np2;
-			np9 = p4.rotate(p5,radius,0);
+			np9 = translate(p5,p4,radius,0);
 			np10 = p5;
 			pent = new Pentagon(np6, np7, np8, np9, np10, null, true);
 			newPentagons.add(pent);

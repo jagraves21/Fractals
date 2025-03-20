@@ -15,9 +15,6 @@ import javax.imageio.*;
 
 public abstract class SimpleFractal extends AbstractFractal
 {
-	public boolean REVERSE = true;
-	public int IMAGE_TYPE = BufferedImage.TYPE_INT_RGB;
-	
 	protected MyPoint minPoint;
 	protected MyPoint maxPoint;
 	
@@ -30,12 +27,12 @@ public abstract class SimpleFractal extends AbstractFractal
 		maxPoint = new MyPoint(Double.MIN_VALUE, Double.MIN_VALUE);
 	}
 	
-	public static MyPoint translate(MyPoint center, MyPoint point, double radius, double thetaOff)
+	public static MyPoint translate(MyPoint p1, MyPoint p2, double radius, double thetaOff)
 	{
-		double theta = Math.atan2(point.y-center.y,point.x-center.x);
+		double theta = Math.atan2(p2.y-p1.y,p2.x-p1.x);
 		theta -= thetaOff;
 		
-		return new MyPoint(center.x + (radius * Math.cos(theta)), center.y + (radius * Math.sin(theta)));
+		return new MyPoint(p1.x + (radius * Math.cos(theta)), p1.y + (radius * Math.sin(theta)));
 	}
 	
 	public abstract List<FractalShape> getFractal();
@@ -53,99 +50,15 @@ public abstract class SimpleFractal extends AbstractFractal
 		return Color.BLACK;
 	}
 	
-	public static List<FractalShape> scaleShapes(List<FractalShape> shapes, double xFactor, double yFactor)
-	{
-		List<FractalShape> scaledShapes = new LinkedList<FractalShape>();
-		
-		Iterator<FractalShape> iter = shapes.iterator();
-		while(iter.hasNext())
-		{
-			scaledShapes.add((iter.next()).scale(xFactor, yFactor));
-		}
-		
-		return scaledShapes;
-	}
-	
-	public static List<FractalShape> translateShapes(List<FractalShape> shapes, MyPoint point)
-	{
-		List<FractalShape> translatedShapes = new LinkedList<FractalShape>();
-		
-		Iterator<FractalShape> iter = shapes.iterator();
-		while(iter.hasNext())
-		{
-			translatedShapes.add((iter.next()).translate(point));
-		}
-		
-		return translatedShapes;
-	}
-	
-	protected List<FractalShape> centerShapes(List<FractalShape> shapes, double newWidth, double newHeight)
-	{
-		double width = newWidth;
-		double height = newHeight;
-		
-		double oldWidth = (int)(maxPoint.x - minPoint.x);
-		double oldHeight = (int)(maxPoint.y - minPoint.y);
-		
-		if(oldWidth == 0)
-		{
-			oldWidth = 1;
-		}
-		if(oldHeight == 0)
-		{
-			oldHeight = 1;
-		}
-		
-		double xRatio = oldWidth / newWidth;
-		double yRatio = oldHeight / newHeight;
-		
-		if(xRatio > yRatio)
-		{
-			// oldX / oldY = newX / newY
-			newHeight = newWidth / (oldWidth / oldHeight);
-		}
-		else if(yRatio > xRatio)
-		{
-			newWidth = (oldWidth / oldHeight) * newHeight;
-		}
-		
-		newHeight -= 30;
-		newWidth -= 30;
-		
-		List<FractalShape> newShapes = new LinkedList<FractalShape>();
-		double xFactor = newWidth/(double)oldWidth;
-		double yFactor = newHeight/(double)oldHeight;
-		
-		newMinPoint = minPoint.scale(xFactor, yFactor);
-		newMaxPoint = maxPoint.scale(xFactor, yFactor);
-		
-		double xT = -newMinPoint.x + (width-newWidth)/2;
-		double yT = -newMinPoint.y + (height-newHeight)/2;
-		
-		MyPoint point = new MyPoint(xT, yT);
-		newMinPoint = newMinPoint.translate(point);
-		newMaxPoint = newMaxPoint.translate(point);
-		
-		Iterator<FractalShape> iter = shapes.iterator();
-		while(iter.hasNext())
-		{
-			newShapes.add((iter.next()).scale(xFactor, yFactor).translate(point));
-		}
-		
-		return newShapes;
-	}
-	
 	public BufferedImage getFractalImage(int width, int height)
 	{
-		BufferedImage image = new BufferedImage(width, height, IMAGE_TYPE);
-		//BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+		//BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		
 		List<FractalShape> shapes = getFractal();
 		findMinMax(shapes);
-		
-		shapes = centerShapes(shapes, width, height);
-		plotShapes(shapes, width, height, image.createGraphics());
-		
+		shapes = scalePoints(shapes, image.getWidth(), image.getHeight());
+		plotShapes(shapes, image.getWidth(), image.getHeight(), image.createGraphics());
 		return image;
 	}
 	
@@ -181,7 +94,71 @@ public abstract class SimpleFractal extends AbstractFractal
 	{
 		return maxPoint;
 	}
+	
+	public List<FractalShape> scalePoints(int width, int height)
+	{
+		return scalePoints(getFractal(), width, height);
+	}
+	
+	public List<FractalShape> scalePoints(int width, int height, double initXOff, double initYOff)
+	{
+		return scalePoints(getFractal(), width, height, initXOff, initYOff);
+	}
+	
+	protected List<FractalShape> scalePoints(List<FractalShape> shapes, int width, int height)
+	{
+		return scalePoints(shapes, width, height, 0, 0);
+	}
+	
+	protected List<FractalShape> scalePoints(List<FractalShape> shapes, int width, int height, double initXOff, double initYOff)
+	{
+		List<FractalShape> scaledShapes = new LinkedList<FractalShape>();
 		
+		double oldXRange = maxPoint.x-minPoint.x;
+		double oldYRange = maxPoint.y-minPoint.y;
+		
+		if(oldXRange == 0)
+		{
+			oldXRange = 1;
+		}
+		if(oldYRange == 0)
+		{
+			oldYRange = 1;
+		}
+		
+		double newXRange = width - 20;
+		double newYRange = height - 20;
+		
+		double xRatio = oldXRange / newXRange;
+		double yRatio = oldYRange / newYRange;
+		
+		if(xRatio > yRatio)
+		{
+			// oldX / oldY = newX / newY
+			newYRange = newXRange / (oldXRange / oldYRange);
+		}
+		else if(yRatio > xRatio)
+		{
+			newXRange = (oldXRange / oldYRange) * newYRange;
+		}
+		
+		double xOff = (width - newXRange)/2;
+		double yOff = (height - newYRange)/2;
+		
+		newMinPoint = new MyPoint(xOff+initXOff, yOff+initYOff);
+		newMaxPoint = new MyPoint(newXRange + xOff, newYRange + yOff);
+		
+		FractalShape shape;
+		Iterator<FractalShape> lineIter = shapes.iterator();
+		while(lineIter.hasNext())
+		{
+			shape = lineIter.next();
+			scaledShapes.add(shape.scale(minPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange));
+		}
+		
+		return scaledShapes;
+	}
+	
 	protected void plotShapes(List<FractalShape> shapes, int width, int height, Graphics2D g)
 	{
 		g.setPaint(getBackground());
@@ -203,7 +180,72 @@ public abstract class SimpleFractal extends AbstractFractal
 			shape.paint(g);
 		}
 	}
-		
+	
+	public void createSVG(String fileName, int width, int height, int delay, int iterations)
+	{
+		try
+		{
+			File file = new File(fileName);
+
+			if(!file.exists())
+			{
+				file.createNewFile();
+			}
+			
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			bw.write("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">");
+			
+			clearFractal();
+			List<FractalShape> shapes;
+			Iterator<FractalShape> iter;
+			FractalShape shape;
+			for(int ii=0; ii <= iterations; ii++)
+			{
+				next();
+				
+			}
+			
+			shapes = getFractal();
+			findMinMax(shapes);
+			shapes = scalePoints(getFractal(), width, height);
+				
+				iter = shapes.iterator();
+				while(iter.hasNext())
+				{
+					shape = iter.next();
+					if(shape instanceof LineSegment)
+					{
+						bw.write("<line x1=\"");
+						bw.write(Double.toString(((LineSegment)shape).p1.x));
+						bw.write("\" y1=\"");
+						bw.write(Double.toString(((LineSegment)shape).p1.y));
+						bw.write("\" x2=\"");
+						bw.write(Double.toString(((LineSegment)shape).p2.x));
+						bw.write("\" y2=\"");
+						bw.write(Double.toString(((LineSegment)shape).p2.y));
+						bw.write("\" style=\"stroke: green;\"/>");
+						bw.newLine();
+					}
+				}
+			
+			bw.write("</svg>");
+			
+			bw.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch(OutOfMemoryError e)
+		{
+			//e.printStackTrace();
+			System.out.println(memory);
+			System.exit(-1);
+		}
+	}
+	
 	public void createGIF(String fileName, int width, int height, int delay, int iterations)
 	{
 		try
@@ -226,26 +268,12 @@ public abstract class SimpleFractal extends AbstractFractal
 			for(int ii=0; ii < images.length; ii++)
 			{
 				e.addFrame(images[ii]);
-				
-				try
-				{
-					String name = fileName.replace(".gif", "_" + (1000+ii) + ".jpg");
-					java.io.File outputfile = new java.io.File(name);
-					javax.imageio.ImageIO.write(images[ii], "png", outputfile);
-				}
-				catch(IOException ioe)
-				{
-					ioe.printStackTrace();
-					System.exit(-1);
-				}
 			}
 			
-			if(REVERSE)
+			//for(int ii=images.length-1; ii > 0; ii--)
+			for(int ii=images.length-2; ii > 0; ii--)
 			{
-				for(int ii=images.length-2; ii > 0; ii--)
-				{
-					e.addFrame(images[ii]);
-				}
+				e.addFrame(images[ii]);
 			}
 			
 			e.finish();

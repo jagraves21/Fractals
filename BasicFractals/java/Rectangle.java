@@ -70,29 +70,14 @@ public class Rectangle extends FractalShape implements Comparable<Rectangle>
 		p4.checkMinMax(minPoint, maxPoint);
 	}
 	
-	public Rectangle translate(MyPoint p)
+	public Rectangle scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new Rectangle(p1.translate(p), p2.translate(p), p3.translate(p), p4.translate(p), paint, fill);
-	}
-	
-	public Rectangle scale(double xFactor, double yFactor)
-	{
-		return new Rectangle(p1.scale(xFactor,yFactor), p2.scale(xFactor,yFactor), p3.scale(xFactor,yFactor), p4.scale(xFactor,yFactor), paint, fill);
-	}
-	
-	public Rectangle scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new Rectangle(p1.scale(xFactor,yFactor,p), p2.scale(xFactor,yFactor,p), p3.scale(xFactor,yFactor,p), p4.scale(xFactor,yFactor,p), paint, fill);
-	}
-	
-	public Rectangle rotate(double thetaOff)
-	{
-		return new Rectangle(p1.rotate(thetaOff), p2.rotate(thetaOff), p3.rotate(thetaOff), p4.rotate(thetaOff), paint, fill);
-	}
-	
-	public Rectangle rotate(double thetaOff, MyPoint p)
-	{
-		return new Rectangle(p1.rotate(thetaOff,p), p2.rotate(thetaOff,p), p3.rotate(thetaOff,p), p4.rotate(thetaOff,p), paint, fill);
+		MyPoint np1 = p1.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np2 = p2.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np3 = p3.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np4 = p4.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		
+		return new Rectangle(np1,np2,np3,np4,paint,fill);
 	}
 	
 	public void paint(Graphics2D g)

@@ -117,12 +117,14 @@ public class Circle extends FractalShape implements Comparable<Circle>
 		}
 		else
 		{
+			System.out.println("same point, diff radius");
 			return Double.compare(this.radius, that.radius);
 		}
 	}
 	
 	public boolean equals(Object that)
 	{
+		System.out.println("HERE");
 		return this.compareTo((Circle)that) == 0;
 	}
 	
@@ -169,38 +171,10 @@ public class Circle extends FractalShape implements Comparable<Circle>
 		c.y -= radius;
 	}
 	
-	public Circle translate(MyPoint p)
+	public Circle scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new Circle(c.translate(p), radius, paint, fill);
-	}
-	
-	public Circle scale(double xFactor, double yFactor)
-	{
-		return new Circle(c.scale(xFactor,yFactor), radius*xFactor, paint, fill);
-	}
-	
-	public Circle scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new Circle(c.scale(xFactor,yFactor,p), radius*xFactor, paint, fill);
-	}
-	
-	public Circle rotate(double thetaOff)
-	{
-		return new Circle(c.rotate(thetaOff), radius, paint, fill);
-	}
-	
-	public Circle rotate(double thetaOff, MyPoint p)
-	{
-		return new Circle(c.rotate(thetaOff,p), radius, paint, fill);
-	}
-	
-	public Circle invert(Circle that) {
-		double dist = that.c.distance(this.c);
-		double x = (that.c.x - this.c.x)/dist*(dist * this.radius*this.radius / (dist * dist - that.radius * that.radius)) + this.c.x;
-		double y = (that.c.y - this.c.y)/dist*(dist * this.radius*this.radius / (dist * dist - that.radius * that.radius)) + this.c.y;
-		double radius = Math.abs(this.radius*this.radius * that.radius / (dist*dist - that.radius*that.radius));
-		
-		return new Circle(new MyPoint(x,y), radius, java.awt.Color.GREEN);
+		MyPoint nc = c.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		return new Circle(nc,radius / (oldXRange) * (newXRange),paint,fill);
 	}
 	
 	public void paint(Graphics2D g)

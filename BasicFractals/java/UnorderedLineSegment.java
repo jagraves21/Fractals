@@ -33,30 +33,4 @@ public class UnorderedLineSegment extends LineSegment implements Comparable<Line
 			return thisP2.compareTo(thatP2);
 		}
 	}
-	
-	public UnorderedLineSegment translate(MyPoint p)
-	{
-		return new UnorderedLineSegment(p1.translate(p), p2.translate(p), paint);
-	}
-	
-	public UnorderedLineSegment scale(double xFactor, double yFactor)
-	{
-		return new UnorderedLineSegment(p1.scale(xFactor,yFactor), p2.scale(xFactor,yFactor), paint);
-	}
-	
-	public UnorderedLineSegment scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new UnorderedLineSegment(p1.scale(xFactor,yFactor,p), p2.scale(xFactor,yFactor,p), paint);
-	}
-	
-	public UnorderedLineSegment rotate(double thetaOff)
-	{
-		return new UnorderedLineSegment(p1.rotate(thetaOff), p2.rotate(thetaOff), paint);
-	}
-	
-	public UnorderedLineSegment rotate(double thetaOff, MyPoint p)
-	{
-		return new UnorderedLineSegment(p1.rotate(thetaOff,p), p2.rotate(thetaOff,p), paint);
-	}
-
 }

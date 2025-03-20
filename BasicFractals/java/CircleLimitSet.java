@@ -99,6 +99,7 @@ public class CircleLimitSet extends SimpleFractal
 		nextCircles.add(c6);
 	}
 	
+	boolean first = true;
 	public void next()
 	{
 		double c1x, c2x, c3x;

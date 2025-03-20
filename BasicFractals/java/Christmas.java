@@ -48,60 +48,7 @@ public class Christmas extends SimpleFractal
 	
 	public List<FractalShape> getFractal()
 	{
-		double x;
-		double y;
 		triangle.findMinMax();
-		MyPoint min = triangle.getMinPoint();
-		MyPoint max = triangle.getMaxPoint();
-		double treeWidth = max.x-min.x;
-		double treeHeight = max.y-min.y;
-		
-		List<FractalShape> branches = triangle.getFractal();
-		
-		square.findMinMax();
-		x = (treeWidth - (square.maxPoint.x-square.minPoint.x)*0.25)/2;
-		y = max.y;
-		List<FractalShape> trunk = translateShapes(scaleShapes(square.getFractal(), 0.25, 0.25), new MyPoint(x,y));
-		
-		flake.findMinMax();
-		y = min.y - (flake.maxPoint.x-flake.minPoint.x)*0.25/2;
-		List<FractalShape> star = translateShapes(scaleShapes(flake.getFractal(), 0.25, 0.25), new MyPoint(x,y));
-		
-		gasket.findMinMax();
-		x = (int)(min.x - (treeWidth/12) + (1.25*treeWidth/6));
-		y = (int)(max.y - (treeWidth/12) - (0.50*treeHeight/10));
-		List<FractalShape> ball1 = translateShapes(scaleShapes(gasket.getFractal(), .07, .07), new MyPoint(x,y));
-		
-		x = (int)(min.x - (treeWidth/12) + (3.30*treeWidth/6));
-		y = (int)(max.y - (treeWidth/12) - (1.75*treeHeight/10));
-		List<FractalShape> ball2 = translateShapes(scaleShapes(gasket.getFractal(), .07, .07), new MyPoint(x,y));
-		
-		
-		x = (int)(min.x - (treeWidth/12) + (5.00*treeWidth/6));
-		y = (int)(max.y - (treeWidth/12) - (0.70*treeHeight/10));
-		List<FractalShape> ball3 = translateShapes(scaleShapes(gasket.getFractal(), .07, .07), new MyPoint(x,y));
-		
-		x = (int)(min.x - (treeWidth/12) + (2.50*treeWidth/6));
-		y = (int)(max.y - (treeWidth/12) - (4.45*treeHeight/10));
-		List<FractalShape> ball4 = translateShapes(scaleShapes(gasket.getFractal(), .07, .07), new MyPoint(x,y));
-		
-		x = (int)(min.x - (treeWidth/12) + (3.75*treeWidth/6));
-		y = (int)(max.y - (treeWidth/12) - (5.75*treeHeight/10));
-		List<FractalShape> ball5 = translateShapes(scaleShapes(gasket.getFractal(), .07, .07), new MyPoint(x,y));
-		
-		List<FractalShape> tree = new LinkedList<FractalShape>();
-		tree.addAll(branches);
-		tree.addAll(trunk);
-		tree.addAll(star);
-		tree.addAll(ball1);
-		tree.addAll(ball2);
-		tree.addAll(ball3);
-		tree.addAll(ball4);
-		tree.addAll(ball5);
-		
-		return tree;
-		
-		/*triangle.findMinMax();
 		MyPoint min = triangle.getMinPoint();
 		MyPoint max = triangle.getMaxPoint();
 		List<FractalShape> branches = triangle.getFractal();
@@ -154,7 +101,7 @@ public class Christmas extends SimpleFractal
 		tree.addAll(ball5);
 		
 		
-		return tree;*/
+		return tree;
 	}
 	
 	public void clearFractal()

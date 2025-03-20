@@ -63,29 +63,13 @@ public class Triangle extends FractalShape implements Comparable<Triangle>
 		p3.checkMinMax(minPoint, maxPoint);
 	}
 	
-	public Triangle translate(MyPoint p)
+	public Triangle scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new Triangle(p1.translate(p), p2.translate(p), p3.translate(p), paint, fill);
-	}
-	
-	public Triangle scale(double xFactor, double yFactor)
-	{
-		return new Triangle(p1.scale(xFactor,yFactor), p2.scale(xFactor,yFactor), p3.scale(xFactor,yFactor), paint, fill);
-	}
-	
-	public Triangle scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new Triangle(p1.scale(xFactor,yFactor,p), p2.scale(xFactor,yFactor,p), p3.scale(xFactor,yFactor,p), paint, fill);
-	}
-	
-	public Triangle rotate(double thetaOff)
-	{
-		return new Triangle(p1.rotate(thetaOff), p2.rotate(thetaOff), p3.rotate(thetaOff), paint, fill);
-	}
-	
-	public Triangle rotate(double thetaOff, MyPoint p)
-	{
-		return new Triangle(p1.rotate(thetaOff,p), p2.rotate(thetaOff,p), p3.rotate(thetaOff,p), paint, fill);
+		MyPoint np1 = p1.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np2 = p2.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np3 = p3.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		
+		return new Triangle(np1,np2,np3,paint,fill);
 	}
 	
 	public void paint(Graphics2D g)

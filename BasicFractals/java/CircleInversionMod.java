@@ -22,8 +22,6 @@ public class CircleInversionMod extends SimpleFractal
 	{
 		super();
 		
-		IMAGE_TYPE = BufferedImage.TYPE_INT_ARGB;
-		
 		nextCircles = new LinkedList<Circle>();
 		outerCircles = new LinkedList<Circle>();
 		circles = new LinkedList<FractalShape>();

@@ -90,59 +90,16 @@ public class Polygon extends FractalShape implements Comparable<Polygon>
 		}
 	}
 	
-	public Polygon translate(MyPoint p)
+	public Polygon scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		MyPoint[] translatedPoints = new MyPoint[points.length];
+		MyPoint[] newPoints = new MyPoint[points.length];
+		
 		for(int ii=0; ii < points.length; ii++)
 		{
-			translatedPoints[ii] = points[ii].translate(p);
+			newPoints[ii] = points[ii].scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
 		}
 		
-		return new Polygon(translatedPoints, paint, fill);
-	}
-	
-	public Polygon scale(double xFactor, double yFactor)
-	{
-		MyPoint[] translatedPoints = new MyPoint[points.length];
-		for(int ii=0; ii < points.length; ii++)
-		{
-			translatedPoints[ii] = points[ii].scale(xFactor,yFactor);
-		}
-		
-		return new Polygon(translatedPoints, paint, fill);
-	}
-	
-	public Polygon scale(double xFactor, double yFactor, MyPoint p)
-	{
-		MyPoint[] translatedPoints = new MyPoint[points.length];
-		for(int ii=0; ii < points.length; ii++)
-		{
-			translatedPoints[ii] = points[ii].scale(xFactor,yFactor,p);
-		}
-		
-		return new Polygon(translatedPoints, paint, fill);
-	}
-	
-	public Polygon rotate(double thetaOff)
-	{
-		MyPoint[] rotatedPoints = new MyPoint[points.length];
-		for(int ii=0; ii < points.length; ii++)
-		{
-			rotatedPoints[ii] = points[ii].rotate(thetaOff);
-		}
-		
-		return new Polygon(rotatedPoints, paint, fill);
-	}
-	
-	public Polygon rotate(double thetaOff, MyPoint p)
-	{
-		MyPoint[] rotatedPoints = new MyPoint[points.length];
-		for(int ii=0; ii < points.length; ii++)
-		{
-			rotatedPoints[ii] = points[ii].rotate(thetaOff,p);
-		}
-		
-		return new Polygon(rotatedPoints, paint, fill);
+		return new Polygon(newPoints,paint,fill);
 	}
 	
 	public void paint(Graphics2D g)

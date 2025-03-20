@@ -60,29 +60,12 @@ public class LineSegment extends FractalShape implements Comparable<LineSegment>
 		p2.checkMinMax(minPoint, maxPoint);
 	}
 	
-	public LineSegment translate(MyPoint p)
+	public LineSegment scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new LineSegment(p1.translate(p), p2.translate(p), paint);
-	}
-	
-	public LineSegment scale(double xFactor, double yFactor)
-	{
-		return new LineSegment(p1.scale(xFactor,yFactor), p2.scale(xFactor,yFactor), paint);
-	}
-	
-	public LineSegment scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new LineSegment(p1.scale(xFactor,yFactor,p), p2.scale(xFactor,yFactor,p), paint);
-	}
-	
-	public LineSegment rotate(double thetaOff)
-	{
-		return new LineSegment(p1.rotate(thetaOff), p2.rotate(thetaOff), paint);
-	}
-	
-	public LineSegment rotate(double thetaOff, MyPoint p)
-	{
-		return new LineSegment(p1.rotate(thetaOff,p), p2.rotate(thetaOff,p), paint);
+		MyPoint np1 = p1.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np2 = p2.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		
+		return new LineSegment(np1,np2,paint);
 	}
 	
 	public void paint(Graphics2D g)

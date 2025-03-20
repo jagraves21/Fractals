@@ -77,29 +77,15 @@ public class Pentagon extends FractalShape implements Comparable<Pentagon>
 		p5.checkMinMax(minPoint, maxPoint);
 	}
 	
-	public Pentagon translate(MyPoint p)
+	public Pentagon scale(MyPoint oldMinPoint, double oldXRange, double oldYRange, MyPoint newMinPoint, double newXRange, double newYRange)
 	{
-		return new Pentagon(p1.translate(p), p2.translate(p), p3.translate(p), p4.translate(p), p5.translate(p), paint, fill);
-	}
-	
-	public Pentagon scale(double xFactor, double yFactor)
-	{
-		return new Pentagon(p1.scale(xFactor,yFactor), p2.scale(xFactor,yFactor), p3.scale(xFactor,yFactor), p4.scale(xFactor,yFactor), p5.scale(xFactor,yFactor), paint, fill);
-	}
-	
-	public Pentagon scale(double xFactor, double yFactor, MyPoint p)
-	{
-		return new Pentagon(p1.scale(xFactor,yFactor,p), p2.scale(xFactor,yFactor,p), p3.scale(xFactor,yFactor,p), p4.scale(xFactor,yFactor,p), p5.scale(xFactor,yFactor,p), paint, fill);
-	}
-	
-	public Pentagon rotate(double thetaOff)
-	{
-		return new Pentagon(p1.rotate(thetaOff), p2.rotate(thetaOff), p3.rotate(thetaOff), p4.rotate(thetaOff), p5.rotate(thetaOff), paint, fill);
-	}
-	
-	public Pentagon rotate(double thetaOff, MyPoint p)
-	{
-		return new Pentagon(p1.rotate(thetaOff,p), p2.rotate(thetaOff,p), p3.rotate(thetaOff,p), p4.rotate(thetaOff,p), p5.rotate(thetaOff,p), paint, fill);
+		MyPoint np1 = p1.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np2 = p2.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np3 = p3.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np4 = p4.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		MyPoint np5 = p5.scale(oldMinPoint, oldXRange, oldYRange, newMinPoint, newXRange, newYRange);
+		
+		return new Pentagon(np1,np2,np3,np4,np5,paint,fill);
 	}
 	
 	public void paint(Graphics2D g)
