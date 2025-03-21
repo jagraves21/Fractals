@@ -248,6 +248,11 @@ public abstract class SimpleFractal extends AbstractFractal
 	
 	public void createGIF(String fileName, int width, int height, int delay, int iterations)
 	{
+		createGIF(fileName, width, height, delay, iterations, true);
+	}
+	
+	public void createGIF(String fileName, int width, int height, int delay, int iterations, boolean reflect)
+	{
 		try
 		{
 			clearFractal();
@@ -270,10 +275,13 @@ public abstract class SimpleFractal extends AbstractFractal
 				e.addFrame(images[ii]);
 			}
 			
-			//for(int ii=images.length-1; ii > 0; ii--)
-			for(int ii=images.length-2; ii > 0; ii--)
+			if(reflect)
 			{
-				e.addFrame(images[ii]);
+				//for(int ii=images.length-1; ii > 0; ii--)
+				for(int ii=images.length-2; ii > 0; ii--)
+				{
+					e.addFrame(images[ii]);
+				}
 			}
 			
 			e.finish();
