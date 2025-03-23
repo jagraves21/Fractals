@@ -7,12 +7,14 @@ import javax.swing.*;
 
 public class Fractal extends JPanel implements ActionListener
 {
+	private static final long serialVersionUID = 1L;
+
 	protected java.util.List<SimpleFractal> fractalList;
 	
 	protected JPanel controlPanel;
-	protected JComboBox fractalComboBox;
+	protected JComboBox<SimpleFractal> fractalComboBox;
 	protected JCheckBox stepCheckBox;
-	protected JComboBox iterationsComboBox;
+	protected JComboBox<Integer> iterationsComboBox;
 	protected JButton redrawButton;
 	protected FractalPanel fractalPanel;
 	
@@ -34,17 +36,17 @@ public class Fractal extends JPanel implements ActionListener
 		
 		controlPanel = new JPanel(layout);
 		
-		fractalComboBox = new JComboBox(fractalList.toArray());
+		fractalComboBox = new JComboBox<SimpleFractal>(fractalList.toArray(new SimpleFractal[0]));
 		fractalComboBox.addActionListener(this);
 		
 		stepCheckBox = new JCheckBox("Step");
 		stepCheckBox.setSelected(true);
 		
-		iterationsComboBox = new JComboBox();
+		iterationsComboBox = new JComboBox<Integer>();
 		int max = ((SimpleFractal)fractalComboBox.getSelectedItem()).getSuggestedIterations();
 		for(int ii=0; ii <= max; ii++)
 		{
-			iterationsComboBox.addItem(new Integer(ii));
+			iterationsComboBox.addItem(ii);
 		}
 		iterationsComboBox.setSelectedIndex(iterationsComboBox.getItemCount()-1);
 		
@@ -101,7 +103,7 @@ public class Fractal extends JPanel implements ActionListener
 			int max = ((SimpleFractal)fractalComboBox.getSelectedItem()).getSuggestedIterations();
 			for(int ii=0; ii <= max; ii++)
 			{
-				iterationsComboBox.addItem(new Integer(ii));
+				iterationsComboBox.addItem(ii);
 			}
 			
 			if(cur > max)
@@ -149,56 +151,121 @@ public class Fractal extends JPanel implements ActionListener
 	{
 		java.util.List<SimpleFractal> fractalList = new LinkedList<SimpleFractal>();
 		
-		fractalList.add(new SquareTriangle());
-		fractalList.add(new SquareTriangleMod());
+		fractalList.add(new ApollonianGasket());
 		fractalList.add(new BoxFractal());
+		fractalList.add(new Branches());
 		fractalList.add(new CesaroFractal());
+		fractalList.add(new Christmas());
+		fractalList.add(new ChristmasApollonianGasket());
+		fractalList.add(new ChristmasKochSnowflake());
+		fractalList.add(new ChristmasSierpinskiCarpet());
+		fractalList.add(new ChristmasSierpinskiTriangle());
+		fractalList.add(new CircleInversion());
+		fractalList.add(new CircleInversion2());
+		fractalList.add(new CircleInversion2Mod());
+		fractalList.add(new CircleInversionMod());
+		fractalList.add(new CircleLimitSet());
+		fractalList.add(new CircleLimitSet1());
+		fractalList.add(new CircleLimitSet2());
+		fractalList.add(new CircleLimitSet3());
+		fractalList.add(new CircleLimitSet4());
+		fractalList.add(new CircleLimitSetNew());
+		fractalList.add(new CirclePacking());
+		fractalList.add(new Circles());
+		fractalList.add(new Cross());
+		fractalList.add(new Cross2());
 		fractalList.add(new Crosses());
+		fractalList.add(new Curlicue());
+		fractalList.add(new DimondFlake());
 		fractalList.add(new Dragon());
-		fractalList.add(new DragonMod());
 		fractalList.add(new DragonColor());
+		fractalList.add(new DragonLSystem());
+		fractalList.add(new DragonMod());
+		fractalList.add(new Edge());
+		fractalList.add(new EdgeMod());
+		fractalList.add(new Fern());
 		fractalList.add(new HFractal());
+		fractalList.add(new HenonAttractor());
+		fractalList.add(new HexagonalTile());
+		fractalList.add(new HilbertCurve());
 		fractalList.add(new InwardCircle());
-		fractalList.add(new OutwardCircle());
+		fractalList.add(new IslandsLakes());
+		fractalList.add(new KochAntisnowflake());
+		fractalList.add(new KochCubes());
+		fractalList.add(new KochCurve());
 		fractalList.add(new KochLine());
 		fractalList.add(new KochLineMod());
+		fractalList.add(new KochMoss());
 		fractalList.add(new KochSnowflake());
-		fractalList.add(new KochAntisnowflake());
-		fractalList.add(new LevyCurve());
-		fractalList.add(new LevyTapestry());
 		fractalList.add(new LRepTile());
 		fractalList.add(new LRepTileMod());
+		fractalList.add(new Lace());
+		fractalList.add(new LevyCurve());
+		fractalList.add(new LevyCurves());
+		fractalList.add(new LevyTapestry());
+		fractalList.add(new Lines());
+		fractalList.add(new MangoKolam());
 		fractalList.add(new MinkowskiLine());
 		fractalList.add(new MinkowskiSausage());
+		fractalList.add(new MooreCurve());
 		fractalList.add(new NestedPentagram());
+		fractalList.add(new OutwardCircle());
+		fractalList.add(new Peano());
+		fractalList.add(new PeanoGosperCurve());
+		fractalList.add(new PenroseTiling());
 		fractalList.add(new PentaFlake());
 		fractalList.add(new PentaFlakeMod());
 		fractalList.add(new PentaFractal());
+		fractalList.add(new PentaStar());
+		fractalList.add(new PentaStarMod());
+		fractalList.add(new Pentadentrite());
+		fractalList.add(new Pentagram());
+		fractalList.add(new Pentigree());
+		fractalList.add(new Plusses());
 		fractalList.add(new PythagorasShrub());
 		fractalList.add(new PythagorasTree());
-		fractalList.add(new Plusses());
+		fractalList.add(new QuadraticFlake());
+		fractalList.add(new RhombusFlake());
 		fractalList.add(new SierpinskiArrowhead());
 		fractalList.add(new SierpinskiCarpet());
+		fractalList.add(new SierpinskiMedian());
+		fractalList.add(new SierpinskiSquare());
 		fractalList.add(new SierpinskiTriangle());
+		fractalList.add(new SpiralSquare());
+		fractalList.add(new Square());
+		fractalList.add(new SquareFlake());
+		fractalList.add(new SquareMesh());
+		fractalList.add(new SquareStar());
+		fractalList.add(new SquareStar2());
+		fractalList.add(new SquareTiling());
+		fractalList.add(new SquareTriangle());
+		fractalList.add(new SquareTriangleMod());
+		fractalList.add(new SquareTurn());
 		fractalList.add(new Squares());
+		fractalList.add(new Squares2());
+		fractalList.add(new Squares2Mod());
 		fractalList.add(new SquaresMod());
+		fractalList.add(new TSquare());
 		fractalList.add(new TernaryTree());
+		fractalList.add(new TetraDragon());
 		fractalList.add(new Thorn());
-		fractalList.add(new TornSquare());
 		fractalList.add(new ThreeBranch());
+		fractalList.add(new TornSquare());
+		fractalList.add(new Tree());
 		fractalList.add(new TreeBlue());
+		fractalList.add(new TreeMod());
 		fractalList.add(new TreePink());
 		fractalList.add(new TriCircle());
-		fractalList.add(new TSquare());
-		
+		fractalList.add(new TriangleFlake());
+
 		System.out.println(fractalList.size() + " fractals.");
-		
+
 		JFrame frame = new JFrame("Fractals");
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800,600);
-		
+
 		frame.setContentPane(new Fractal(fractalList));
-		
+
 		frame.setVisible(true);
 	}
 }
@@ -206,29 +273,29 @@ public class Fractal extends JPanel implements ActionListener
 class FractalWorker extends SwingWorker<FractalPanel,FractalPanel>
 {
 	static final int delay = 1000;
-	
+
 	JButton redrawButton;
 	FractalPanel fractalPanel;
 	int iterations;
 	long fireAt;
-	
+
 	public FractalWorker(JButton redrawButton, FractalPanel fractalPanel, int iterations)
 	{
 		this(redrawButton, fractalPanel, iterations, System.currentTimeMillis() + delay);
 	}
-	
+
 	protected FractalWorker(JButton redrawButton, FractalPanel fractalPanel, int iterations, long fireAt)
 	{
 		this.redrawButton = redrawButton;
 		this.fractalPanel = fractalPanel;
 		this.iterations = iterations;
 		this.fireAt = fireAt;
-		
+
 		fractalPanel.repaint();
-		
+
 		System.out.println(iterations);
 	}
-	
+
 	protected FractalPanel doInBackground()
 	{
 		if(iterations > 0)
@@ -242,26 +309,26 @@ class FractalWorker extends SwingWorker<FractalPanel,FractalPanel>
 				}
 				catch(Exception e)
 				{
-				
+
 				}
 			}
-			
+
 			fractalPanel.next();
-			
+
 			FractalWorker nextWoker = new FractalWorker(redrawButton, fractalPanel, iterations-1, fireAt+delay);
 			nextWoker.execute();
 		}
-		
+
 		return fractalPanel;
 	}
-	
+
 	protected void done()
 	{
 		if(iterations <= 0 )
 		{
 			redrawButton.setEnabled(true);
 		}
-		
+
 		fractalPanel.repaint();
 	}
 }

@@ -1,149 +1,143 @@
+import java.lang.reflect.InvocationTargetException;
+
 import java.util.*;
 
 public class FractalToGIF
 {
-	public static void usage()
-	{
-		System.out.println("java FractalToGIF [-options] <class files>");
-		System.out.println("  -w <numner>     specify the width of the gif");
-		System.out.println("  -h <numner>     specify the height of the gif");
-		System.out.println("  -d <numner>     specify the frame delay in milliseconds");
-		System.out.println("  -i <numner>     iterations");
-		System.out.println("");
-		System.out.println("example:  java FractalToGIF -w 800 -h 500 -d 500 Dragon.class LevyCurve.class\n");
-		
-		System.exit(-1);
-	}
+	public static void printHelp()
+    {
+        System.out.println("Usage: java FractalToGIF [options] <class files>");
+        System.out.println("Options:");
+        System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
+        System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
+        System.out.println("  -i, --iterations <count>   Set the number of iterations");
+		System.out.println("  -d, --delay  <numner>      Set the frame delay in milliseconds (default: 500)");
+        System.out.println("  -h, --help                 Show this help message");
+    }
 	
 	public static void main(String[] args)
 	{
 		int width = 800;
 		int height = 600;
+		int iterations = -1;
 		int delay = 500;
-		int iterations=-1;
 		
-		String arg;
-		String className;
 		List<String> classes = new LinkedList<String>();
 		ClassLoader classLoader = FractalToGIF.class.getClassLoader();
-		
-		if(args.length < 1)
+
+		for (String arg : args)
 		{
-			usage();
-		}
-		
-		for(int ii=0; ii < args.length; ii++)
-		{
-			arg = args[ii];
-			if(arg.endsWith(".class"))
+			if (arg.equals("-h") || arg.equals("--help"))
 			{
-				className = arg.substring(0, arg.lastIndexOf(".class"));
+				printHelp();
+				return;
+			}
+		}
+
+		for (int ii = 0; ii < args.length; ii++)
+		{
+			if(args[ii].endsWith(".class"))
+			{
+				String className = args[ii].substring(0, args[ii].lastIndexOf(".class"));
 				classes.add(className);
 			}
-			else if(arg.equals("-w") || (arg.equals("--width")))
-			{
-				ii++;
-				if(ii < args.length)
+			else {
+				switch (args[ii])
 				{
-					try
-					{
-						width = Integer.parseInt(args[ii]);
-					}
-					catch(NumberFormatException nfe)
-					{
-						System.out.println("width argument must be a number");
-						usage();
-					}
+					case "-w":
+					case "--width":
+						if (ii + 1 < args.length)
+						{
+							try
+							{
+								width = Integer.parseInt(args[ii + 1]);
+								ii++;
+							}
+							catch (NumberFormatException e)
+							{
+								System.out.println("Invalid width value. Must be an integer.");
+							}
+						}
+						else
+						{
+							System.out.println("No value provided for width.");
+						}
+						break;
+					case "-h":
+					case "--height":
+						if (ii + 1 < args.length)
+						{
+							try
+							{
+								height = Integer.parseInt(args[ii + 1]);
+								ii++;
+							}
+							catch (NumberFormatException e)
+							{
+								System.out.println("Invalid height value. Must be an integer.");
+							}
+						}
+						else
+						{
+							System.out.println("No value provided for height.");
+						}
+						break;
+					case "-i":
+					case "--iterations":
+						if (ii + 1 < args.length)
+						{
+							try
+							{
+								iterations = Integer.parseInt(args[ii + 1]);
+								ii++;
+							}
+							catch (NumberFormatException e)
+							{
+								System.out.println("Invalid iterations value. Must be an integer.");
+							}
+						}
+						else
+						{
+							System.out.println("No value provided for iterations.");
+						}
+						break;
+					case "-d":
+					case "--delay":
+						if (ii + 1 < args.length)
+						{
+							try
+							{
+								delay = Integer.parseInt(args[ii + 1]);
+								ii++;
+							}
+							catch (NumberFormatException e)
+							{
+								System.out.println("Invalid delay value. Must be an integer.");
+							}
+						}
+						else
+						{
+							System.out.println("No value provided for delay.");
+						}
+						break;
+					default:
+						System.out.println("Unknown argument: " + args[ii]);
+						System.out.println();
+						printHelp();
+						System.exit(-1);
 				}
-				else
-				{
-					System.out.println("width argument must be a number");
-					usage();
-				}
-			}
-			else if(arg.equals("-h") || (arg.equals("--height")))
-			{
-				ii++;
-				if(ii < args.length)
-				{
-					try
-					{
-						height = Integer.parseInt(args[ii]);
-					}
-					catch(NumberFormatException nfe)
-					{
-						System.out.println("height argument must be a number");
-						usage();
-					}
-				}
-				else
-				{
-					System.out.println("height argument must be a number");
-					usage();
-				}
-			}
-			else if(arg.equals("-d") || (arg.equals("--delay")))
-			{
-				ii++;
-				if(ii < args.length)
-				{
-					try
-					{
-						delay = Integer.parseInt(args[ii]);
-					}
-					catch(NumberFormatException nfe)
-					{
-						System.out.println("delay argument must be a number");
-						usage();
-					}
-				}
-				else
-				{
-					System.out.println("delay argument must be a number");
-					usage();
-				}
-			}
-			else if(arg.equals("-i") || (arg.equals("--iterations")))
-			{
-				ii++;
-				if(ii < args.length)
-				{
-					try
-					{
-						iterations = Integer.parseInt(args[ii]);
-					}
-					catch(NumberFormatException nfe)
-					{
-						System.out.println("iterations argument must be a positve number");
-						usage();
-					}
-				}
-				else
-				{
-					System.out.println("iterations argument must be a number");
-					usage();
-				}
-			}
-			else
-			{
-				System.out.println("unknown argument " + arg);	
 			}
 		}
-		
-		if(classes.size() == 0)
-		{
-			usage();
-		}
-		
+
+
 		Iterator<String> iter = classes.iterator();
-		while(iter.hasNext())
+		for(String className : classes)
 		{
 			try
 			{
-				className = iter.next();
-				Class aClass = classLoader.loadClass(className);
-				SimpleFractal fractal = (SimpleFractal) aClass.newInstance();
-				
+				Class<?> aClass = classLoader.loadClass(className);
+				SimpleFractal fractal = (SimpleFractal) aClass.getDeclaredConstructor().newInstance();
+
 				if(iterations == -1)
 				{
 					fractal.createGIF(className + ".gif", width, height, delay, fractal.getSuggestedIterations());
@@ -154,20 +148,17 @@ public class FractalToGIF
 				}
 				System.out.println(className + ".gif");
 			}
-			catch (ClassNotFoundException e) {
-				System.err.println(e.getMessage() + " class not found.");
-			}
-			catch(InstantiationException ie)
+			catch (ClassNotFoundException e)
 			{
-				System.err.println("Unable to create instance of " + ie.getMessage() + ".");
+				System.err.println("Class not found: " + className);
 			}
-			catch(IllegalAccessException iae)
+			catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
 			{
-				iae.printStackTrace();
+				System.err.println("Could not instantiate " + className + ": " + e.getMessage());
 			}
-			catch(ClassCastException cce)
+			catch (ClassCastException e)
 			{
-				System.err.println(cce.getMessage() + ".");
+				System.err.println(className + " does not extend SimpleFractal.");
 			}
 		}
 	}

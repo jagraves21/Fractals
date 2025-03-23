@@ -101,35 +101,4 @@ public class FractalPanel extends JPanel
 	{
 		return fractal.toString();
 	}
-	
-	public static void displayFractal(SimpleFractal fractal)
-	{
-		displayFractal(fractal, fractal.getSuggestedIterations());
-	}
-	
-	public static void displayFractal(SimpleFractal fractal, int iterations)
-	{
-		FractalPanel fractalPanel = new FractalPanel(new Dragon());
-		for(int ii=0; ii < iterations; ii++)
-		{
-			fractalPanel.next();
-		}
-		
-		fractal.findMinMax();
-		MyPoint minPoint = fractal.getMinPoint();
-		MyPoint maxPoint = fractal.getMaxPoint();
-		int width = (int)(maxPoint.x - minPoint.x + 5);
-		int height = (int)(maxPoint.y - minPoint.y + 5);
-		Dimension dim = new Dimension(width, height);
-		
-		fractalPanel.setMinimumSize(dim);
-		fractalPanel.setMaximumSize(dim);
-		fractalPanel.setPreferredSize(dim);
-		
-		JFrame frame = new JFrame(fractal.toString());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(800,600);
-		frame.setContentPane(new JScrollPane(fractalPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
-		frame.setVisible(true);
-	}
 }

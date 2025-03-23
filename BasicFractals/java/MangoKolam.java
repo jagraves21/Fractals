@@ -71,24 +71,6 @@ public class MangoKolam extends LSystem
 	
 	public static void main(String[] args)
 	{
-		int iterations = 18;
-		
-		if(args.length > 0)
-		{
-			iterations = Integer.parseInt(args[0]);
-		}
-		
-		FractalPanel fractal = new FractalPanel(new MangoKolam());		
-		JFrame frame = new JFrame(fractal.toString());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(800,600);
-		
-		frame.setContentPane(fractal);
-		for(int ii=0; ii < iterations; ii++)
-		{
-			fractal.next();
-		}
-		
-		frame.setVisible(true);
+		SimpleFractal.main(args);
 	}
 }

@@ -2,12 +2,16 @@ import java.util.*;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.RenderingHints;
 
+import java.awt.event.*;
 import java.awt.image.*;
+
+import javax.swing.*;
 
 import java.io.*;
 import javax.imageio.metadata.*;
@@ -181,7 +185,7 @@ public abstract class SimpleFractal extends AbstractFractal
 		}
 	}
 	
-	public void createSVG(String fileName, int width, int height, int delay, int iterations)
+	public void createSVG(String fileName, int width, int height, int iterations)
 	{
 		try
 		{
@@ -333,5 +337,150 @@ public abstract class SimpleFractal extends AbstractFractal
 	public String toString()
 	{
 		return "Simple Fractal";
+	}
+
+	public void displayFractal(int width, int height, int iterations)
+	{
+		System.out.println(this + " " + width + " " + height + " " + iterations);
+		JFrame frame = new JFrame(toString());
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(width, height));
+		frame.add(new FractalPanel(this));
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+
+		String os = System.getProperty("os.name").toLowerCase();
+		String keyStroke = null;
+		if (os.contains("mac")) {
+			keyStroke = "meta W";
+		} else {
+			keyStroke = "control W";
+		}
+		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyStroke), "close");
+		frame.getRootPane().getActionMap().put("close", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0); // Close the application
+			}
+		});
+
+		for(int ii=0; ii < iterations; ii++)
+		{
+			next();
+		}
+
+		frame.setVisible(true);
+	}
+
+	public void displayFractal(String callerClassName, String[] args)
+	{
+		int width = 800;
+		int height = 600;
+		int iterations = getSuggestedIterations();
+
+		for (String arg : args)
+		{
+			if (arg.equals("-h") || arg.equals("--help"))
+			{
+				printHelp(callerClassName);
+				return;
+			}
+		}
+
+		for (int ii = 0; ii < args.length; ii++)
+		{
+			switch (args[ii])
+			{
+				case "-w":
+				case "--width":
+					if (ii + 1 < args.length)
+					{
+						try
+						{
+							width = Integer.parseInt(args[ii + 1]);
+							ii++;
+						}
+						catch (NumberFormatException e)
+						{
+							System.out.println("Invalid width value. Must be an integer.");
+						}
+					}
+					else
+					{
+						System.out.println("No value provided for width.");
+					}
+					break;
+				case "-h":
+				case "--height":
+					if (ii + 1 < args.length)
+					{
+						try
+						{
+							height = Integer.parseInt(args[ii + 1]);
+							ii++;
+						}
+						catch (NumberFormatException e)
+						{
+							System.out.println("Invalid height value. Must be an integer.");
+						}
+					}
+					else
+					{
+						System.out.println("No value provided for height.");
+					}
+					break;
+				case "-i":
+				case "--iterations":
+					if (ii + 1 < args.length)
+					{
+						try
+						{
+							iterations = Integer.parseInt(args[ii + 1]);
+							ii++;
+						}
+						catch (NumberFormatException e)
+						{
+							System.out.println("Invalid iterations value. Must be an integer.");
+						}
+					}
+					else
+					{
+						System.out.println("No value provided for iterations.");
+					}
+					break;
+				default:
+					System.out.println("Unknown argument: " + args[ii]);
+					System.out.println();
+					printHelp(callerClassName);
+					System.exit(-1);
+			}
+		}
+
+		displayFractal(width, height, iterations);
+	}
+	
+	public void printHelp(String callerClassName)
+	{
+		System.out.println("Usage: java " + callerClassName + " [options]");
+		System.out.println("Options:");
+		System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
+		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
+		System.out.println("  -i, --iterations <count>   Set the number of iterations");
+		System.out.println("  -h, --help                 Show this help message");
+	}
+
+	public static void main(String[] args)
+	{
+		try
+		{
+			String callerClassName = Thread.currentThread().getStackTrace()[2].getClassName();
+			Class<?> callerClass = Class.forName(callerClassName);
+			Object instance = callerClass.getConstructor().newInstance();
+			SimpleFractal simpleFractal = (SimpleFractal) instance;
+			simpleFractal.displayFractal(callerClassName, args);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

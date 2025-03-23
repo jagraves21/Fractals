@@ -80,14 +80,14 @@ public class TreeMod extends LSystem
 				lines.add(line);
 				curAngle = 0;
 				
-				if(!levels.containsKey(new Double(radius)))
+				if(!levels.containsKey(radius))
 				{
 					list = new LinkedList<LineSegment>();
-					levels.put(new Double(radius), list);
+					levels.put(radius, list);
 				}
 				else
 				{
-					list = levels.get(new Double(radius));	
+					list = levels.get(radius);	
 				}
 				
 				list.add(line);
@@ -221,24 +221,6 @@ public class TreeMod extends LSystem
 	
 	public static void main(String[] args)
 	{
-		int iterations = 10;
-		
-		if(args.length > 0)
-		{
-			iterations = Integer.parseInt(args[0]);
-		}
-		
-		FractalPanel fractal = new FractalPanel(new TreeMod());		
-		JFrame frame = new JFrame(fractal.toString());
-		frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-		frame.setSize(800,600);
-		
-		frame.setContentPane(fractal);
-		for(int ii=0; ii < iterations; ii++)
-		{
-			fractal.next();
-		}
-		
-		frame.setVisible(true);
+				SimpleFractal.main(args);
 	}
 }
