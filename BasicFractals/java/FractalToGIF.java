@@ -10,9 +10,10 @@ public class FractalToGIF
         System.out.println("Options:");
         System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
         System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
-        System.out.println("  -i, --iterations <count>   Set the number of iterations");
+        System.out.println("  -i, --iterations <count>   Set the number of iterations (default: auto)");
 		System.out.println("  -d, --delay  <numner>      Set the frame delay in milliseconds (default: 500)");
-        System.out.println("  -h, --help                 Show this help message");
+		System.out.println("  -n, --no-reflect           Prevent the GIF from being reflect (default: reflected)");
+		System.out.println("  -h, --help                 Show this help message");
     }
 	
 	public static void main(String[] args)
@@ -21,6 +22,7 @@ public class FractalToGIF
 		int height = 600;
 		int iterations = -1;
 		int delay = 500;
+		boolean reflect = true;
 		
 		List<String> classes = new LinkedList<String>();
 		ClassLoader classLoader = FractalToGIF.class.getClassLoader();
@@ -120,6 +122,10 @@ public class FractalToGIF
 							System.out.println("No value provided for delay.");
 						}
 						break;
+					case "-n":
+					case "--no-reflect":
+						reflect = false;
+                break;
 					default:
 						System.out.println("Unknown argument: " + args[ii]);
 						System.out.println();
@@ -140,11 +146,11 @@ public class FractalToGIF
 
 				if(iterations == -1)
 				{
-					fractal.createGIF(className + ".gif", width, height, delay, fractal.getSuggestedIterations());
+					fractal.createGIF(className + ".gif", width, height, delay, fractal.getSuggestedIterations(), reflect);
 				}
 				else
 				{
-					fractal.createGIF(className + ".gif", width, height, delay, iterations);
+					fractal.createGIF(className + ".gif", width, height, delay, iterations, reflect);
 				}
 				System.out.println(className + ".gif");
 			}
