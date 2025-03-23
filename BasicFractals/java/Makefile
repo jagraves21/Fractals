@@ -21,10 +21,6 @@ all: $(CLASSES)
 cleanclass:
 	rm -f *.class
 
-.PHONY: cleanjpg
-cleanjpg:
-	rm -f *.jpg
-
 .PHONY: cleanpng
 cleanpng:
 	rm -f *.png
@@ -34,7 +30,7 @@ cleangif:
 	rm -f *.gif
 
 .PHONY: clean
-clean: cleanclass cleanjpg
+clean: cleanclass
 
 .PHONY: tar
 tar: all
@@ -43,7 +39,6 @@ tar: all
 .PHONY: gif
 gif: all
 	java $(FractalToGIF) $(OTHER_CLASSES)
-	$(MAKE) cleanjpg
 
 .PHONY: png
 png: all
