@@ -97,10 +97,10 @@ public class TornSquare extends SimpleFractal
 			theta = Math.atan(d1 / d2);
 			radius = Math.sqrt(Math.pow(d1,2) + Math.pow(d2,2));
 			
-			np2 = np5.rotate(np1, d1, 0);
-			np4 = np1.rotate(np5, d1, 0);
+			np2 = np1.rotate(np5, d1, 0);
+			np4 = np5.rotate(np1, d1, 0);
 			
-			np3 = np2.rotate(np4, radius, theta);
+			np3 = np4.rotate(np2, radius, theta);
 			
 			newLines.add(new LineSegment(np1, np2));
 			newLines.add(new LineSegment(np2, np3));

@@ -65,8 +65,8 @@ public class TernaryTree extends SimpleFractal
 		
 		dist = p1.distance(center);
 		
-		MyPoint p2 = p1.rotate(center, dist, r120);
-		MyPoint p3 = p1.rotate(center, dist, -r120);
+		MyPoint p2 = center.rotate(p1, dist, r120);
+		MyPoint p3 = center.rotate(p1, dist, -r120);
 		
 		lines.clear();
 		nextLines.clear();
@@ -151,9 +151,9 @@ public class TernaryTree extends SimpleFractal
 			
 			dist = p1.distance(center)/2;
 			
-			np1 = center.rotate(p1, dist, r180);
-			np2 = np1.rotate(p1, dist, r120);
-			np3 = np1.rotate(p1, dist, -r120);
+			np1 = p1.rotate(center, dist, r180);
+			np2 = p1.rotate(np1, dist, r120);
+			np3 = p1.rotate(np1, dist, -r120);
 			
 			line = new LineSegment(p1, np1, paint);
 			lines.add(line);

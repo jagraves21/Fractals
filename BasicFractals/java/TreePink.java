@@ -142,8 +142,8 @@ public class TreePink extends SimpleFractal
 			
 			dist = p1.distance(p2) * 10/6;
 			
-			np1 = p2.rotate(p1, dist, angle1);
-			np2 = p2.rotate(p1, dist, -angle2);
+			np1 = p1.rotate(p2, dist, angle1);
+			np2 = p1.rotate(p2, dist, -angle2);
 			
 			line = new LineSegment(p2,np1,color);
 			lines.add(line);
