@@ -79,7 +79,7 @@ public class CircleInversionMod extends SimpleFractal
 		
 		seed = 1355959557249L;
 		java.util.Random random = new java.util.Random(seed);
-		System.out.println("circle " + seed + "L");
+		//System.out.println("circle " + seed + "L");
 		
 		boolean inside;
 		Iterator<Circle> outerIter;
@@ -176,7 +176,7 @@ public class CircleInversionMod extends SimpleFractal
 		{
 			long seed = System.currentTimeMillis();
 			seed = 1355959557249L;
-			System.out.println("color " + seed + "L");
+			//System.out.println("color " + seed + "L");
 			random = new Random(seed);
 		}
 		

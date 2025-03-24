@@ -6,7 +6,7 @@ FractalToGIF = FractalToGIF
 FractalToPNG = FractalToPNG
 FractalToSVG = FractalToSVG
 
-JAR_NAME = Fractal.jar
+JAR_NAME = GUI.jar
 MAIN_CLASS = Fractal
 
 EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment

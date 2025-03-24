@@ -139,12 +139,12 @@ public class ApollonianGasket extends SimpleFractal
 			D = solveApollonius(A, B, C, 1, 1, 1);
 			if (D == null)
 			{
-				System.out.println("null 135");
+				//System.out.println("null 135");
 				continue;
 			}
 			if (D.radius() < 0.1)
 			{
-				System.out.println("null 140");
+				//System.out.println("null 140");
 				continue;
 			}
 
@@ -183,12 +183,12 @@ public class ApollonianGasket extends SimpleFractal
 			D = solveApollonius(A, B, C, 1, 1, -1);
 			if (D == null)
 			{
-				System.out.println("null 179");
+				//System.out.println("null 179");
 				continue;
 			}
 			if (D.radius() < 0.1)
 			{
-				System.out.println("null 184");
+				//System.out.println("null 184");
 				continue;
 			}
 

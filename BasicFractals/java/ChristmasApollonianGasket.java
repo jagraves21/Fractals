@@ -73,12 +73,6 @@ public class ChristmasApollonianGasket extends SimpleFractal
 			COLORS[tmpCOLORS.length + ii] = new Color(red, green, blue);
 		}
 		
-		for(int ii=0; ii < COLORS.length; ii++)
-		{
-			System.out.println(ii + " " + COLORS[ii]);
-		}
-		
-		
 		createBase();
 	}
 

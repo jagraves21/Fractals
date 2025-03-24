@@ -117,14 +117,12 @@ public class Circle extends FractalShape implements Comparable<Circle>
 		}
 		else
 		{
-			System.out.println("same point, diff radius");
 			return Double.compare(this.radius, that.radius);
 		}
 	}
 	
 	public boolean equals(Object that)
 	{
-		System.out.println("HERE");
 		return this.compareTo((Circle)that) == 0;
 	}
 	

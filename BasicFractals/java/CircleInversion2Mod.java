@@ -163,7 +163,7 @@ public class CircleInversion2Mod extends SimpleFractal
 		{
 			long seed = System.currentTimeMillis();
 			seed = 1355959557249L;
-			System.out.println("color " + seed + "L");
+			//System.out.println("color " + seed + "L");
 			random = new Random(seed);
 		}
 		

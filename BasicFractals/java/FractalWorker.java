@@ -28,7 +28,7 @@ public class FractalWorker extends SwingWorker<FractalPanel,FractalPanel>
 
 		fractalPanel.repaint();
 
-		System.out.println(iterations);
+		//System.out.println(iterations);
 	}
 
 	protected FractalPanel doInBackground()
