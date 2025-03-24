@@ -96,8 +96,6 @@ public class Fractal extends JPanel implements ActionListener
 	{
 		if(e.getSource() == fractalComboBox)
 		{
-			int cur = ((Integer)iterationsComboBox.getSelectedItem()).intValue();
-			
 			iterationsComboBox.removeAllItems();
 			
 			int max = ((SimpleFractal)fractalComboBox.getSelectedItem()).getSuggestedIterations();
@@ -105,13 +103,7 @@ public class Fractal extends JPanel implements ActionListener
 			{
 				iterationsComboBox.addItem(ii);
 			}
-			
-			if(cur > max)
-			{
-				cur = max;
-			}
-			
-			iterationsComboBox.setSelectedIndex(cur);
+			iterationsComboBox.setSelectedIndex(max);
 		}
 		else if(e.getSource() == redrawButton)
 		{
@@ -258,7 +250,7 @@ public class Fractal extends JPanel implements ActionListener
 		fractalList.add(new TriCircle());
 		fractalList.add(new TriangleFlake());
 
-		System.out.println(fractalList.size() + " fractals.");
+		//System.out.println(fractalList.size() + " fractals.");
 
 		JFrame frame = new JFrame("Fractals");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -270,65 +262,3 @@ public class Fractal extends JPanel implements ActionListener
 	}
 }
 
-class FractalWorker extends SwingWorker<FractalPanel,FractalPanel>
-{
-	static final int delay = 1000;
-
-	JButton redrawButton;
-	FractalPanel fractalPanel;
-	int iterations;
-	long fireAt;
-
-	public FractalWorker(JButton redrawButton, FractalPanel fractalPanel, int iterations)
-	{
-		this(redrawButton, fractalPanel, iterations, System.currentTimeMillis() + delay);
-	}
-
-	protected FractalWorker(JButton redrawButton, FractalPanel fractalPanel, int iterations, long fireAt)
-	{
-		this.redrawButton = redrawButton;
-		this.fractalPanel = fractalPanel;
-		this.iterations = iterations;
-		this.fireAt = fireAt;
-
-		fractalPanel.repaint();
-
-		System.out.println(iterations);
-	}
-
-	protected FractalPanel doInBackground()
-	{
-		if(iterations > 0)
-		{
-			long fireIn = fireAt - System.currentTimeMillis();
-			if(fireIn > 0)
-			{
-				try
-				{
-					Thread.sleep(fireIn);
-				}
-				catch(Exception e)
-				{
-
-				}
-			}
-
-			fractalPanel.next();
-
-			FractalWorker nextWoker = new FractalWorker(redrawButton, fractalPanel, iterations-1, fireAt+delay);
-			nextWoker.execute();
-		}
-
-		return fractalPanel;
-	}
-
-	protected void done()
-	{
-		if(iterations <= 0 )
-		{
-			redrawButton.setEnabled(true);
-		}
-
-		fractalPanel.repaint();
-	}
-}

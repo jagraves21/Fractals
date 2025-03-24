@@ -1,21 +1,44 @@
 JAVAC = javac
 SRC = $(wildcard *.java)
 CLASSES = $(SRC:.java=.class)
-TAR_NAME = fractals.tar.gz
 
 FractalToGIF = FractalToGIF
 FractalToPNG = FractalToPNG
 FractalToSVG = FractalToSVG
 
+JAR_NAME = Fractal.jar
+MAIN_CLASS = Fractal
+
 EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
 
-OTHER_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
+FRACTAL_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
+
+%.class: %.java
+	$(JAVAC) $<
 
 .PHONY: all
 all: $(CLASSES)
 
-%.class: %.java
-	$(JAVAC) $<
+.PHONY: gif
+gif: all
+	java $(FractalToGIF) $(FRACTAL_CLASSES)
+
+.PHONY: png
+png: all
+	java $(FractalToPNG) $(FRACTAL_CLASSES)
+
+.PHONY: svg
+svg: all
+	java $(FractalToSVG) $(FRACTAL_CLASSES)
+
+manifest.mf:
+	echo "Main-Class: $(MAIN_CLASS)" > manifest.mf
+	echo "" >> manifest.mf
+
+.PHONY: jar
+jar: all manifest.mf
+	jar -cvfm $(JAR_NAME) manifest.mf $(CLASSES) $(SRC)
+	rm -f manifest.mf
 
 .PHONY: cleanclass
 cleanclass:
@@ -25,6 +48,10 @@ cleanclass:
 cleanpng:
 	rm -f *.png
 
+.PHONY: cleansvg
+cleansvg:
+	rm -f *.svg
+
 .PHONY: cleangif
 cleangif:
 	rm -f *.gif
@@ -32,29 +59,7 @@ cleangif:
 .PHONY: clean
 clean: cleanclass
 
-.PHONY: tar
-tar: all
-	tar -czf $(TAR_NAME) *.java *.class
-
-.PHONY: gif
-gif: all
-	java $(FractalToGIF) $(OTHER_CLASSES)
-
-.PHONY: png
-png: all
-	java $(FractalToPNG) $(OTHER_CLASSES)
-
-.PHONY: svg
-svg: all
-	java $(FractalToSVG) $(OTHER_CLASSES)
-
 .PHONY: veryclean
-veryclean: clean cleanpng cleangif
-	rm -f $(TAR_NAME)
-
-.PHONY: tell
-tell:
-	@echo $(EXCLUDE_CLASSES)
-	@echo ""
-	@echo $(OTHER_CLASSES)
+veryclean: clean cleanpng cleansvg cleangif
+	rm -f $(JAR_NAME)
 
