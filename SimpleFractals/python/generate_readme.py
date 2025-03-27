@@ -40,7 +40,7 @@ def main():
 	github_username = "jagraves21"
 	repo_name = "Fractals"
 	branch = "main"
-	github_path = "BasicFractals/gif"
+	github_path = "SimpleFractals/gif"
 	image_files = sys.argv[1:]
 	if image_files:
 		generate_readme(image_files, github_username, repo_name, branch, github_path)
