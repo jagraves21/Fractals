@@ -402,11 +402,17 @@ public abstract class SimpleFractal extends AbstractFractal
 						catch (NumberFormatException e)
 						{
 							System.out.println("Invalid width value. Must be an integer.");
+							System.out.println();
+							printHelp(callerClassName);
+							System.exit(-1);
 						}
 					}
 					else
 					{
 						System.out.println("No value provided for width.");
+						System.out.println();
+						printHelp(callerClassName);
+						System.exit(-1);
 					}
 					break;
 				case "-h":
@@ -421,11 +427,17 @@ public abstract class SimpleFractal extends AbstractFractal
 						catch (NumberFormatException e)
 						{
 							System.out.println("Invalid height value. Must be an integer.");
+							System.out.println();
+							printHelp(callerClassName);
+							System.exit(-1);
 						}
 					}
 					else
 					{
 						System.out.println("No value provided for height.");
+						System.out.println();
+						printHelp(callerClassName);
+						System.exit(-1);
 					}
 					break;
 				case "-i":
@@ -440,11 +452,17 @@ public abstract class SimpleFractal extends AbstractFractal
 						catch (NumberFormatException e)
 						{
 							System.out.println("Invalid iterations value. Must be an integer.");
+							System.out.println();
+							printHelp(callerClassName);
+							System.exit(-1);
 						}
 					}
 					else
 					{
 						System.out.println("No value provided for iterations.");
+						System.out.println();
+						printHelp(callerClassName);
+						System.exit(-1);
 					}
 					break;
 				default:
