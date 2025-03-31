@@ -7,9 +7,9 @@ FractalToPNG = FractalToPNG
 FractalToSVG = FractalToSVG
 
 JAR_NAME = GUI.jar
-MAIN_CLASS = Fractal
+MAIN_CLASS = GUI
 
-EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
+EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree GUI LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
 
 FRACTAL_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
 
