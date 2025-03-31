@@ -30,7 +30,7 @@ public class FractalPanel extends Canvas implements Runnable
 	protected int iterations;
 	protected long delay;
 	private Thread animationThread;
-	
+
 	public FractalPanel()
 	{
 		this(null);
@@ -39,7 +39,7 @@ public class FractalPanel extends Canvas implements Runnable
 	public FractalPanel(SimpleFractal fractal) {
 		this(fractal, 10, 500);
 	}
-	
+
 	public FractalPanel(SimpleFractal fractal, int iterations, long delay)
 	{
 		super();
@@ -64,7 +64,7 @@ public class FractalPanel extends Canvas implements Runnable
 					break;
 				}
 				catch(InterruptedException ie) {
-				
+
 				}	
 			}
 		}
@@ -94,7 +94,7 @@ public class FractalPanel extends Canvas implements Runnable
 					Thread.currentThread().interrupt();
 				}
 			}
-		
+
 			try {	
 				if(bufferStrategy == null || bufferStrategy.contentsLost()) {
 					createBufferStrategy(2);
@@ -103,27 +103,30 @@ public class FractalPanel extends Canvas implements Runnable
 				render(bufferStrategy);
 			}
 			catch (IllegalStateException ise) {
-			
+
 			}
-			
+
 			fireAt += delay * 1000000;
 		}
 	}
 
 	protected void render(BufferStrategy bufferStrategy) {
 		if (bufferStrategy == null) return;
-
-		Graphics g = bufferStrategy.getDrawGraphics();
-		try {
-			BufferedImage bufferedImage = fractal.getFractalImage(getWidth(), getHeight());
-			g.drawImage(bufferedImage, 0, 0, null);
-		} catch (OutOfMemoryError e) {
-			System.out.println(memory);
-			System.exit(-1);
-		} finally {
-			g.dispose();
-			bufferStrategy.show();
-		}
+		do {
+			do {
+				Graphics g = bufferStrategy.getDrawGraphics();
+				try {
+					BufferedImage bufferedImage = fractal.getFractalImage(getWidth(), getHeight());
+					g.drawImage(bufferedImage, 0, 0, null);
+				} catch (OutOfMemoryError e) {
+					System.out.println(memory);
+					System.exit(-1);
+				} finally {
+					g.dispose();
+					bufferStrategy.show();
+				}
+			} while (bufferStrategy.contentsRestored());
+		} while (bufferStrategy.contentsLost());
 	}
 
 	public void setFractal(SimpleFractal fractal)
