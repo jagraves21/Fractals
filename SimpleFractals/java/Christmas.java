@@ -29,6 +29,11 @@ public class Christmas extends SimpleFractal
 		return 9;
 	}
 		
+	public long getSuggestedDelay()
+	{
+		return 75;
+	}
+		
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);

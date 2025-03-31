@@ -35,6 +35,8 @@ public class FractalWorker extends SwingWorker<FractalPanel,FractalPanel>
 	{
 		if(iterations > 0)
 		{
+			fractalPanel.next();
+			
 			long fireIn = fireAt - System.currentTimeMillis();
 			if(fireIn > 0)
 			{
@@ -47,8 +49,7 @@ public class FractalWorker extends SwingWorker<FractalPanel,FractalPanel>
 
 				}
 			}
-
-			fractalPanel.next();
+			fractalPanel.clearFractal();
 
 			FractalWorker nextWoker = new FractalWorker(redrawButton, fractalPanel, iterations-1, fireAt+delay);
 			nextWoker.execute();

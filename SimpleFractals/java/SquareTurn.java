@@ -33,6 +33,11 @@ public class SquareTurn extends SimpleFractal
 		return 60;
 	}
 	
+	public long getSuggestedDelay()
+	{
+		return 100;
+	}
+	
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);

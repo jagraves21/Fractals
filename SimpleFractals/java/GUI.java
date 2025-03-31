@@ -5,137 +5,50 @@ import java.util.*;
 
 import javax.swing.*;
 
-public class Fractal extends JPanel implements ActionListener
+public class GUI extends JPanel implements ActionListener
 {
 	private static final long serialVersionUID = 1L;
 
 	protected java.util.List<SimpleFractal> fractalList;
 	
-	protected JPanel controlPanel;
 	protected JComboBox<SimpleFractal> fractalComboBox;
-	protected JCheckBox stepCheckBox;
-	protected JComboBox<Integer> iterationsComboBox;
-	protected JButton redrawButton;
 	protected FractalPanel fractalPanel;
 	
-	public Fractal(java.util.List<SimpleFractal> fractalList)
+	public GUI(java.util.List<SimpleFractal> fractalList)
 	{
 		this.fractalList = fractalList;
 		
 		setLayout(new BorderLayout());
 		
-		createControlPanel();
+		fractalComboBox = new JComboBox<SimpleFractal>(fractalList.toArray(new SimpleFractal[0]));
+		fractalComboBox.addActionListener(this);
+		add(fractalComboBox, BorderLayout.SOUTH);
 		
 		fractalPanel = new FractalPanel((SimpleFractal)fractalComboBox.getSelectedItem());
 		add(fractalPanel, BorderLayout.CENTER);
 	}
+
+	public void start() {
+		fractalPanel.start();
+	}
 	
-	protected void createControlPanel()
-	{
-		GridBagLayout layout = new GridBagLayout();
-		
-		controlPanel = new JPanel(layout);
-		
-		fractalComboBox = new JComboBox<SimpleFractal>(fractalList.toArray(new SimpleFractal[0]));
-		fractalComboBox.addActionListener(this);
-		
-		stepCheckBox = new JCheckBox("Step");
-		stepCheckBox.setSelected(true);
-		
-		iterationsComboBox = new JComboBox<Integer>();
-		int max = ((SimpleFractal)fractalComboBox.getSelectedItem()).getSuggestedIterations();
-		for(int ii=0; ii <= max; ii++)
-		{
-			iterationsComboBox.addItem(ii);
-		}
-		iterationsComboBox.setSelectedIndex(iterationsComboBox.getItemCount()-1);
-		
-		redrawButton = new JButton("Redraw");
-		redrawButton.addActionListener(this);
-		
-		Component glue = Box.createGlue();
-		
-		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = GridBagConstraints.RELATIVE;
-		c.gridy = GridBagConstraints.RELATIVE;
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.gridheight = 1;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		//c.ipadx
-		//c.ipady
-		c.insets = new Insets(5,5,5,5);
-		c.anchor = GridBagConstraints.NORTHEAST;
-		c.weightx = 1;
-		c.weighty = 1;
-		
-		layout.setConstraints(fractalComboBox, c);
-		controlPanel.add(fractalComboBox);
-		
-		c.fill = GridBagConstraints.NONE;
-		layout.setConstraints(stepCheckBox, c);
-		controlPanel.add(stepCheckBox);
-		
-		c.fill = GridBagConstraints.HORIZONTAL;
-		layout.setConstraints(iterationsComboBox, c);
-		controlPanel.add(iterationsComboBox);
-		
-		layout.setConstraints(redrawButton, c);
-		controlPanel.add(redrawButton);
-		
-		c.gridheight = GridBagConstraints.REMAINDER;
-		layout.setConstraints(glue, c);
-		controlPanel.add(glue);
-		
-		JPanel newPanel = new JPanel();
-		newPanel.add(controlPanel);
-		
-		add(newPanel, BorderLayout.WEST);
+	public void stop() {
+		fractalPanel.stop();
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == fractalComboBox)
 		{
-			iterationsComboBox.removeAllItems();
-			
-			int max = ((SimpleFractal)fractalComboBox.getSelectedItem()).getSuggestedIterations();
-			for(int ii=0; ii <= max; ii++)
-			{
-				iterationsComboBox.addItem(ii);
-			}
-			iterationsComboBox.setSelectedIndex(max);
-		}
-		else if(e.getSource() == redrawButton)
-		{
 			SimpleFractal fractal = (SimpleFractal)fractalComboBox.getSelectedItem();
-			
-			if(fractalPanel.getFractal() != fractal)
-			{
-				fractalPanel.setFractal(fractal);
-			}
-			
-			fractal.clearFractal();
+			System.out.println(fractal);
+
+			stop();
+			fractalPanel.setFractal(fractal);
+			fractalPanel.setIterations(fractal.getSuggestedIterations());
+			fractalPanel.setDelay(fractal.getSuggestedDelay());
 			fractalPanel.clearFractal();
-			
-			Integer iterations = (Integer)iterationsComboBox.getSelectedItem();
-			FractalWorker worker;
-			
-			if(stepCheckBox.isSelected())
-			{
-				worker = new FractalWorker(redrawButton, fractalPanel, iterations.intValue());
-			}
-			else
-			{
-				for(int ii=0; ii < iterations.intValue(); ii++)
-				{
-					fractalPanel.next();
-				}
-				
-				worker = new FractalWorker(redrawButton, fractalPanel, 0);
-			}
-			
-			redrawButton.setEnabled(false);
-			worker.execute();
+			start();	
 		}
 	}
 	
@@ -250,13 +163,37 @@ public class Fractal extends JPanel implements ActionListener
 		fractalList.add(new TriCircle());
 		fractalList.add(new TriangleFlake());
 
-		//System.out.println(fractalList.size() + " fractals.");
+		System.out.println(fractalList.size() + " fractals.");
 
 		JFrame frame = new JFrame("Fractals");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800,600);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(800, 600));
 
-		frame.setContentPane(new Fractal(fractalList));
+		GUI gui = new GUI(fractalList);
+		frame.setContentPane(gui);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowOpened(WindowEvent e) {
+				new SwingWorker<Void, Void>() {
+					protected Void doInBackground() throws Exception {
+						gui.start();
+						return null;
+					}
+				}.execute();
+			}   
+			
+			public void windowClosing(WindowEvent e) {
+				new SwingWorker<Void, Void>() {
+					protected Void doInBackground() throws Exception {
+						gui.stop();
+						return null;
+					}
+				}.execute();
+			}   
+		});
 
 		frame.setVisible(true);
 	}

@@ -32,6 +32,10 @@ public class CircleLimitSetNew extends SimpleFractal
 		return 74;
 	}
 	
+	public long getSuggestedDelay() {
+		return 100;
+	}
+	
 	protected void findMinMax(List<FractalShape> shapes)
 	{
 		minPoint.x = -200;//-1654;

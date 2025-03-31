@@ -11,10 +11,10 @@ import javax.swing.*;
 
 public class Circles extends SimpleFractal
 {
-	public final static MyPoint NORTH = new MyPoint(WIDTH/2, 0);
-	public final static MyPoint SOUTH = new MyPoint( WIDTH/2, HEIGHT);
-	public final static MyPoint EAST = new MyPoint(WIDTH, HEIGHT/2);
-	public final static MyPoint WEST = new MyPoint(0, HEIGHT/2);
+	public final MyPoint NORTH = new MyPoint(WIDTH/2, 0);
+	public final MyPoint SOUTH = new MyPoint( WIDTH/2, HEIGHT);
+	public final MyPoint EAST = new MyPoint(WIDTH, HEIGHT/2);
+	public final MyPoint WEST = new MyPoint(0, HEIGHT/2);
 	
 	protected int iteration;
 	protected int space;

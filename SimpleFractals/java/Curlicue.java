@@ -101,7 +101,7 @@ public class Curlicue extends SimpleFractal
 	
 	public String toString()
 	{
-		return "Koch Snowflake";
+		return "Curlicue";
 	}
 	
 	public static void main(String[] args)

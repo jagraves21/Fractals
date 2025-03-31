@@ -21,6 +21,11 @@ public class LevyCurves extends LSystem
 		return 70;
 	}
 		
+	public long getSuggestedDelay()
+	{
+		return 100;
+	}
+		
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
@@ -54,8 +59,8 @@ public class LevyCurves extends LSystem
 			}
 			
 			curve = nextCurve;
-		}		
-		
+		}
+		curAngle = 0;
 		
 		return curve;
 	}
@@ -63,7 +68,6 @@ public class LevyCurves extends LSystem
 	public StringBuilder applyTransition(StringBuilder curve)
 	{
 		curAngle += r45 / getSuggestedIterations();
-		System.out.println("applyTransition " + curAngle);
 		return curve;
 	}
 	

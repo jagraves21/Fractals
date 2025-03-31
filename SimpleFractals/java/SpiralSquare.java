@@ -14,11 +14,6 @@ public class SpiralSquare extends LSystem
 		super();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-		
 	protected Paint getForeground()
 	{
 		float[] dist = {0.0f, 1.0f};

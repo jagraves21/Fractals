@@ -14,11 +14,6 @@ public class Tree extends LSystem
 		super();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-		
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
@@ -76,6 +71,6 @@ public class Tree extends LSystem
 	
 	public static void main(String[] args)
 	{
-				SimpleFractal.main(args);
+		SimpleFractal.main(args);
 	}
 }

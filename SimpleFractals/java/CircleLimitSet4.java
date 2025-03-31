@@ -35,6 +35,10 @@ public class CircleLimitSet4 extends SimpleFractal
 		return 36;
 	}
 	
+	public long getSuggestedDelay() {
+		return 100;
+	}
+	
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);

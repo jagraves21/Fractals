@@ -191,7 +191,7 @@ public class CircleInversionMod extends SimpleFractal
 	
 	public String toString()
 	{
-		return "Circle Inversion";
+		return "Circle Inversion Mod";
 	}
 	
 	public static void main(String[] args)

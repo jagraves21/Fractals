@@ -76,11 +76,6 @@ public class ChristmasApollonianGasket extends SimpleFractal
 		createBase();
 	}
 
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-
 	protected Paint getForeground()
 	{
 		return Color.BLACK;

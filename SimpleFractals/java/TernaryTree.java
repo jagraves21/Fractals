@@ -36,11 +36,6 @@ public class TernaryTree extends SimpleFractal
 		createBase();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-		
 	protected Paint getForeground()
 	{
 		return Color.WHITE;

@@ -14,11 +14,6 @@ public class SierpinskiMedian extends LSystem
 		super();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-		
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);

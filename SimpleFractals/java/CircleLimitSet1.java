@@ -31,6 +31,10 @@ public class CircleLimitSet1 extends SimpleFractal
 	{
 		return 36;
 	}
+
+	public long getSuggestedDelay() {
+		return 100;
+	}
 	
 	protected Paint getForeground()
 	{

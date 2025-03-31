@@ -42,7 +42,14 @@ public abstract class SimpleFractal extends AbstractFractal
 	public abstract List<FractalShape> getFractal();
 	public abstract void next();
 	public abstract void clearFractal();
-	public abstract int getSuggestedIterations();
+	
+	public int getSuggestedIterations() {
+		return 10;
+	}
+	
+	public long getSuggestedDelay() {
+		return 500;
+	}
 	
 	protected Paint getForeground()
 	{
@@ -339,15 +346,38 @@ public abstract class SimpleFractal extends AbstractFractal
 		return "Simple Fractal";
 	}
 
-	public void displayFractal(int width, int height, int iterations)
+	public void displayFractal(int width, int height, int iterations, long delay)
 	{
-		System.out.println(this + " " + width + " " + height + " " + iterations);
+		System.out.println(this + " " + width + " " + height + " " + iterations + " " + delay);
 		JFrame frame = new JFrame(toString());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(width, height));
-		frame.add(new FractalPanel(this));
+
+		FractalPanel fractalPanel = new FractalPanel(this, iterations, delay); 
+		frame.add(fractalPanel);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowOpened(WindowEvent e) {
+				new SwingWorker<Void, Void>() {
+					protected Void doInBackground() throws Exception {
+						fractalPanel.start();
+						return null;
+					}
+				}.execute();
+			}
+			
+			public void windowClosing(WindowEvent e) {
+				new SwingWorker<Void, Void>() {
+					protected Void doInBackground() throws Exception {
+						fractalPanel.stop();
+						return null;
+					}
+				}.execute();
+			}
+		});
 
 		String os = System.getProperty("os.name").toLowerCase();
 		String keyStroke = null;
@@ -359,15 +389,10 @@ public abstract class SimpleFractal extends AbstractFractal
 		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyStroke), "close");
 		frame.getRootPane().getActionMap().put("close", new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0); // Close the application
+				System.exit(0);
 			}
 		});
-
-		for(int ii=0; ii < iterations; ii++)
-		{
-			next();
-		}
-
+		
 		frame.setVisible(true);
 	}
 
@@ -376,6 +401,7 @@ public abstract class SimpleFractal extends AbstractFractal
 		int width = 800;
 		int height = 600;
 		int iterations = getSuggestedIterations();
+		long delay = getSuggestedDelay();
 
 		for (String arg : args)
 		{
@@ -465,6 +491,31 @@ public abstract class SimpleFractal extends AbstractFractal
 						System.exit(-1);
 					}
 					break;
+				case "-d":
+				case "--delay":
+					if (ii + 1 < args.length)
+					{
+						try
+						{
+							delay = Long.parseLong(args[ii + 1]);
+							ii++;
+						}
+						catch (NumberFormatException e)
+						{
+							System.out.println("Invalid delay value. Must be an integer.");
+							System.out.println();
+							printHelp(callerClassName);
+							System.exit(-1);
+						}
+					}
+					else
+					{
+						System.out.println("No value provided for delay.");
+						System.out.println();
+						printHelp(callerClassName);
+						System.exit(-1);
+					}
+					break;
 				default:
 					System.out.println("Unknown argument: " + args[ii]);
 					System.out.println();
@@ -473,7 +524,7 @@ public abstract class SimpleFractal extends AbstractFractal
 			}
 		}
 
-		displayFractal(width, height, iterations);
+		displayFractal(width, height, iterations, delay);
 	}
 	
 	public void printHelp(String callerClassName)
@@ -483,6 +534,7 @@ public abstract class SimpleFractal extends AbstractFractal
 		System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
 		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
 		System.out.println("  -i, --iterations <count>   Set the number of iterations");
+		System.out.println("  -d, --delay <time>         Set the redraw delay in miliseconds");
 		System.out.println("  -h, --help                 Show this help message");
 	}
 

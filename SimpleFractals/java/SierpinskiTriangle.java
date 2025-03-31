@@ -20,11 +20,6 @@ public class SierpinskiTriangle extends SimpleFractal
 		createBase();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-		
 	protected Paint getForeground()
 	{
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);

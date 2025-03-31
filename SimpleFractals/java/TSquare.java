@@ -20,11 +20,6 @@ public class TSquare extends SimpleFractal
 		createBase();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
-	}
-		
 	protected Paint getForeground()
 	{
 		Color c1 = Color.GREEN;

@@ -143,7 +143,7 @@ public class CirclePacking extends SimpleFractal
 		
 	public String toString()
 	{
-		return "Circle Inversion";
+		return "Circle Packing";
 	}
 	
 	public static void main(String[] args)

@@ -42,6 +42,7 @@ public class Branches extends LSystem
 		{
 			str = applyTransition2(str);
 		}
+		turningAngle = 0;
 		
 		return str;
 	}

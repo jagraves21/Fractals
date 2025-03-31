@@ -155,7 +155,7 @@ public class ChristmasKochSnowflake extends SimpleFractal
 	
 	public String toString()
 	{
-		return "Koch Snowflake";
+		return "Christmas Koch Snowflake";
 	}
 	
 	public static void main(String[] args)

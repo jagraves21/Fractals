@@ -45,9 +45,8 @@ public class TreeMod extends LSystem
 		createLines();
 	}
 	
-	public int getSuggestedIterations()
-	{
-		return 10;
+	public long getSuggestedDelay() {
+		return 75;
 	}
 	
 	public List<FractalShape> createLines()
@@ -221,6 +220,6 @@ public class TreeMod extends LSystem
 	
 	public static void main(String[] args)
 	{
-				SimpleFractal.main(args);
+		SimpleFractal.main(args);
 	}
 }
