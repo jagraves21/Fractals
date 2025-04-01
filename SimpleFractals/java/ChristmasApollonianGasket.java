@@ -453,7 +453,7 @@ public class ChristmasApollonianGasket extends SimpleFractal
 
 	public String toString()
 	{
-		return "Apollonian Gasket";
+		return "Christmas Apollonian Gasket";
 	}
 
 	public static void main(String[] args)

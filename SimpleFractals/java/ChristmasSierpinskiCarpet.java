@@ -157,7 +157,7 @@ public class ChristmasSierpinskiCarpet extends SimpleFractal
 	
 	public String toString()
 	{
-		return "Sierpinski Carpet";
+		return "Christmas Sierpinski Carpet";
 	}
 	
 	public static void main(String[] args)

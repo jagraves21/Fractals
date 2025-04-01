@@ -137,7 +137,7 @@ public class ChristmasSierpinskiTriangle extends SimpleFractal
 	
 	public String toString()
 	{
-		return "Sierpinski Triangle";
+		return "Christmas Sierpinski Triangle";
 	}
 	
 	public static void main(String[] args)
