@@ -5,16 +5,16 @@ import java.util.*;
 public class FractalToGIF
 {
 	public static void printHelp()
-    {
-        System.out.println("Usage: java FractalToGIF [options] <class files>");
-        System.out.println("Options:");
-        System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
-        System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
-        System.out.println("  -i, --iterations <count>   Set the number of iterations (default: auto)");
+	{
+		System.out.println("Usage: java FractalToGIF [options] <class files>");
+		System.out.println("Options:");
+		System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
+		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
+		System.out.println("  -i, --iterations <count>   Set the number of iterations (default: auto)");
 		System.out.println("  -d, --delay  <numner>      Set the frame delay in milliseconds (default: 500)");
 		System.out.println("  -n, --no-reflect           Prevent the GIF from being reflect (default: reflected)");
 		System.out.println("  -h, --help                 Show this help message");
-    }
+	}
 	
 	public static void main(String[] args)
 	{
@@ -125,7 +125,7 @@ public class FractalToGIF
 					case "-n":
 					case "--no-reflect":
 						reflect = false;
-                break;
+				break;
 					default:
 						System.out.println("Unknown argument: " + args[ii]);
 						System.out.println();
