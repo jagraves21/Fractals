@@ -183,7 +183,7 @@ public class GUI extends JPanel implements ActionListener
 						return null;
 					}
 				}.execute();
-			}   
+			}
 			
 			public void windowClosing(WindowEvent e) {
 				new SwingWorker<Void, Void>() {
@@ -192,7 +192,20 @@ public class GUI extends JPanel implements ActionListener
 						return null;
 					}
 				}.execute();
-			}   
+			}
+		});
+
+		String os = System.getProperty("os.name").toLowerCase();
+		String keyStroke = os.contains("mac") ? "meta W" : "control W";
+
+		JRootPane rootPane = frame.getRootPane();
+		InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		ActionMap actionMap = rootPane.getActionMap();
+		inputMap.put(KeyStroke.getKeyStroke(keyStroke), "close");
+		actionMap.put("close", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			}
 		});
 
 		frame.setVisible(true);

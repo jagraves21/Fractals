@@ -380,16 +380,15 @@ public abstract class SimpleFractal extends AbstractFractal
 		});
 
 		String os = System.getProperty("os.name").toLowerCase();
-		String keyStroke = null;
-		if (os.contains("mac")) {
-			keyStroke = "meta W";
-		} else {
-			keyStroke = "control W";
-		}
-		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyStroke), "close");
-		frame.getRootPane().getActionMap().put("close", new AbstractAction() {
+		String keyStroke = os.contains("mac") ? "meta W" : "control W";
+
+		JRootPane rootPane = frame.getRootPane();
+		InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+		ActionMap actionMap = rootPane.getActionMap();
+		inputMap.put(KeyStroke.getKeyStroke(keyStroke), "close");
+		actionMap.put("close", new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 		
