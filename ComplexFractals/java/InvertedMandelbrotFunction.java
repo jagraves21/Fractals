@@ -1,6 +1,6 @@
 public class InvertedMandelbrotFunction extends MandelbrotFunction {
 	protected boolean right;
-	
+
 	public InvertedMandelbrotFunction() {
 		super();
 		init();
@@ -9,16 +9,12 @@ public class InvertedMandelbrotFunction extends MandelbrotFunction {
 	public double getOriginX() {
 		return 1.4;
 	}
-	public double getOriginY() {
-		return 0;
-	}
 	public double getWindowWidth() {
 		return 6;
 	}
 
 	public void init() {
 		super.init();
-		c.re = 0; c.im = 0;
 		right = true;
 	}
 
@@ -47,6 +43,10 @@ public class InvertedMandelbrotFunction extends MandelbrotFunction {
 
 		mu.re = z.re + c.re;
 		mu.im = z.im + c.im;
+	}
+
+	public ColorFunction getColorFunction() {
+		return PalletedColorFunction.getRainbow(25);
 	}
 
 	public String toString() {
