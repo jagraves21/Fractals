@@ -1,5 +1,4 @@
-public class LState
-{
+public class LState {
 	double curAngle;
 	double turningAngle;
 	double radius;
@@ -8,9 +7,16 @@ public class LState
 	char minus;
 	MyPoint p1;
 	MyPoint p2;
-		
-	public LState(double curAngle, double turningAngle, double radius, double scaleFactor, char plus, char minus, MyPoint p1, MyPoint p2)
-	{
+
+	public LState(
+			double curAngle,
+			double turningAngle,
+			double radius,
+			double scaleFactor,
+			char plus,
+			char minus,
+			MyPoint p1,
+			MyPoint p2) {
 		this.curAngle = curAngle;
 		this.turningAngle = turningAngle;
 		this.radius = radius;

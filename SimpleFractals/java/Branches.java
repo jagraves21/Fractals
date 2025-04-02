@@ -1,103 +1,87 @@
 import java.awt.Color;
 import java.awt.Paint;
-import java.awt.Point;
 import java.awt.RadialGradientPaint;
-
 import java.util.*;
-
 import javax.swing.*;
 
-public class Branches extends LSystem
-{
+public class Branches extends LSystem {
 	private double turningAngle;
-	
-	public Branches()
-	{
+
+	public Branches() {
 		super();
-		
+
 		turningAngle = 0;
 	}
-	
-	public int getSuggestedIterations()
-	{
+
+	public int getSuggestedIterations() {
 		return 6;
 	}
-		
-	protected Paint getForeground()
-	{
+
+	protected Paint getForeground() {
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
-		mid.y += mid.y * (1.0/10.0);
-		
+		mid.y += mid.y * (1.0 / 10.0);
+
 		float[] dist = {0.3f, 1.0f};
 		Color[] colors = {Color.BLUE, Color.RED};
-		
-		RadialGradientPaint paint = new RadialGradientPaint((float)mid.x, (float)mid.y, (float)(mid.distance(newMinPoint)*(6.0/10.0)), dist, colors);
+
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x,
+						(float) mid.y,
+						(float) (mid.distance(newMinPoint) * (6.0 / 10.0)),
+						dist,
+						colors);
 		return paint;
 	}
-	
-	protected StringBuilder getAxiom()
-	{
+
+	protected StringBuilder getAxiom() {
 		StringBuilder str = new StringBuilder("FA");
-		for(int ii=0; ii < 10; ii++)
-		{
+		for (int ii = 0; ii < 10; ii++) {
 			str = applyTransition2(str);
 		}
 		turningAngle = 0;
-		
+
 		return str;
 	}
-	
-	public StringBuilder applyTransition2(StringBuilder curve)
-	{
+
+	public StringBuilder applyTransition2(StringBuilder curve) {
 		StringBuilder nextCurve = new StringBuilder();
-		
-		for(int ii=0; ii < curve.length(); ii++)
-		{
-			if(curve.charAt(ii) == 'F')
-			{
+
+		for (int ii = 0; ii < curve.length(); ii++) {
+			if (curve.charAt(ii) == 'F') {
 				nextCurve.append("F");
-			}
-			else if(curve.charAt(ii) == 'A')
-			{
+			} else if (curve.charAt(ii) == 'A') {
 				nextCurve.append("[+>FA][->FA]");
-			}
-			else
-			{
+			} else {
 				nextCurve.append(curve.charAt(ii));
 			}
 		}
-		
+
 		return nextCurve;
 	}
-	
-	public StringBuilder applyTransition(StringBuilder curve)
-	{
+
+	public StringBuilder applyTransition(StringBuilder curve) {
 		turningAngle += r10;
 		return curve;
 	}
-	
-	protected double getStartingAngle()
-	{
+
+	protected double getStartingAngle() {
 		return r90;
 	}
-	
-	protected double getTurningAngle()
-	{
+
+	protected double getTurningAngle() {
 		return turningAngle;
 	}
-	
-	protected double getScaleFactor()
-	{
+
+	protected double getScaleFactor() {
 		return 0.75;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		return "Branches";
 	}
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		SimpleFractal.main(args);
 	}
 }

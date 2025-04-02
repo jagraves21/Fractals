@@ -1,88 +1,72 @@
 import java.awt.Color;
 import java.awt.Paint;
-import java.awt.Point;
 import java.awt.RadialGradientPaint;
-
 import java.util.*;
-
 import javax.swing.*;
 
-public class LevyCurves extends LSystem
-{
+public class LevyCurves extends LSystem {
 	protected double curAngle = 0.0;
-	
-	public LevyCurves()
-	{
+
+	public LevyCurves() {
 		super();
 	}
-	
-	public int getSuggestedIterations()
-	{
+
+	public int getSuggestedIterations() {
 		return 70;
 	}
-		
-	public long getSuggestedDelay()
-	{
+
+	public long getSuggestedDelay() {
 		return 100;
 	}
-		
-	protected Paint getForeground()
-	{
+
+	protected Paint getForeground() {
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
-		
+
 		float[] dist = {0.0f, 0.15f, 0.30f, 0.45f, 0.60f, 0.75f};
 		Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.RED, Color.BLUE, Color.GREEN};
-		
-		RadialGradientPaint paint = new RadialGradientPaint((float)mid.x, (float)mid.y, (float)mid.distance(newMaxPoint), dist, colors);
+
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x, (float) mid.y, (float) mid.distance(newMaxPoint), dist, colors);
 		return paint;
 	}
-	
-	protected StringBuilder getAxiom()
-	{
+
+	protected StringBuilder getAxiom() {
 		StringBuilder nextCurve;
 		StringBuilder curve = new StringBuilder("F");
-		
-		for(int ii=0; ii < 15; ii++)
-		{
+
+		for (int ii = 0; ii < 15; ii++) {
 			nextCurve = new StringBuilder();
-			
-			for(int jj=0; jj < curve.length(); jj++)
-			{
-				if(curve.charAt(jj) == 'F')
-				{
+
+			for (int jj = 0; jj < curve.length(); jj++) {
+				if (curve.charAt(jj) == 'F') {
 					nextCurve.append("+F--F+");
-				}
-				else
-				{
+				} else {
 					nextCurve.append(curve.charAt(jj));
 				}
 			}
-			
+
 			curve = nextCurve;
 		}
 		curAngle = 0;
-		
+
 		return curve;
 	}
-	
-	public StringBuilder applyTransition(StringBuilder curve)
-	{
+
+	public StringBuilder applyTransition(StringBuilder curve) {
 		curAngle += r45 / getSuggestedIterations();
 		return curve;
 	}
-	
-	protected double getTurningAngle()
-	{
+
+	protected double getTurningAngle() {
 		return curAngle;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		return "Levy Curves";
 	}
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		SimpleFractal.main(args);
 	}
 }

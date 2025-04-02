@@ -1,104 +1,84 @@
 import java.awt.Color;
 import java.awt.Paint;
-import java.awt.Point;
 import java.awt.RadialGradientPaint;
-
 import java.util.*;
-
 import javax.swing.*;
 
-public class PenroseTiling extends LSystem
-{
+public class PenroseTiling extends LSystem {
 	public static final double r17 = (17 * Math.PI / 180.0);
 	public static final double r163 = (163 * Math.PI / 180.0);
 	public static final double r36 = (36 * Math.PI / 180.0);
-	
+
 	protected int iteration;
-	
-	public PenroseTiling()
-	{
+
+	public PenroseTiling() {
 		super();
-		
+
 		iteration = 1;
 	}
-	
-	public int getSuggestedIterations()
-	{
+
+	public int getSuggestedIterations() {
 		return 6;
 	}
-		
-	protected Paint getForeground()
-	{
+
+	protected Paint getForeground() {
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
 		MyPoint tmp = new MyPoint(newMinPoint.x, mid.y);
-		
+
 		float[] dist = {0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f};
-		Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, new Color(138, 43, 226)};
-		
-		RadialGradientPaint paint = new RadialGradientPaint((float)mid.x, (float)mid.y, (float)mid.distance(tmp), dist, colors);
+		Color[] colors = {
+			Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE, new Color(138, 43, 226)
+		};
+
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x, (float) mid.y, (float) mid.distance(tmp), dist, colors);
 		return paint;
 	}
-	
-	protected StringBuilder getAxiom()
-	{
+
+	protected StringBuilder getAxiom() {
 		iteration = 1;
-		return new StringBuilder("[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]");
+		return new StringBuilder(
+				"[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]++[+8F--9F[---6F--7F]+]");
 	}
-	
-	public StringBuilder applyTransition(StringBuilder curve)
-	{
+
+	public StringBuilder applyTransition(StringBuilder curve) {
 		StringBuilder nextCurve = new StringBuilder();
-		
-		for(int ii=0; ii < curve.length(); ii++)
-		{
-			if(curve.charAt(ii) == '6')
-			{
+
+		for (int ii = 0; ii < curve.length(); ii++) {
+			if (curve.charAt(ii) == '6') {
 				nextCurve.append("8F++9F----7F[-8F----6F]++");
-			}
-			else if(curve.charAt(ii) == '7')
-			{
+			} else if (curve.charAt(ii) == '7') {
 				nextCurve.append("+8F--9F[---6F--7F]+");
-			}
-			else if(curve.charAt(ii) == '8')
-			{
+			} else if (curve.charAt(ii) == '8') {
 				nextCurve.append("-6F++7F[+++8F++9F]-");
-			}
-			else if(curve.charAt(ii) == '9')
-			{
+			} else if (curve.charAt(ii) == '9') {
 				nextCurve.append("--8F++++6F[+9F++++7F]--7F");
-			}
-			else if(curve.charAt(ii) == 'F')
-			{
-			
-			}
-			else
-			{
+			} else if (curve.charAt(ii) == 'F') {
+
+			} else {
 				nextCurve.append(curve.charAt(ii));
 			}
 		}
-		
+
 		iteration++;
-		
+
 		return nextCurve;
 	}
-	
-	protected double getStartingAngle()
-	{
-		return (((iteration/2) % 2) == 0) ? r17 : -r17;
+
+	protected double getStartingAngle() {
+		return (((iteration / 2) % 2) == 0) ? r17 : -r17;
 	}
-	
-	protected double getTurningAngle()
-	{
+
+	protected double getTurningAngle() {
 		return r36;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		return "Penrose Tiling";
 	}
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		SimpleFractal.main(args);
 	}
 }

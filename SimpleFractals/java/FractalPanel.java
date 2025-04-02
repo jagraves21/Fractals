@@ -1,16 +1,7 @@
-import java.awt.Color;
 import java.awt.Canvas;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Point;
-
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import java.awt.image.BufferedImage;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /*import java.awt.*;
 import java.awt.image.*;
@@ -22,8 +13,7 @@ import javax.imageio.metadata.*;
 import javax.swing.*;
 */
 
-public class FractalPanel extends Canvas implements Runnable
-{
+public class FractalPanel extends Canvas implements Runnable {
 	protected static final String memory = "Ran out of memeory.\nTry runing with -Xmx1g option.\n";
 
 	protected SimpleFractal fractal;
@@ -31,8 +21,7 @@ public class FractalPanel extends Canvas implements Runnable
 	protected long delay;
 	private Thread animationThread;
 
-	public FractalPanel()
-	{
+	public FractalPanel() {
 		this(null);
 	}
 
@@ -40,8 +29,7 @@ public class FractalPanel extends Canvas implements Runnable
 		this(fractal, 10, 500);
 	}
 
-	public FractalPanel(SimpleFractal fractal, int iterations, long delay)
-	{
+	public FractalPanel(SimpleFractal fractal, int iterations, long delay) {
 		super();
 		this.fractal = fractal;
 		this.iterations = iterations;
@@ -49,23 +37,22 @@ public class FractalPanel extends Canvas implements Runnable
 	}
 
 	public void start() {
-		if(animationThread == null || !animationThread.isAlive()) {
+		if (animationThread == null || !animationThread.isAlive()) {
 			animationThread = new Thread(this);
 			animationThread.start();
 		}
 	}
 
 	public void stop() {
-		if(animationThread != null) {
-			while(true) {
+		if (animationThread != null) {
+			while (true) {
 				animationThread.interrupt();
 				try {
 					animationThread.join(100);
 					break;
-				}
-				catch(InterruptedException ie) {
+				} catch (InterruptedException ie) {
 
-				}	
+				}
 			}
 		}
 	}
@@ -75,34 +62,32 @@ public class FractalPanel extends Canvas implements Runnable
 		int curIter = iterations;
 		long sleepTime;
 		long fireAt = System.nanoTime();
-		while(!Thread.currentThread().isInterrupted()) {
-			if(fractal != null) {
-				if(++curIter > iterations) {
+		while (!Thread.currentThread().isInterrupted()) {
+			if (fractal != null) {
+				if (++curIter > iterations) {
 					clearFractal();
 					curIter = 0;
-				}
-				else {
+				} else {
 					fractal.next();
 				}
 			}
 
 			sleepTime = (fireAt - System.nanoTime()) / 1000000;
-			if(sleepTime > 0) {
+			if (sleepTime > 0) {
 				try {
 					Thread.sleep(sleepTime);
-				} catch(InterruptedException e) {
+				} catch (InterruptedException e) {
 					Thread.currentThread().interrupt();
 				}
 			}
 
-			try {	
-				if(bufferStrategy == null || bufferStrategy.contentsLost()) {
+			try {
+				if (bufferStrategy == null || bufferStrategy.contentsLost()) {
 					createBufferStrategy(2);
 					bufferStrategy = getBufferStrategy();
 				}
 				render(bufferStrategy);
-			}
-			catch (IllegalStateException ise) {
+			} catch (IllegalStateException ise) {
 
 			}
 
@@ -129,16 +114,14 @@ public class FractalPanel extends Canvas implements Runnable
 		} while (bufferStrategy.contentsLost());
 	}
 
-	public void setFractal(SimpleFractal fractal)
-	{
+	public void setFractal(SimpleFractal fractal) {
 		this.fractal = fractal;
 	}
-	
-	public SimpleFractal getFractal()
-	{
+
+	public SimpleFractal getFractal() {
 		return fractal;
 	}
-	
+
 	public void setIterations(int iterations) {
 		this.iterations = iterations;
 	}
@@ -146,10 +129,9 @@ public class FractalPanel extends Canvas implements Runnable
 	public void setDelay(long delay) {
 		this.delay = delay;
 	}
-	
-	public void clearFractal()
-	{
-		if(fractal != null) {
+
+	public void clearFractal() {
+		if (fractal != null) {
 			fractal.clearFractal();
 		}
 	}

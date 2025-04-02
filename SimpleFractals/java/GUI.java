@@ -1,46 +1,40 @@
 import java.awt.*;
 import java.awt.event.*;
-
 import java.util.*;
-
 import javax.swing.*;
 
-public class GUI extends JPanel implements ActionListener
-{
+public class GUI extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	protected java.util.List<SimpleFractal> fractalList;
-	
+
 	protected JComboBox<SimpleFractal> fractalComboBox;
 	protected FractalPanel fractalPanel;
-	
-	public GUI(java.util.List<SimpleFractal> fractalList)
-	{
+
+	public GUI(java.util.List<SimpleFractal> fractalList) {
 		this.fractalList = fractalList;
-		
+
 		setLayout(new BorderLayout());
-		
+
 		fractalComboBox = new JComboBox<SimpleFractal>(fractalList.toArray(new SimpleFractal[0]));
 		fractalComboBox.addActionListener(this);
 		add(fractalComboBox, BorderLayout.SOUTH);
-		
-		fractalPanel = new FractalPanel((SimpleFractal)fractalComboBox.getSelectedItem());
+
+		fractalPanel = new FractalPanel((SimpleFractal) fractalComboBox.getSelectedItem());
 		add(fractalPanel, BorderLayout.CENTER);
 	}
 
 	public void start() {
 		fractalPanel.start();
 	}
-	
+
 	public void stop() {
 		fractalPanel.stop();
 	}
-	
-	public void actionPerformed(ActionEvent e)
-	{
-		if(e.getSource() == fractalComboBox)
-		{
-			SimpleFractal fractal = (SimpleFractal)fractalComboBox.getSelectedItem();
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == fractalComboBox) {
+			SimpleFractal fractal = (SimpleFractal) fractalComboBox.getSelectedItem();
 			System.out.println(fractal);
 
 			stop();
@@ -48,14 +42,13 @@ public class GUI extends JPanel implements ActionListener
 			fractalPanel.setIterations(fractal.getSuggestedIterations());
 			fractalPanel.setDelay(fractal.getSuggestedDelay());
 			fractalPanel.clearFractal();
-			start();	
+			start();
 		}
 	}
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		java.util.List<SimpleFractal> fractalList = new LinkedList<SimpleFractal>();
-		
+
 		fractalList.add(new ApollonianGasket());
 		fractalList.add(new BoxFractal());
 		fractalList.add(new Branches());
@@ -166,7 +159,7 @@ public class GUI extends JPanel implements ActionListener
 		System.out.println(fractalList.size() + " fractals.");
 
 		JFrame frame = new JFrame("Fractals");
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(800, 600));
 
@@ -175,25 +168,26 @@ public class GUI extends JPanel implements ActionListener
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowOpened(WindowEvent e) {
-				new SwingWorker<Void, Void>() {
-					protected Void doInBackground() throws Exception {
-						gui.start();
-						return null;
+		frame.addWindowListener(
+				new WindowAdapter() {
+					public void windowOpened(WindowEvent e) {
+						new SwingWorker<Void, Void>() {
+							protected Void doInBackground() throws Exception {
+								gui.start();
+								return null;
+							}
+						}.execute();
 					}
-				}.execute();
-			}
-			
-			public void windowClosing(WindowEvent e) {
-				new SwingWorker<Void, Void>() {
-					protected Void doInBackground() throws Exception {
-						gui.stop();
-						return null;
+
+					public void windowClosing(WindowEvent e) {
+						new SwingWorker<Void, Void>() {
+							protected Void doInBackground() throws Exception {
+								gui.stop();
+								return null;
+							}
+						}.execute();
 					}
-				}.execute();
-			}
-		});
+				});
 
 		String os = System.getProperty("os.name").toLowerCase();
 		String keyStroke = os.contains("mac") ? "meta W" : "control W";
@@ -202,13 +196,14 @@ public class GUI extends JPanel implements ActionListener
 		InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		ActionMap actionMap = rootPane.getActionMap();
 		inputMap.put(KeyStroke.getKeyStroke(keyStroke), "close");
-		actionMap.put("close", new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-			}
-		});
+		actionMap.put(
+				"close",
+				new AbstractAction() {
+					public void actionPerformed(ActionEvent e) {
+						frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+					}
+				});
 
 		frame.setVisible(true);
 	}
 }
-

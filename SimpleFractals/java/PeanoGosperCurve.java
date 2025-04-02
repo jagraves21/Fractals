@@ -1,75 +1,59 @@
 import java.awt.Color;
 import java.awt.Paint;
-import java.awt.Point;
 import java.awt.RadialGradientPaint;
-
 import java.util.*;
-
 import javax.swing.*;
 
-public class PeanoGosperCurve extends LSystem
-{
-	public PeanoGosperCurve()
-	{
+public class PeanoGosperCurve extends LSystem {
+	public PeanoGosperCurve() {
 		super();
 	}
-	
-	public int getSuggestedIterations()
-	{
+
+	public int getSuggestedIterations() {
 		return 5;
 	}
-		
-	protected Paint getForeground()
-	{
+
+	protected Paint getForeground() {
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
-		
+
 		float[] dist = {0.0f, 0.15f, 0.30f, 0.45f, 0.60f, 0.75f};
 		Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.RED, Color.BLUE, Color.GREEN};
-		
-		RadialGradientPaint paint = new RadialGradientPaint((float)mid.x, (float)mid.y, (float)mid.distance(newMaxPoint), dist, colors);
+
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x, (float) mid.y, (float) mid.distance(newMaxPoint), dist, colors);
 		return paint;
 	}
-	
-	protected StringBuilder getAxiom()
-	{
+
+	protected StringBuilder getAxiom() {
 		return new StringBuilder("FX");
 	}
-	
-	public StringBuilder applyTransition(StringBuilder curve)
-	{
+
+	public StringBuilder applyTransition(StringBuilder curve) {
 		StringBuilder nextCurve = new StringBuilder();
-		
-		for(int ii=0; ii < curve.length(); ii++)
-		{
-			if(curve.charAt(ii) == 'X')
-			{
+
+		for (int ii = 0; ii < curve.length(); ii++) {
+			if (curve.charAt(ii) == 'X') {
 				nextCurve.append("X+YF++YF-FX--FXFX-YF+");
-			}
-			else if(curve.charAt(ii) == 'Y')
-			{
+			} else if (curve.charAt(ii) == 'Y') {
 				nextCurve.append("-FX+YFYF++YF+FX--FX-Y");
-			}
-			else
-			{
+			} else {
 				nextCurve.append(curve.charAt(ii));
 			}
 		}
-		
+
 		return nextCurve;
 	}
-	
-	protected double getTurningAngle()
-	{
+
+	protected double getTurningAngle() {
 		return r60;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		return "Peano Gosper Curve";
 	}
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		SimpleFractal.main(args);
 	}
 }

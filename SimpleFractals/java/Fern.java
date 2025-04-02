@@ -1,88 +1,71 @@
-//http://en.wikipedia.org/wiki/File:Ifs-construction.png
+// http://en.wikipedia.org/wiki/File:Ifs-construction.png
 import java.awt.Color;
 import java.awt.Paint;
-import java.awt.Point;
 import java.awt.RadialGradientPaint;
-
 import java.util.*;
-
 import javax.swing.*;
 
-public class Fern extends LSystem
-{
-	public Fern()
-	{
+public class Fern extends LSystem {
+	public Fern() {
 		super();
 	}
-	
-	public int getSuggestedIterations()
-	{
+
+	public int getSuggestedIterations() {
 		return 12;
 	}
-		
-	protected Paint getForeground()
-	{
+
+	protected Paint getForeground() {
 		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
 		MyPoint tmp = new MyPoint(newMinPoint.x, mid.y);
-		
+
 		float[] dist = {0.0f, 1.0f};
 		Color[] colors = {Color.WHITE, Color.BLUE};
-		
-		RadialGradientPaint paint = new RadialGradientPaint((float)mid.x, (float)mid.y, (float)mid.distance(tmp), dist, colors);
+
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x, (float) mid.y, (float) mid.distance(tmp), dist, colors);
 		return paint;
 	}
-	
-	protected StringBuilder getAxiom()
-	{
+
+	protected StringBuilder getAxiom() {
 		return new StringBuilder("F-F-F-F-f-f(-f)|>F-F-F-F|f-<f>|A");
 	}
-	
-	public StringBuilder applyTransition(StringBuilder curve)
-	{
+
+	public StringBuilder applyTransition(StringBuilder curve) {
 		StringBuilder nextCurve = new StringBuilder();
-		
-		for(int ii=0; ii < curve.length(); ii++)
-		{
-			if(curve.charAt(ii) == 'A')
-			{
+
+		for (int ii = 0; ii < curve.length(); ii++) {
+			if (curve.charAt(ii) == 'A') {
 				nextCurve.append("F-F-F-F-f-f(-f)|>F-F-F-F|f-<f>|A");
-			}
-			else
-			{
+			} else {
 				nextCurve.append(curve.charAt(ii));
 			}
 		}
-		
+
 		return nextCurve;
 	}
-	
-	protected double getStartingAngle()
-	{
+
+	protected double getStartingAngle() {
 		return 0.0;
 	}
-	
-	protected double getTurningAngle()
-	{
+
+	protected double getTurningAngle() {
 		return r90;
 	}
-	
-	protected double getAngleIncrement()
-	{
+
+	protected double getAngleIncrement() {
 		return r45;
 	}
-	
-	protected double getScaleFactor()
-	{
+
+	protected double getScaleFactor() {
 		return 2.0;
 	}
-	
-	public String toString()
-	{
+
+	public String toString() {
 		return "Fern";
 	}
-	
-	public static void main(String[] args)
-	{
+
+	public static void main(String[] args) {
 		SimpleFractal.main(args);
 	}
 }

@@ -21,10 +21,10 @@ public class FractalTree extends JFrame {
 	}
 
 	@Override
-		public void paint(Graphics g) {
-			g.setColor(Color.BLACK);
-			drawTree(g, 400, 500, -90, 9);
-		}
+	public void paint(Graphics g) {
+		g.setColor(Color.BLACK);
+		drawTree(g, 400, 500, -90, 9);
+	}
 
 	public static void main(String[] args) {
 		new FractalTree().setVisible(true);
