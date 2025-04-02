@@ -1,5 +1,8 @@
-public class MandeldiskFunction extends InvertedMandelbrotFunction
-{
+public class MandeldiskFunction extends InvertedMandelbrotFunction {
+	public MandeldiskFunction() {
+		super();
+		init();
+	}
 	public double getOriginX() {
 		return 0;
 	}

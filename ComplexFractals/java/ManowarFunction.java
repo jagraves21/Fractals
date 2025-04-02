@@ -1,15 +1,20 @@
 public class ManowarFunction extends AbstractComplexFunction {
+	public ManowarFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
 		return -0.75;
 	}
 
 	public void init() {
-		c.re = 0; c.im = 0;
-
+		super.init();
 		a = 0;
 		b = 0.05;
 		theta = 0;
 		thetaOff = 0.05;
+		c.re = 0; c.im = 0;
 	}
 
 	public void convert(Complex z, Complex mu) {

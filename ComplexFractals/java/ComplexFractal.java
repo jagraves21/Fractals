@@ -308,10 +308,269 @@ public class ComplexFractal extends AnimatedPanel {
 	}
 	
 	public void draw(Graphics g, int gWidth, int gHeight) {
+		step(gWidth, gHeight);
 		drawFractal(g, gWidth, gHeight);
+		//drawFractal(g, gWidth, gHeight);
+	}
+
+	public void step(int gWidth, int gHeight) {
+		Complex z = null;
+		Complex mu = null;
+		double widthScale, heightScale;
+		int iteration;
+		
+		int totalIterations;
+		double originY = this.originY;
+		double windowWidth = this.windowWidth;
+		double maxWidth = gWidth;
+		double maxHeight = gHeight;
+		ComplexFunction complexFunction = this.complexFunction;
+		ConvergenceFunction convergenceFunction = this.convergenceFunction;
+		ColorFunction colorFunction = this.colorFunction;
+		FractalStyle fractalStyle = this.fractalStyle;
+		
+		synchronized (lock) {
+			totalIterations = this.totalIterations++;
+		}
+		
+		if(complexFunction == null || convergenceFunction == null || colorFunction == null) {
+			return;
+		}
+		
+		if(maxWidth < maxHeight) {
+			widthScale = 1;
+			heightScale = maxHeight/maxWidth;
+		}
+		else {
+			widthScale = maxWidth/maxHeight;
+			heightScale = 1;
+		}
+		
+		if(points.length != maxWidth || (points.length > 0 && points[0].length != maxHeight)) {
+	 		allocateComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
+	 		totalIterations = 0;
+		}
+		else if(totalIterations == 0) {
+			initializeComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
+		}
+		
+		if(fractalType == FractalType.ITERATIVE) {
+			//maxIteration++;
+			
+			if(fractalStyle == FractalStyle.FREQUENCY) {
+				maxIteration += 1000;
+			}
+			else
+			{
+				maxIteration++;
+			}
+		}
+		else if(fractalType == FractalType.MOVING)
+		{
+			complexFunction.move();
+			maxIteration = 200;
+			totalIterations = 0;
+			initializeComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
+		}
+		else if(fractalType == FractalType.RANDOM)
+		{
+			if(prevIterationSum/(double)curIterationSum > 0.95) {
+				complexFunction.random();
+				maxIteration = 0;
+				
+				if(totalIterations != 0) {
+					totalIterations = 0;
+					initializeComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
+				}
+			}
+			else {
+				maxIteration++;
+			}
+		}
+		
+		prevIterationSum = curIterationSum;
+		curIterationSum = 0;
+		for(int width=0; width < maxWidth; width++) {
+			for(int height=0; height < maxHeight; height++) {
+				z = points[width][height][0];
+				mu = points[width][height][1];
+				
+				iteration = totalIterations;
+				
+				while(!convergenceFunction.escaped(z) && iteration < maxIteration) {
+					complexFunction.next(z, mu);
+					pointIterations[width][height]++;
+					iteration++;
+				}
+				
+				if(convergenceFunction.escaped(z)) {
+					curIterationSum += iteration;
+				}
+			}
+		}
+		
+		synchronized (lock) {
+			if(this.totalIterations != 0) {
+				this.totalIterations = maxIteration;
+			}
+		}
+	}
+
+	public synchronized void drawFractal(Graphics g, int gWidth, int gHeight) {
+		Complex z = null;
+		Complex mu = null;
+		double widthScale, heightScale;
+		int iteration;
+		
+		int totalIterations;
+		double originX = this.originX;
+		double originY = this.originY;
+		double windowWidth = this.windowWidth;
+		double maxWidth = gWidth;
+		double maxHeight = gHeight;
+		ComplexFunction complexFunction = this.complexFunction;
+		ConvergenceFunction convergenceFunction = this.convergenceFunction;
+		ColorFunction colorFunction = this.colorFunction;
+		FractalStyle fractalStyle = this.fractalStyle;
+		
+		if(colorsCycle) {
+			shift++;
+		}
+		
+		if(complexFunction == null || convergenceFunction == null || colorFunction == null) {
+			return;
+		}
+		
+		if(maxWidth < maxHeight) {
+			widthScale = 1;
+			heightScale = maxHeight/maxWidth;
+		}
+		else {
+			widthScale = maxWidth/maxHeight;
+			heightScale = 1;
+		}
+		
+		
+		if(fractalStyle == FractalStyle.STANDARD) {
+			for(int width=0; width < maxWidth; width++) {
+				for(int height=0; height < maxHeight; height++) {
+					z = points[width][height][0];
+					mu = points[width][height][1];
+					if(!convergenceFunction.escaped(z)) {
+						g.setColor(
+							colorFunction.getConvergentColor(
+								z, pointIterations[width][height]+shift, maxIteration
+							)
+						);
+					}
+					else {
+						g.setColor(
+							colorFunction.getDivergentColor(
+								z, pointIterations[width][height]+shift, maxIteration
+							)
+						);
+					}
+					g.drawLine(width,height,width,height);
+				}
+			}
+		}
+		else if(fractalStyle == FractalStyle.CONTOURED) {
+			g.setColor(Color.BLACK);
+			g.drawRect(0,0,(int)maxWidth-1,(int)maxHeight-1);
+			for(int width=1; width < maxWidth-1; width++) {
+				for(int height=1; height < maxHeight-1; height++) {
+					if(pointIterations[width][height] != pointIterations[width-1][height] || 
+						pointIterations[width][height] != pointIterations[width+1][height] ||
+						pointIterations[width][height] != pointIterations[width][height-1] ||
+						pointIterations[width][height] != pointIterations[width][height+1])
+					{
+						z = points[width][height][0];
+						mu = points[width][height][1];
+						
+						if(!convergenceFunction.escaped(z)) {
+							g.setColor(
+								colorFunction.getConvergentColor(
+									z, pointIterations[width][height]+shift, maxIteration
+								)
+							);
+						}
+						else {
+							g.setColor(
+								colorFunction.getDivergentColor(
+									z, pointIterations[width][height]+shift, maxIteration
+								)
+							);
+						}
+					}
+					else {
+						g.setColor(Color.BLACK);
+					}
+					
+					g.drawLine(width,height,width,height);
+				}
+			}
+		}
+		else if(fractalStyle == FractalStyle.FREQUENCY) {
+			int[][] field = new int[(int)maxWidth][(int)maxHeight];
+			for(int width=0; width < maxWidth; width++) {
+				for(int height=0; height < maxHeight; height++) {
+					field[width][height] = 1;
+				}
+			}
+			
+			z = new Complex(0,0);
+			mu = new Complex(0,0);
+			int x, y;
+			double LOG_MAX = 1;
+			for(int width=0; width < maxWidth; width++) {
+				for(int height=0; height < maxHeight; height++) {
+					if(convergenceFunction.escaped(points[width][height][0])) {
+						z.re = originX + width/maxWidth * widthScale*windowWidth - widthScale*windowWidth/2;
+						z.im = originY + height/maxHeight * heightScale*windowWidth - heightScale*windowWidth/2;
+						complexFunction.convert(z, mu);
+						
+						iteration = 0;
+						while(!convergenceFunction.escaped(z) && iteration < maxIteration) {
+							complexFunction.next(z, mu);
+							iteration++;
+							
+							x = (int)Math.round((z.re - (originX - ((windowWidth * widthScale) / 2)))/(windowWidth * widthScale) * maxWidth);
+							y = (int)Math.round((z.im - (originY - ((windowWidth * heightScale) / 2)))/(windowWidth * heightScale) * maxHeight);
+							
+							if(x >= 0 && x < maxWidth && y >= 0 && y < maxHeight) {
+								if(iteration < (maxIteration / 3.0)) {
+									field[x][y]++;
+									if(field[x][y] > LOG_MAX) {
+										LOG_MAX = field[x][y];
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			
+			LOG_MAX = Math.log(LOG_MAX);
+			double M = (LOG_MAX) / 255.0;
+			double logVal;
+			int red, green, blue;
+			for(int width=0; width < maxWidth; width++) {
+				for(int height=0; height < maxHeight; height++) {
+					logVal = Math.log(field[width][height]);
+					logVal = logVal / M;
+					
+					red = green = blue = (int)Math.round(logVal);
+					
+					
+					
+					g.setColor(new Color(red, green, blue));
+					g.drawLine(width,height,width,height);
+				}
+			}
+		}
 	}
 	
-	public synchronized void drawFractal(Graphics g, int gWidth, int gHeight) {
+	public synchronized void drawFractal2(Graphics g, int gWidth, int gHeight) {
 		Complex z = null;
 		Complex mu = null;
 		double widthScale, heightScale;

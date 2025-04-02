@@ -1,5 +1,16 @@
 public class JuliaFunction extends AbstractComplexFunction {
+	public JuliaFunction() {
+		super();
+		init();
+	}
+
 	public void init() {
+		super.init();
+		a = 0;
+		b = 0.01;
+		theta = 60;
+		//theta = 76.7;
+		thetaOff = 0.005;
 		c.re = -0.4; c.im = 0.6;
 		//c.re = 0.285; c.im = 0;
 		//c.re = 0.285; c.im = 0.01;
@@ -7,12 +18,6 @@ public class JuliaFunction extends AbstractComplexFunction {
 		//c.re = -0.835; c.im = 0.2321;
 		//c.re = -0.8; c.im = 0.156;
 		//c.re = -0.63; c.im = -0.407;
-
-		a = 0;
-		b = 0.01;
-		//theta = 76.7;
-		theta = 60;
-		thetaOff = 0.005;
 	}
 
 	public void convert(Complex z, Complex mu) {

@@ -1,6 +1,11 @@
 public class GlynnFunction extends AbstractComplexFunction {
 	protected double e;
 	
+	public GlynnFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginY() {
 		return -0.5;
 	}
@@ -9,6 +14,7 @@ public class GlynnFunction extends AbstractComplexFunction {
 	}
 	
 	public void init() {
+		super.init();
 		e = 1.5;
 	}
 	

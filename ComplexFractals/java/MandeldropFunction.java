@@ -1,5 +1,9 @@
-public class MandeldropFunction extends MandelbrotFunction
-{
+public class MandeldropFunction extends MandelbrotFunction {
+	public MandeldropFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
         return 1.4;
     }

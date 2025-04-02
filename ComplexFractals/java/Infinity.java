@@ -1,15 +1,20 @@
 public class Infinity extends AbstractComplexFunction {
+	public Infinity() {
+		super();
+		init();
+	}
+
 	public double getWindowWidth() {
 		return 5;
 	}
 	
 	public void init() {
-		c.re = 0; c.im = 0;
-		
+		super.init();
 		a = 0;
 		b = 0.01;
 		theta = 0;
 		thetaOff = 0.5;
+		c.re = 0; c.im = 0;
 	}
 	
 	public void convert(Complex z, Complex mu) {

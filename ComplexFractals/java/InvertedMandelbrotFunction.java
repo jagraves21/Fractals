@@ -1,6 +1,10 @@
-public class InvertedMandelbrotFunction extends MandelbrotFunction
-{
-	protected boolean right = true;
+public class InvertedMandelbrotFunction extends MandelbrotFunction {
+	protected boolean right;
+	
+	public InvertedMandelbrotFunction() {
+		super();
+		init();
+	}
 
 	public double getOriginX() {
 		return 1.4;
@@ -13,9 +17,8 @@ public class InvertedMandelbrotFunction extends MandelbrotFunction
 	}
 
 	public void init() {
-		c.re = 0;
-		c.im = 0;
-
+		super.init();
+		c.re = 0; c.im = 0;
 		right = true;
 	}
 

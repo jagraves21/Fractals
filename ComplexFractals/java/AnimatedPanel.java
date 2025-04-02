@@ -60,7 +60,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 					createBufferStrategy(2);
 					bufferStrategy = getBufferStrategy();
 				}
-				render2(bufferStrategy);
+				render(bufferStrategy);
 			}
 			catch (IllegalStateException ise) {
 
@@ -68,27 +68,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 		}
 	}
 
-	public void render() {
-		if (bs == null || !this.isDisplayable()) {
-			return;
-		}
-
-		try {
-			do {
-				do {
-					Graphics g = bs.getDrawGraphics();
-					draw(g, getWidth(), getHeight());
-					g.dispose();
-				} while (bs.contentsRestored());
-
-				bs.show();
-			} while (bs.contentsLost());
-		} catch (IllegalStateException e) {
-		
-		}
-	}
-
-	protected void render2(BufferStrategy bufferStrategy) {
+	protected void render(BufferStrategy bufferStrategy) {
 		if (bufferStrategy == null) return;
 		do {
 			do {
@@ -104,7 +84,6 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 		} while (bufferStrategy.contentsLost());
 	}
 
-	
 	public void render(Image image) {
 		if (bs == null || !this.isDisplayable()) {
 			return;
@@ -130,16 +109,16 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 		return "Animated Panel";
 	}
 	
-	public static void display(final AnimatedPanel fractal) {
-		display(fractal, 500, 500);
+	public static void display(final AnimatedPanel animatedPanel) {
+		display(animatedPanel, 500, 500);
 	}
 	
-	public static void display(final AnimatedPanel fractal, int width, int height) {
-		final JFrame frame = new JFrame(fractal.toString());
+	public static void display(final AnimatedPanel animatedPanel, int width, int height) {
+		final JFrame frame = new JFrame(animatedPanel.toString());
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.add(fractal);
-		fractal.setPreferredSize(new Dimension(width, height));
+		frame.add(animatedPanel);
+		animatedPanel.setPreferredSize(new Dimension(width, height));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		
@@ -147,7 +126,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 			public void windowOpened(WindowEvent e) {
 				new SwingWorker<Void, Void>() {
 					protected Void doInBackground() throws Exception {
-						fractal.start();
+						animatedPanel.start();
 						return null;
 					}
 				}.execute();
@@ -156,7 +135,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 			public void windowClosing(WindowEvent e) {
 				new SwingWorker<Void, Void>() {
 					protected Void doInBackground() throws Exception {
-						fractal.stop();
+						animatedPanel.stop();
 						return null;
 					}
 				}.execute();

@@ -1,9 +1,19 @@
 public class InvertedLambdaJuliaFunction extends JuliaFunction {
+	public InvertedLambdaJuliaFunction() {
+		super();
+		init();
+	}
+
 	public double getWindowWidth() {
 		return 18;
 	}
 
 	public void init() {
+		super.init();
+		a = 0;
+		b = 0.01;
+		theta = 55.46;
+		thetaOff = 0.0001;
 		c.re = -0.4; c.im = 0.6;
 		//c.re = 0.285; c.im = 0;
 		//c.re = 0.285; c.im = 0.01;
@@ -11,11 +21,6 @@ public class InvertedLambdaJuliaFunction extends JuliaFunction {
 		//c.re = -0.835; c.im = 0.2321;
 		//c.re = -0.8; c.im = 0.156;
 		//c.re = -0.63; c.im = -0.407;
-
-		a = 0;
-		b = 0.01;
-		theta = 55.46;
-		thetaOff = 0.0001;
 	}
 
 	public void convert(Complex z, Complex mu) {

@@ -1,5 +1,9 @@
-public class CosMandelbrotFunction extends MandelbrotFunction
-{
+public class CosMandelbrotFunction extends MandelbrotFunction {
+	public CosMandelbrotFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
 		return 0;
 	}

@@ -1,15 +1,24 @@
 public class ModifiedCollatzFunction extends AbstractComplexFunction {
+	public ModifiedCollatzFunction() {
+		super();
+		init();
+	}
+
+	public double getOriginX() {
+		//return -7.7124366603572145;
+		return 3.94939259635873;
+	}
 	public double getWindowWidth() {
-		return 2;
+		return 1;
 	}
 
 	public void init() {
-		c.re = 0; c.im = 0;
-
+		super.init();
 		a = 0;
 		b = 0.01;
 		theta = 0;
 		thetaOff = 0.5;
+		c.re = 0; c.im = 0;
 	}
 
 	public void convert(Complex z, Complex mu) {
@@ -30,11 +39,11 @@ public class ModifiedCollatzFunction extends AbstractComplexFunction {
 	public ConvergenceFunction getConvergenceFunction() {
 		return new ModulusFifty();
 	}
-	
+
 	public ColorFunction getColorFunction() {
 		return PalletedColorFunction.getRedBlue(3);
 	}
-	
+
 	public String toString() {
 		return "Modified Collatz Set";
 	}

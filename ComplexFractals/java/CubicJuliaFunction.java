@@ -1,9 +1,19 @@
 public class CubicJuliaFunction extends JuliaFunction {
+	public CubicJuliaFunction() {
+		super();
+		init();
+	}
+
 	public double getWindowWidth() {
 		return 2.75;
 	}
 	
 	public void init() {
+		super.init();
+		a = 0;
+		b = 0.01;
+		theta = 59;
+		thetaOff = 0.01;
 		c.re = 0.4; c.im = 0;
 		//c.re = -0.4; c.im = 0.6;
 		//c.re = -0.835; c.im = 0.2321;
@@ -15,11 +25,6 @@ public class CubicJuliaFunction extends JuliaFunction {
 		//c.re = 0.48923549297880875; c.im = 0.05197582800437739;
 		//c.re = -0.41662264629299717; c.im = 0.6311524039759373;
 		//c.re = 0.155953756389009; c.im = 0.7599701396963163;
-		
-		a = 0;
-		b = 0.01;
-		theta = 59;
-		thetaOff = 0.01;
 	}
 	
 	public void next(Complex z, Complex mu) {

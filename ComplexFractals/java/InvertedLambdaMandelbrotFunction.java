@@ -1,5 +1,9 @@
-public class InvertedLambdaMandelbrotFunction extends InvertedMandelbrotFunction
-{
+public class InvertedLambdaMandelbrotFunction extends InvertedMandelbrotFunction {
+	public InvertedLambdaMandelbrotFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
 		return 0;
 	}

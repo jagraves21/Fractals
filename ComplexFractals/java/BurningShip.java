@@ -1,4 +1,9 @@
 public class BurningShip extends AbstractComplexFunction {
+	public BurningShip() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
 		return -1.7526674680844139;
 	}
@@ -10,12 +15,12 @@ public class BurningShip extends AbstractComplexFunction {
 	}
 	
 	public void init() {
-		c.re = 0; c.im = 0;
-		
+		super.init();
 		a = 0;
 		b = 0.01;
 		theta = 0;
 		thetaOff = 0.005;
+		c.re = 0; c.im = 0;
 	}
 	
 	public void convert(Complex z, Complex mu) {

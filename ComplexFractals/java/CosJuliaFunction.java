@@ -1,20 +1,25 @@
 public class CosJuliaFunction extends JuliaFunction {
+	public CosJuliaFunction() {
+		super();
+		init();
+	}
+	
 	public double getWindowWidth() {
 		return 12;
 	}
 
 	public void init() {
+		super.init();
+		a = 0;
+		b = 0;
+		theta = 0;
+		thetaOff = 0;
 		//c.re = 1; c.im = 0;
 		//c.re = 1; c.im = 0.1;
 		c.re = 1; c.im = 0.2;
 		//c.re = 1; c.im = 0.3;
 		//c.re = 1; c.im = 0.4;
 		//c.re = 1; c.im = 0.5;
-
-		a = 0;
-		b = 0;
-		theta = 0;
-		thetaOff = 0;
 	}
 
 	public void next(Complex z, Complex mu) {

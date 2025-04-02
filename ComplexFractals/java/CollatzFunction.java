@@ -1,4 +1,9 @@
 public class CollatzFunction extends AbstractComplexFunction {
+	public CollatzFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
 		return 0.25;
 	}
@@ -8,12 +13,12 @@ public class CollatzFunction extends AbstractComplexFunction {
 	}
 
 	public void init() {
-		c.re = 0; c.im = 0;
-
+		super.init();
 		a = 0;
 		b = 0.01;
 		theta = 0;
 		thetaOff = 0.5;
+		c.re = 0; c.im = 0;
 	}
 
 	public void convert(Complex z, Complex mu) {

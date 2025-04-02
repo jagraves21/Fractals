@@ -1,4 +1,9 @@
 public class CubicMandelbrotFunction extends MandelbrotFunction {
+	public CubicMandelbrotFunction() {
+		super();
+		init();
+	}
+
 	public double getOriginX() {
 		return 0;
 	}
@@ -13,7 +18,7 @@ public class CubicMandelbrotFunction extends MandelbrotFunction {
 		double temp = z.re*z.re*z.re - 3*z.re*z.im*z.im;
 		z.im = 3*z.re*z.re*z.im - z.im*z.im*z.im;
 		z.re = temp;
-		
+
 		z.re += mu.re;
 		z.im += mu.im;
 	}

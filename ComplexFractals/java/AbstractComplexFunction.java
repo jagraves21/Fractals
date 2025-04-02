@@ -9,13 +9,18 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 public abstract class AbstractComplexFunction implements ComplexFunction {
-	public Complex c = new Complex(0,0);
-	protected Random random = new Random();
+	protected double a;
+	protected double b;
+	protected double theta;
+	protected double thetaOff;
 	
-	protected double a = 0;
-	protected double b = 0.01;
-	protected double theta = 0;
-	protected double thetaOff = 0.1;
+	public Complex c;
+	protected Random random;
+
+	public AbstractComplexFunction() {
+		c = new Complex(0,0);
+		random = new Random(0);
+	}
 	
 	public double getOriginX() {
 		return 0;
@@ -32,17 +37,22 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 		c.im = random.nextDouble() * 2 - 1;
 	}
 	
-	public abstract void init();
-	
+	public  void init() {
+		a = 0;
+		b = 0.01;
+		theta = 0;
+		thetaOff = 0.1;
+		c.re = 0; c.im = 0;
+		random.setSeed(0);
+	}
+
 	public void move() {
 		double r = a + b*theta;
 		c.re = r * Math.cos(theta);
 		c.im = r * Math.sin(theta);
-		
 		if(r > 1.5) {
 			theta = 0;
 		}
-		
 		theta += thetaOff;//1/(r+1) * 0.3;
 	}
 	
