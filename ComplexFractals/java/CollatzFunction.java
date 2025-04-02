@@ -12,15 +12,6 @@ public class CollatzFunction extends AbstractComplexFunction {
 		return 2;
 	}
 
-	public void init() {
-		super.init();
-		a = 0;
-		b = 0.01;
-		theta = 0;
-		thetaOff = 0.5;
-		c.re = 0; c.im = 0;
-	}
-
 	public void convert(Complex z, Complex mu) {
 		mu.re = z.re;
 		mu.im = z.im;

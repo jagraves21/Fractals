@@ -14,9 +14,6 @@ public class ModifiedCollatzFunction extends AbstractComplexFunction {
 
 	public void init() {
 		super.init();
-		a = 0;
-		b = 0.01;
-		theta = 0;
 		thetaOff = 0.5;
 		c.re = 0; c.im = 0;
 	}

@@ -10,9 +10,7 @@ public class MandelbrotFunction extends AbstractComplexFunction {
 
 	public void init() {
 		super.init();
-		a = 0;
 		b = 0.05;
-		theta = 0;
 		thetaOff = 0.05;
 		c.re = 0; c.im = 0;
 	}

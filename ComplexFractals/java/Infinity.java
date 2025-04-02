@@ -10,9 +10,6 @@ public class Infinity extends AbstractComplexFunction {
 	
 	public void init() {
 		super.init();
-		a = 0;
-		b = 0.01;
-		theta = 0;
 		thetaOff = 0.5;
 		c.re = 0; c.im = 0;
 	}
@@ -23,11 +20,11 @@ public class Infinity extends AbstractComplexFunction {
 		z.re = temp;
 		
 		Complex res = z.rotate(57 * Math.PI / 180.0);
-		z.re = res.re;
-		z.im = res.im;
+		z.re = res.re + c.re;
+		z.im = res.im + c.im;
 		
-		mu.re = 0.285;// + c.re;
-		mu.im = 0.01;// + c.im;
+		mu.re = 0.285 + c.re;
+		mu.im = 0.01 + c.im;
 	}
 	
 	public void next(Complex z, Complex mu) {

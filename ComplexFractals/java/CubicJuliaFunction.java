@@ -10,8 +10,6 @@ public class CubicJuliaFunction extends JuliaFunction {
 	
 	public void init() {
 		super.init();
-		a = 0;
-		b = 0.01;
 		theta = 59;
 		thetaOff = 0.01;
 		c.re = 0.4; c.im = 0;

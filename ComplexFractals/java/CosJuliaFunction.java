@@ -10,10 +10,6 @@ public class CosJuliaFunction extends JuliaFunction {
 
 	public void init() {
 		super.init();
-		a = 0;
-		b = 0;
-		theta = 0;
-		thetaOff = 0;
 		//c.re = 1; c.im = 0;
 		//c.re = 1; c.im = 0.1;
 		c.re = 1; c.im = 0.2;

@@ -6,8 +6,6 @@ public class JuliaFunction extends AbstractComplexFunction {
 
 	public void init() {
 		super.init();
-		a = 0;
-		b = 0.01;
 		theta = 60;
 		//theta = 76.7;
 		thetaOff = 0.005;

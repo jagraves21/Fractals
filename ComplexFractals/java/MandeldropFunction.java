@@ -17,8 +17,8 @@ public class MandeldropFunction extends MandelbrotFunction {
 		z.im = -z.im/(z.re*z.re+z.im*z.im);
 		z.re = temp;
 		
-		mu.re = z.re;
-		mu.im = z.im;
+		mu.re = z.re + c.re;
+		mu.im = z.im + c.im;
 	}
 
 	public ColorFunction getColorFunction() {

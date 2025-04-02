@@ -10,8 +10,6 @@ public class InvertedJuliaFunction extends JuliaFunction {
 
 	public void init() {
 		super.init();
-		a = 0;
-		b = 0.01;
 		theta = 37.25;
 		thetaOff = 0.001;
 		//c.re = -0.4; c.im = 0.6;
