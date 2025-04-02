@@ -13,7 +13,7 @@ public class FractalToGIF
 		System.out.println("  -i, --iterations <count>   Set the number of iterations (default: auto)");
 		System.out.println("  -d, --delay  <numner>      Set the frame delay in milliseconds (default: 500)");
 		System.out.println("  -n, --no-reflect           Prevent the GIF from being reflect (default: reflected)");
-		System.out.println("  -h, --help                 Show this help message");
+		System.out.println("  --help                     Show this help message");
 	}
 	
 	public static void main(String[] args)
@@ -29,7 +29,7 @@ public class FractalToGIF
 
 		for (String arg : args)
 		{
-			if (arg.equals("-h") || arg.equals("--help"))
+			if (arg.equals("--help"))
 			{
 				printHelp();
 				return;
@@ -58,11 +58,17 @@ public class FractalToGIF
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid width value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for width.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					case "-h":
@@ -77,11 +83,17 @@ public class FractalToGIF
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid height value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for height.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					case "-i":
@@ -96,11 +108,17 @@ public class FractalToGIF
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid iterations value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for iterations.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					case "-d":
@@ -115,11 +133,17 @@ public class FractalToGIF
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid delay value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for delay.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					case "-n":
@@ -156,15 +180,15 @@ public class FractalToGIF
 			}
 			catch (ClassNotFoundException e)
 			{
-				System.err.println("Class not found: " + className);
+				System.out.println("Class not found: " + className);
 			}
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
 			{
-				System.err.println("Could not instantiate " + className + ": " + e.getMessage());
+				System.out.println("Could not instantiate " + className + ": " + e.getMessage());
 			}
 			catch (ClassCastException e)
 			{
-				System.err.println(className + " does not extend SimpleFractal.");
+				System.out.println(className + " does not extend SimpleFractal.");
 			}
 		}
 	}

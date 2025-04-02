@@ -54,11 +54,17 @@ public class FractalToSVG
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid width value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for width.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					case "-h":
@@ -73,11 +79,17 @@ public class FractalToSVG
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid height value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for height.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					case "-i":
@@ -92,11 +104,17 @@ public class FractalToSVG
 							catch (NumberFormatException e)
 							{
 								System.out.println("Invalid iterations value. Must be an integer.");
+								System.out.println();
+								printHelp();
+								System.exit(-1);
 							}
 						}
 						else
 						{
 							System.out.println("No value provided for iterations.");
+							System.out.println();
+							printHelp();
+							System.exit(-1);
 						}
 						break;
 					default:
@@ -130,15 +148,15 @@ public class FractalToSVG
 			}
 			catch (ClassNotFoundException e)
 			{
-				System.err.println("Class not found: " + className);
+				System.out.println("Class not found: " + className);
 			}
 			catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
 			{
-				System.err.println("Could not instantiate " + className + ": " + e.getMessage());
+				System.out.println("Could not instantiate " + className + ": " + e.getMessage());
 			}
 			catch (ClassCastException e)
 			{
-				System.err.println(className + " does not extend SimpleFractal.");
+				System.out.println(className + " does not extend SimpleFractal.");
 			}
 		}
 	}
