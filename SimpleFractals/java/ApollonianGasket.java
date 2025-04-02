@@ -27,9 +27,9 @@ public class ApollonianGasket extends SimpleFractal {
 		float[] dist = {0.20f, 0.30f, 0.40f, 0.50f, 0.60f};
 		Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE};
 
-		RadialGradientPaint paint =i new RadialGradientPaint(
-			(float) mid.x, (float) mid.y, (float) mid.distance(newMinPoint), dist, colors
-		);
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x, (float) mid.y, (float) mid.distance(newMinPoint), dist, colors);
 		return paint;
 	}
 
