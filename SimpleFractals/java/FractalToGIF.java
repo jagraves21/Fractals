@@ -8,10 +8,8 @@ public class FractalToGIF {
 		System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
 		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
 		System.out.println("  -i, --iterations <count>   Set the number of iterations (default: auto)");
-		System.out.println(
-				"  -d, --delay  <numner>      Set the frame delay in milliseconds (default: 500)");
-		System.out.println(
-				"  -n, --no-reflect           Prevent the GIF from being reflect (default: reflected)");
+		System.out.println("  -d, --delay  <numner>      Set the frame delay in milliseconds (default: 500)");
+		System.out.println("  -n, --no-reflect           Prevent the GIF from being reflect (default: reflected)");
 		System.out.println("  --help                     Show this help message");
 	}
 

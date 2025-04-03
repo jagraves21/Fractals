@@ -451,7 +451,7 @@ public abstract class SimpleFractal extends AbstractFractal {
 		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
 		System.out.println("  -i, --iterations <count>   Set the number of iterations");
 		System.out.println("  -d, --delay <time>         Set the redraw delay in miliseconds");
-		System.out.println("  -h, --help                 Show this help message");
+		System.out.println("  --help                     Show this help message");
 	}
 
 	public static void main(String[] args) {

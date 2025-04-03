@@ -8,7 +8,7 @@ public class FractalToPNG {
 		System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
 		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
 		System.out.println("  -i, --iterations <count>   Set the number of iterations (default: auto)");
-		System.out.println("  -h, --help                 Show this help message");
+		System.out.println("  --help                     Show this help message");
 	}
 
 	public static void main(String[] args) {
