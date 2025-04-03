@@ -20,7 +20,7 @@ public class FractalToPNG {
 		ClassLoader classLoader = FractalToPNG.class.getClassLoader();
 
 		for (String arg : args) {
-			if (arg.equals("-h") || arg.equals("--help")) {
+			if (arg.equals("--help")) {
 				printHelp();
 				return;
 			}

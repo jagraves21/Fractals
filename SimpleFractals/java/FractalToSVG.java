@@ -20,7 +20,7 @@ public class FractalToSVG {
 		ClassLoader classLoader = FractalToSVG.class.getClassLoader();
 
 		for (String arg : args) {
-			if (arg.equals("-h") || arg.equals("--help")) {
+			if (arg.equals("--help")) {
 				printHelp();
 				return;
 			}
