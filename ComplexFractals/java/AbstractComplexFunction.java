@@ -120,7 +120,33 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 
 		return function.apply(count);
 	}	
-
+	
+	public void printHelp(String callerClassName)
+	{
+		System.out.println("Usage: java " + callerClassName + " [options]");
+		System.out.println("Options:");
+		System.out.println("  -w, --width <width>                    Set the width of the fractal (default: 800)");
+		System.out.println("  -h, --height <height>                  Set the height of the fractal (default: 600)");
+		System.out.println("  -f, --convergence-function <function>  Set the convergence function");
+		System.out.println("  -c, --color <color>[n][s]?             Set the color palette for the fractal");
+		System.out.println("                                         Format: <color>[n][s]");
+		System.out.println("                                         [n] is an optional number for color count");
+		System.out.println("                                         [s] is an optional 's' to enable smooth colors");
+		System.out.println("  -t, --fractal-type <type>              Set the fractal type");
+		System.out.println("  -s, --fractal-style <style>            Set the fractal style");
+		System.out.println("  --colors-cycle                         Enable color cycling (optional)");
+		System.out.println("  --colors-cycle                         Enable color cycling (optional)");
+		System.out.println("  --help                                 Show this help message");
+		System.out.println();
+		System.out.println("convergence functions: ['HalfPlaneColorFunction', 'ModulusFifty', 'ModulusFiftyMod', 'ModulusFour', 'ModulusSquare', 'ModulusTwo', 'ModulusTwoMod', 'ModulusTwoPI']");
+		System.out.println();
+		System.out.println("color functions: ['blackredyellow', 'blackwhite', 'rainbow', 'redblue', 'redgreenblue', 'whitered']");
+		System.out.println();
+		System.out.println("fractal types: ['iterative', 'moving', 'random']");
+		System.out.println();
+		System.out.println("fractal styles: ['standard', 'contoured', 'frequency']");
+	}
+	
 	public void displayFractal(String callerClassName, String[] args)
 	{
 		int width = 800;
@@ -134,7 +160,7 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 		
 		for (String arg : args)
 		{
-			if (arg.equals("-h") || arg.equals("--help"))
+			if (arg.equals("--help"))
 			{
 				printHelp(callerClassName);
 				return;
@@ -145,6 +171,56 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 		{
 			switch (args[ii])
 			{
+				case "-w":
+				case "--width":
+					if (ii + 1 < args.length)
+					{
+						try
+						{
+							width = Integer.parseInt(args[ii + 1]);
+							ii++;
+						}
+						catch (NumberFormatException e)
+						{
+							System.out.println("Invalid width value. Must be an integer.");
+							System.out.println();
+							printHelp(callerClassName);
+							System.exit(-1);
+						}
+					}
+					else
+					{
+						System.out.println("No value provided for width.");
+						System.out.println();
+						printHelp(callerClassName);
+						System.exit(-1);
+					}
+					break;
+				case "-h":
+				case "--height":
+					if (ii + 1 < args.length)
+					{
+						try
+						{
+							height = Integer.parseInt(args[ii + 1]);
+							ii++;
+						}
+						catch (NumberFormatException e)
+						{
+							System.out.println("Invalid height value. Must be an integer.");
+							System.out.println();
+							printHelp(callerClassName);
+							System.exit(-1);
+						}
+					}
+					else
+					{
+						System.out.println("No value provided for height.");
+						System.out.println();
+						printHelp(callerClassName);
+						System.exit(-1);
+					}
+					break;
 				case "-f":
 				case "--convergence-function":
 					if (ii + 1 < args.length)
@@ -210,8 +286,8 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 					if (ii + 1 < args.length)
 					{
 						try {
-						colorFunction = parseColorArgument(args[ii + 1]);
-						ii++;
+							colorFunction = parseColorArgument(args[ii + 1]);
+							ii++;
 						} catch (IllegalArgumentException iae) {
 							System.out.println(iae.getMessage());
 							System.out.println();
@@ -308,6 +384,19 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 			}
 		}
 
+		displayFractal(
+			width,
+			height,
+			convergenceFunction,
+			colorFunction,
+			fractalType,
+			fractalStyle,
+			colorsCycle
+		);
+	}
+	
+	public void displayFractal(int width, int height, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, ComplexFractal.FractalType fractalType, ComplexFractal.FractalStyle fractalStyle, boolean colorsCycle) {
+
 		AnimatedPanel fractal = new ComplexFractal(
 			getOriginX(),
 			getOriginY(),
@@ -319,32 +408,9 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 			fractalStyle,
 			colorsCycle
 		);
-		AnimatedPanel.display(fractal);
+		AnimatedPanel.display(fractal, width, height);
 	}
 
-	public void printHelp(String callerClassName)
-	{
-		System.out.println("Usage: java " + callerClassName + " [options]");
-		System.out.println("Options:");
-		System.out.println("  -w, --width <width>                      Set the width of the fractal (default: 800)");
-		System.out.println("  -h, --height <height>                    Set the height of the fractal (default: 600)");
-		System.out.println("  -f, --convergence-function <function>    Set the convergence function");
-		System.out.println("  -c, --color <color>[n][s]?               Set the color palette for the fractal.");
-		System.out.println("                                           Format: <color>[n][s]");
-		System.out.println("                                           [n] is an optional number for color count.");
-		System.out.println("                                           [s] is an optional 's' to enable smooth colors.");
-		System.out.println("  -t, --fractal-type <type>                Set the fractal type");
-		System.out.println("  -s, --fractal-style <style>              Set the fractal style");
-		System.out.println("  --colors-cycle                           Enable color cycling (optional)");
-		System.out.println();
-		System.out.println("convergence functions: ['HalfPlaneColorFunction', 'ModulusFifty', 'ModulusFiftyMod', 'ModulusFour', 'ModulusSquare', 'ModulusTwo', 'ModulusTwoMod', 'ModulusTwoPI'].");
-		System.out.println();
-		System.out.println("color functions: ['blackredyellow', 'blackwhite', 'rainbow', 'redblue', 'redgreenblue', 'whitered']");
-		System.out.println();
-		System.out.println("fractal types: ['iterative', 'moving', 'random']");
-		System.out.println();
-		System.out.println("fractal styles: ['standard', 'contoured', 'frequency']");
-	}
 
 	public static void main(String[] args)
 	{

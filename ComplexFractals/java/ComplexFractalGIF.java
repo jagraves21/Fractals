@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import java.awt.image.BufferedImage;
 
@@ -6,85 +7,46 @@ import java.util.Stack;
 
 public class ComplexFractalGIF extends ComplexFractal
 {
-	public ComplexFractalGIF(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction) {
-		this(complexFunction, convergenceFunction, new PalletedColorFunction());
+	int maxIterations;
+	int curIteration;
+	AnimatedGifEncoder gifEncoder;
+
+	public ComplexFractalGIF(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle, boolean colorsCycle) {
+		super(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle, colorsCycle);
+
+		maxIterations = 20;
 	}
-	
-	public ComplexFractalGIF(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction) {
-		this(complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE);
+
+	public void start() {
+		curIteration = 0;
+		gifEncoder = new AnimatedGifEncoder();
+		gifEncoder.start(toString().replace(" ", "") + ".gif");
+		gifEncoder.setDelay(100);
+		gifEncoder.setRepeat(0);
+		super.start();
 	}
-	
-	public ComplexFractalGIF(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalStyle fractalStyle) {
-		this(complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, fractalStyle);
+
+	public void stop() {
+		gifEncoder.finish();
+		super.stop();
 	}
-	
-	public ComplexFractalGIF(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType) {
-		this(complexFunction, convergenceFunction, colorFunction, fractalType, FractalStyle.STANDARD);
-	}
-	
-	public ComplexFractalGIF(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle) {
-		this(0, 0, 3, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle);
-	}
-	
-	public ComplexFractalGIF(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction) {
-		this(x, y, width, complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, FractalStyle.STANDARD);
-	}
-	
-	public ComplexFractalGIF(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType) {
-		this(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, FractalStyle.STANDARD);
-	}
-	
-	public ComplexFractalGIF(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalStyle fractalStyle) {
-		this(x, y, width, complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, fractalStyle);
-	}
-	
-	public ComplexFractalGIF(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle) {
-		super(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle);
-	}
-	
-	public void run() {
-		AnimatedGifEncoder e = new AnimatedGifEncoder();
-		e.start(toString().replace(" ", "") + ".gif");
-		e.setDelay(100);
-		e.setRepeat(0);
-			
-		Stack<BufferedImage> frames = new Stack<BufferedImage>();
-		Graphics g;
-		BufferedImage img = null;
-		try {
-			int gWidth, gHeight;
-			
-			int frameCount = 0;
-			gWidth = 1920;//getWidth();
-			gHeight = 1080;//getHeight();
-			img = new BufferedImage(gWidth, gHeight, BufferedImage.TYPE_INT_RGB);
-			while(!Thread.currentThread().isInterrupted() && frameCount++ <= 3200) {
-				g = img.createGraphics();
-				draw(g, gWidth, gHeight);
-				g.dispose();
-				render(img);
-				
-				e.addFrame(img);
-				frames.push(img);
-				System.out.println("push frame " + frames.size());
-				
-				/*String name = toString().replace(" ", "") + "_" + String.format("%05d", frameCount) + ".png";
-				java.io.File outputfile = new java.io.File(name);
-				javax.imageio.ImageIO.write(img, "png", outputfile);*/
-			}
-		} catch(Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			while(!frames.isEmpty()) {
-				System.out.println("pop frame " + frames.size());
-				img = frames.pop();
-				e.addFrame(img);
-			}
-			e.finish();
-			System.exit(-1);
+
+	public void draw(Graphics g, int gWidth, int gHeight) {
+		step(gWidth, gHeight);
+		
+		BufferedImage img = new BufferedImage(gWidth, gHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics imageGraphics = img.createGraphics();
+		drawFractal(imageGraphics, gWidth, gHeight);
+		imageGraphics.dispose();
+		gifEncoder.addFrame(img);
+
+		g.drawImage(img, 0, 0, null);
+
+		System.out.println(curIteration + " curIteration");
+		if(curIteration++ == maxIterations) {
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		//ComplexFunction complexFunction = new TreeFunction();
 		ComplexFunction complexFunction = new Infinity();
@@ -93,7 +55,7 @@ public class ComplexFractalGIF extends ComplexFractal
 		//PalletedColorFunction.getBlackRedYellow(10);
 		ComplexFractal.FractalType fractalType = ComplexFractal.FractalType.MOVING;
 		ComplexFractal.FractalStyle fractalStyle = ComplexFractal.FractalStyle.STANDARD;
-		AnimatedPanel fractal = new ComplexFractalGIF(complexFunction.getOriginX(),complexFunction.getOriginY(),complexFunction.getWindowWidth(),complexFunction,convergenceFunction,colorFunction,fractalType,fractalStyle);
+		AnimatedPanel fractal = new ComplexFractalGIF(complexFunction.getOriginX(),complexFunction.getOriginY(),complexFunction.getWindowWidth(),complexFunction,convergenceFunction,colorFunction,fractalType,fractalStyle, false);
 		AnimatedPanel.display(fractal);
 	}
 }
