@@ -26,10 +26,10 @@ public class MandelbrotFunction extends AbstractComplexFunction {
 		z.re = temp;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(25);
 	}
-	
+
 	public String toString() {
 		return "Mandelbrot Set";
 	}

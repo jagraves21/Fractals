@@ -7,7 +7,7 @@ public class CollatzFunction extends AbstractComplexFunction {
 	public double getOriginX() {
 		return 0.25;
 	}
-	
+
 	public double getWindowWidth() {
 		return 2;
 	}
@@ -23,14 +23,14 @@ public class CollatzFunction extends AbstractComplexFunction {
 		z.im = res.im + c.im;
 	}
 
-	public ConvergenceFunction getConvergenceFunction() {
+	public ConvergenceFunction getSuggestedConvergenceFunction() {
 		return new ModulusFifty();
 	}
-	
-	public ColorFunction getColorFunction() {
+
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(3);
 	}
-	
+
 	public String toString() {
 		return "Collatz Set";
 	}

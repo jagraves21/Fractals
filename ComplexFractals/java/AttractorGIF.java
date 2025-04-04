@@ -9,13 +9,13 @@ public class AttractorGIF extends CosFlameFractal
 	public AttractorGIF() {
 		super();
 	}
-	
+
 	public void run() {
 		AnimatedGifEncoder e = new AnimatedGifEncoder();
 		e.start(toString().replace(" ", "") + ".gif");
 		e.setDelay(100);
 		e.setRepeat(0);
-		
+
 		int gWidth, gHeight;
 		Stack<BufferedImage> frames = new Stack<BufferedImage>();
 		Graphics g;
@@ -44,17 +44,17 @@ public class AttractorGIF extends CosFlameFractal
 			System.exit(-1);
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		/*ComplexFunction function = new Mandelbrow();
 		AnimatedPanel fractal = new SetGIF(0,0,8,function,null);
 		AnimatedPanel.display(fractal);*/
-		
+
 		/*ColorField colorField = new ColorField(ColorField.getColorSpan(ColorField.RAINBOW, 25, false));
 		ComplexFunction function = new MandelbrotSet();
 		AnimatedPanel fractal = new SetGIF(-0.75,0,2.3,function,colorField);
 		AnimatedPanel.display(fractal);*/
-		
+
 		AnimatedPanel fractal = new AttractorGIF();
 		AnimatedPanel.display(fractal);
 	}

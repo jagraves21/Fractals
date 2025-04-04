@@ -20,7 +20,7 @@ public class MandeldropFunction extends MandelbrotFunction {
 		mu.im = z.im + c.im;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(25);
 	}
 

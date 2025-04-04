@@ -25,11 +25,11 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 
 	protected volatile Thread animationThread;
 	protected volatile BufferStrategy bs;
-	
+
 	public AnimatedPanel() {
 		super();
 	}
-	
+
 	public void start() {
 		if(animationThread == null || !animationThread.isAlive()) {
 			animationThread = new Thread(this);
@@ -46,8 +46,8 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 					break;
 				}
 				catch(InterruptedException ie) {
-				
-				}	
+
+				}
 			}
 		}
 	}
@@ -102,18 +102,18 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 
 		}
 	}
-		
+
 	public abstract void draw(Graphics g, int gWidth, int gHeight);
-	
+
 	public String toString() {
 		return "Animated Panel";
 	}
-	
-	public static void display(final AnimatedPanel animatedPanel) {
-		display(animatedPanel, 500, 500);
+
+	public static JFrame display(final AnimatedPanel animatedPanel) {
+		return display(animatedPanel, 500, 500);
 	}
-	
-	public static void display(final AnimatedPanel animatedPanel, int width, int height) {
+
+	public static JFrame display(final AnimatedPanel animatedPanel, int width, int height) {
 		final JFrame frame = new JFrame(animatedPanel.toString());
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -121,7 +121,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 		animatedPanel.setPreferredSize(new Dimension(width, height));
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		
+
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowOpened(WindowEvent e) {
 				new SwingWorker<Void, Void>() {
@@ -130,7 +130,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 						return null;
 					}
 				}.execute();
-			}   
+			}
 
 			public void windowClosing(WindowEvent e) {
 				new SwingWorker<Void, Void>() {
@@ -156,5 +156,6 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 		});
 
 		frame.setVisible(true);
+		return frame;
 	}
 }

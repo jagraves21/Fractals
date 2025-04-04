@@ -7,7 +7,7 @@ public class CubicJuliaFunction extends JuliaFunction {
 	public double getWindowWidth() {
 		return 2.75;
 	}
-	
+
 	public void init() {
 		super.init();
 		theta = 59;
@@ -24,21 +24,21 @@ public class CubicJuliaFunction extends JuliaFunction {
 		//c.re = -0.41662264629299717; c.im = 0.6311524039759373;
 		//c.re = 0.155953756389009; c.im = 0.7599701396963163;
 	}
-	
+
 	public void next(Complex z, Complex mu) {
 		double temp = z.re*z.re*z.re - 3*z.re*z.im*z.im;
 		z.im = 3*z.re*z.re*z.im - z.im*z.im*z.im;
 		z.re = temp;
-					
+
 		z.re += mu.re;
 		z.im += mu.im;
 	}
-	
-	public ColorFunction getColorFunction() {
+
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(5);
 	}
 
-	public ComplexFractal.FractalType getFractalType() {
+	public ComplexFractal.FractalType getSuggestedFractalType() {
 		return ComplexFractal.FractalType.ITERATIVE;
 	}
 

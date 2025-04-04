@@ -1,9 +1,9 @@
 public class LambdaJuliaFunction extends JuliaFunction {
 	public LambdaJuliaFunction() {
 		super();
-		init();	
+		init();
 	}
-	
+
 	public double getOriginX() {
 		return -1;
 	}
@@ -35,12 +35,12 @@ public class LambdaJuliaFunction extends JuliaFunction {
 		mu.re = c.re;
 		mu.im = c.im;
 	}
-	
-	public ColorFunction getColorFunction() {
+
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(10);
 	}
 
-	public ComplexFractal.FractalType getFractalType() {
+	public ComplexFractal.FractalType getSuggestedFractalType() {
 		return ComplexFractal.FractalType.ITERATIVE;
 	}
 

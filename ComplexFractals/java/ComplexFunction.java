@@ -7,8 +7,8 @@ public interface ComplexFunction {
 	public void move();
 	public void convert(Complex z, Complex mu);
 	public void next(Complex z, Complex mu);
-	public ConvergenceFunction getConvergenceFunction();
-	public ColorFunction getColorFunction();
-	public ComplexFractal.FractalType getFractalType();
-	public ComplexFractal.FractalStyle getFractalStyle();
+	public ConvergenceFunction getSuggestedConvergenceFunction();
+	public ColorFunction getSuggestedColorFunction();
+	public ComplexFractal.FractalType getSuggestedFractalType();
+	public ComplexFractal.FractalStyle getSuggestedFractalStyle();
 }

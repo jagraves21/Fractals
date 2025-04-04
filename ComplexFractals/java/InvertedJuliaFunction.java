@@ -30,11 +30,11 @@ public class InvertedJuliaFunction extends JuliaFunction {
 		mu.im = c.im;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(10);
 	}
 
-	public ComplexFractal.FractalType getFractalType() {
+	public ComplexFractal.FractalType getSuggestedFractalType() {
 		return ComplexFractal.FractalType.ITERATIVE;
 	}
 

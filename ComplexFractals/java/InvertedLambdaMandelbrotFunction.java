@@ -30,10 +30,10 @@ public class InvertedLambdaMandelbrotFunction extends InvertedMandelbrotFunction
 		mu.im = -z.im + c.im;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(25);
 	}
-	
+
 	public String toString() {
 		return "Mandelbrot Set (1/\u03BB)";
 	}

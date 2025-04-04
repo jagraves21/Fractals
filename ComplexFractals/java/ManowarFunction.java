@@ -30,10 +30,10 @@ public class ManowarFunction extends AbstractComplexFunction {
 		z.im = res.im;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getBlackRedYellow(10);
 	}
-	
+
 	public String toString() {
 		return "Manowar";
 	}

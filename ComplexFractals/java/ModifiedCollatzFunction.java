@@ -33,11 +33,11 @@ public class ModifiedCollatzFunction extends AbstractComplexFunction {
 		z.im = res.im + c.im;
 	}
 
-	public ConvergenceFunction getConvergenceFunction() {
+	public ConvergenceFunction getSuggestedConvergenceFunction() {
 		return new ModulusFifty();
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRedBlue(3);
 	}
 

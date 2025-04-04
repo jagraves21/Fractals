@@ -28,11 +28,11 @@ public class CosMandelbrotFunction extends MandelbrotFunction {
 		z.re = -1*temp;
 	}
 
-	public ConvergenceFunction getConvergenceFunction() {
+	public ConvergenceFunction getSuggestedConvergenceFunction() {
 		return new ModulusFiftyMod();
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return new PalletedColorFunction(
 			PalletedColorFunction.getColorSpan(PalletedColorFunction.BLACK_RED_YELLOW, 10)
 		);

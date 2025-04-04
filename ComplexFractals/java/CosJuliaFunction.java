@@ -3,7 +3,7 @@ public class CosJuliaFunction extends JuliaFunction {
 		super();
 		init();
 	}
-	
+
 	public double getWindowWidth() {
 		return 12;
 	}
@@ -32,18 +32,18 @@ public class CosJuliaFunction extends JuliaFunction {
 		z.re = -1*temp;
 	}
 
-	public ConvergenceFunction getConvergenceFunction() {
+	public ConvergenceFunction getSuggestedConvergenceFunction() {
 		return new ModulusFiftyMod();
 	}
-	
-	public ColorFunction getColorFunction() {
+
+	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRedBlue(6);
 	}
 
-	public ComplexFractal.FractalType getFractalType() {
+	public ComplexFractal.FractalType getSuggestedFractalType() {
 		return ComplexFractal.FractalType.ITERATIVE;
 	}
-	
+
 	public String toString() {
 		return "Cosine Julia Set";
 	}

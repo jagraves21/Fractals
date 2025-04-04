@@ -29,15 +29,15 @@ public class JuliaFunction extends AbstractComplexFunction {
 		z.re = temp;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		return SmoothColorFunction.getBlackRedYellow(15);
 	}
-	
-	public ComplexFractal.FractalType getFractalType() {
+
+	public ComplexFractal.FractalType getSuggestedFractalType() {
 		//return ComplexFractal.FractalType.MOVING;
 		return ComplexFractal.FractalType.ITERATIVE;
 	}
-	
+
 	public String toString() {
 		return "Julia Set";
 	}

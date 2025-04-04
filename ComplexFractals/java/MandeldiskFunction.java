@@ -22,11 +22,11 @@ public class MandeldiskFunction extends InvertedMandelbrotFunction {
 		mu.im = z.im + c.im;
 	}
 
-	public ColorFunction getColorFunction() {
+	public ColorFunction getSuggestedColorFunction() {
 		//return PalletedColorFunction.getRainbow(13);
 		return new SmoothColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.BLACK_RED_YELLOW, 20));
 	}
-	
+
 	public String toString() {
 		return "Mandeldisk Set";
 	}
