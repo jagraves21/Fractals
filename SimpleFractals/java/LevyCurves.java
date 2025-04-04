@@ -15,7 +15,7 @@ public class LevyCurves extends LSystem {
 		return 70;
 	}
 
-	public long getSuggestedDelay() {
+	public int getSuggestedDelay() {
 		return 100;
 	}
 

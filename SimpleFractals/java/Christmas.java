@@ -23,7 +23,7 @@ public class Christmas extends SimpleFractal {
 		return 9;
 	}
 
-	public long getSuggestedDelay() {
+	public int getSuggestedDelay() {
 		return 75;
 	}
 

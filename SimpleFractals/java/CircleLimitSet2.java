@@ -25,7 +25,7 @@ public class CircleLimitSet2 extends SimpleFractal {
 		return 36;
 	}
 
-	public long getSuggestedDelay() {
+	public int getSuggestedDelay() {
 		return 100;
 	}
 

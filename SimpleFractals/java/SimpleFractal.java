@@ -39,7 +39,7 @@ public abstract class SimpleFractal extends AbstractFractal {
 		return 10;
 	}
 
-	public long getSuggestedDelay() {
+	public int getSuggestedDelay() {
 		return 500;
 	}
 
@@ -220,12 +220,12 @@ public abstract class SimpleFractal extends AbstractFractal {
 		}
 	}
 
-	public void createGIF(String fileName, int width, int height, int delay, int iterations) {
-		createGIF(fileName, width, height, delay, iterations, true);
+	public void createGIF(String fileName, int width, int height, int iterations, int delay) {
+		createGIF(fileName, width, height, iterations, delay, true);
 	}
 
 	public void createGIF(
-			String fileName, int width, int height, int delay, int iterations, boolean reflect) {
+			String fileName, int width, int height, int iterations, int delay, boolean reflect) {
 		try {
 			clearFractal();
 
@@ -291,7 +291,7 @@ public abstract class SimpleFractal extends AbstractFractal {
 		return "Simple Fractal";
 	}
 
-	public void displayFractal(int width, int height, int iterations, long delay) {
+	public void displayFractal(int width, int height, int iterations, int delay) {
 		System.out.println(this + " " + width + " " + height + " " + iterations + " " + delay);
 		JFrame frame = new JFrame(toString());
 		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -304,25 +304,26 @@ public abstract class SimpleFractal extends AbstractFractal {
 		frame.setLocationRelativeTo(null);
 
 		frame.addWindowListener(
-				new WindowAdapter() {
-					public void windowOpened(WindowEvent e) {
-						new SwingWorker<Void, Void>() {
-							protected Void doInBackground() throws Exception {
-								fractalPanel.start();
-								return null;
-							}
-						}.execute();
-					}
+			new WindowAdapter() {
+				public void windowOpened(WindowEvent e) {
+					new SwingWorker<Void, Void>() {
+						protected Void doInBackground() throws Exception {
+							fractalPanel.start();
+							return null;
+						}
+					}.execute();
+				}
 
-					public void windowClosing(WindowEvent e) {
-						new SwingWorker<Void, Void>() {
-							protected Void doInBackground() throws Exception {
-								fractalPanel.stop();
-								return null;
-							}
-						}.execute();
-					}
-				});
+				public void windowClosing(WindowEvent e) {
+					new SwingWorker<Void, Void>() {
+						protected Void doInBackground() throws Exception {
+							fractalPanel.stop();
+							return null;
+						}
+					}.execute();
+				}
+			}
+		);
 
 		String os = System.getProperty("os.name").toLowerCase();
 		String keyStroke = os.contains("mac") ? "meta W" : "control W";
@@ -332,126 +333,15 @@ public abstract class SimpleFractal extends AbstractFractal {
 		ActionMap actionMap = rootPane.getActionMap();
 		inputMap.put(KeyStroke.getKeyStroke(keyStroke), "close");
 		actionMap.put(
-				"close",
-				new AbstractAction() {
-					public void actionPerformed(ActionEvent e) {
-						frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-					}
-				});
+			"close",
+			new AbstractAction() {
+				public void actionPerformed(ActionEvent e) {
+					frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+				}
+			}
+		);
 
 		frame.setVisible(true);
-	}
-
-	public void displayFractal(String callerClassName, String[] args) {
-		int width = 800;
-		int height = 600;
-		int iterations = getSuggestedIterations();
-		long delay = getSuggestedDelay();
-
-		for (String arg : args) {
-			if (arg.equals("--help")) {
-				printHelp(callerClassName);
-				return;
-			}
-		}
-
-		for (int ii = 0; ii < args.length; ii++) {
-			switch (args[ii]) {
-				case "-w":
-				case "--width":
-					if (ii + 1 < args.length) {
-						try {
-							width = Integer.parseInt(args[ii + 1]);
-							ii++;
-						} catch (NumberFormatException e) {
-							System.out.println("Invalid width value. Must be an integer.");
-							System.out.println();
-							printHelp(callerClassName);
-							System.exit(-1);
-						}
-					} else {
-						System.out.println("No value provided for width.");
-						System.out.println();
-						printHelp(callerClassName);
-						System.exit(-1);
-					}
-					break;
-				case "-h":
-				case "--height":
-					if (ii + 1 < args.length) {
-						try {
-							height = Integer.parseInt(args[ii + 1]);
-							ii++;
-						} catch (NumberFormatException e) {
-							System.out.println("Invalid height value. Must be an integer.");
-							System.out.println();
-							printHelp(callerClassName);
-							System.exit(-1);
-						}
-					} else {
-						System.out.println("No value provided for height.");
-						System.out.println();
-						printHelp(callerClassName);
-						System.exit(-1);
-					}
-					break;
-				case "-i":
-				case "--iterations":
-					if (ii + 1 < args.length) {
-						try {
-							iterations = Integer.parseInt(args[ii + 1]);
-							ii++;
-						} catch (NumberFormatException e) {
-							System.out.println("Invalid iterations value. Must be an integer.");
-							System.out.println();
-							printHelp(callerClassName);
-							System.exit(-1);
-						}
-					} else {
-						System.out.println("No value provided for iterations.");
-						System.out.println();
-						printHelp(callerClassName);
-						System.exit(-1);
-					}
-					break;
-				case "-d":
-				case "--delay":
-					if (ii + 1 < args.length) {
-						try {
-							delay = Long.parseLong(args[ii + 1]);
-							ii++;
-						} catch (NumberFormatException e) {
-							System.out.println("Invalid delay value. Must be an integer.");
-							System.out.println();
-							printHelp(callerClassName);
-							System.exit(-1);
-						}
-					} else {
-						System.out.println("No value provided for delay.");
-						System.out.println();
-						printHelp(callerClassName);
-						System.exit(-1);
-					}
-					break;
-				default:
-					System.out.println("Unknown argument: " + args[ii]);
-					System.out.println();
-					printHelp(callerClassName);
-					System.exit(-1);
-			}
-		}
-
-		displayFractal(width, height, iterations, delay);
-	}
-
-	public void printHelp(String callerClassName) {
-		System.out.println("Usage: java " + callerClassName + " [options]");
-		System.out.println("Options:");
-		System.out.println("  -w, --width <width>        Set the width of the fractal (default: 800)");
-		System.out.println("  -h, --height <height>      Set the height of the fractal (default: 600)");
-		System.out.println("  -i, --iterations <count>   Set the number of iterations");
-		System.out.println("  -d, --delay <time>         Set the redraw delay in miliseconds");
-		System.out.println("  --help                     Show this help message");
 	}
 
 	public static void main(String[] args) {
@@ -460,7 +350,21 @@ public abstract class SimpleFractal extends AbstractFractal {
 			Class<?> callerClass = Class.forName(callerClassName);
 			Object instance = callerClass.getConstructor().newInstance();
 			SimpleFractal simpleFractal = (SimpleFractal) instance;
-			simpleFractal.displayFractal(callerClassName, args);
+
+			ArgumentParser argumentParser = new ArgumentParser(
+				callerClassName,
+				800,
+				600,
+				simpleFractal.getSuggestedIterations(),
+				simpleFractal.getSuggestedDelay()
+			);
+			argumentParser.parseArguments(args);
+			simpleFractal.displayFractal(
+				argumentParser.width,
+				argumentParser.height,
+				argumentParser.iterations,
+				argumentParser.delay
+			);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

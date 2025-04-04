@@ -33,7 +33,7 @@ public class TreeMod extends LSystem {
 		createLines();
 	}
 
-	public long getSuggestedDelay() {
+	public int getSuggestedDelay() {
 		return 75;
 	}
 

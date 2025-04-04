@@ -25,7 +25,7 @@ public class SquareTurn extends SimpleFractal {
 		return 60;
 	}
 
-	public long getSuggestedDelay() {
+	public int getSuggestedDelay() {
 		return 100;
 	}
 

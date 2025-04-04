@@ -18,7 +18,7 @@ public class FractalPanel extends Canvas implements Runnable {
 
 	protected SimpleFractal fractal;
 	protected int iterations;
-	protected long delay;
+	protected int delay;
 	private Thread animationThread;
 
 	public FractalPanel() {
@@ -29,7 +29,7 @@ public class FractalPanel extends Canvas implements Runnable {
 		this(fractal, 10, 500);
 	}
 
-	public FractalPanel(SimpleFractal fractal, int iterations, long delay) {
+	public FractalPanel(SimpleFractal fractal, int iterations, int delay) {
 		super();
 		this.fractal = fractal;
 		this.iterations = iterations;
@@ -126,7 +126,7 @@ public class FractalPanel extends Canvas implements Runnable {
 		this.iterations = iterations;
 	}
 
-	public void setDelay(long delay) {
+	public void setDelay(int delay) {
 		this.delay = delay;
 	}
 
