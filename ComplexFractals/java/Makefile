@@ -15,7 +15,7 @@ OTHER_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
 all: $(CLASSES)
 
 %.class: %.java
-	$(JAVAC) -cp .:../class $<
+	$(JAVAC) $<
 
 .PHONY: cleanclass
 cleanclass:
