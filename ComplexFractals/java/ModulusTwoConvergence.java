@@ -1,4 +1,4 @@
-public class ModulusTwo implements ConvergenceFunction {
+public class ModulusTwoConvergence implements ConvergenceFunction {
 	public boolean escaped(Complex z) {
 		return z.re*z.re + z.im*z.im > 2*2;
 	}

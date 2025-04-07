@@ -1,4 +1,4 @@
-public class HalfPlaneColorFunction implements ConvergenceFunction {
+public class RealTwoConvergence implements ConvergenceFunction {
 	public boolean escaped(Complex z) {
 		return z.re > 2;
 	}

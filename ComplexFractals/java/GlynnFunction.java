@@ -51,11 +51,11 @@ public class GlynnFunction extends AbstractComplexFunction {
 	}
 
 	public ConvergenceFunction getSuggestedConvergenceFunction() {
-		return new ModulusFour();
+		return new ModulusFourConvergence();
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return PalletedColorFunction.getBlues(5);
+		return PalletedColorFunction.getAqua(5);
 	}
 
 	public String toString() {

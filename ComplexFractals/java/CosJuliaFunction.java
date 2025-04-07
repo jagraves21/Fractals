@@ -33,11 +33,11 @@ public class CosJuliaFunction extends JuliaFunction {
 	}
 
 	public ConvergenceFunction getSuggestedConvergenceFunction() {
-		return new ModulusFiftyMod();
+		return new ImAbsFiftyConvergence();
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return PalletedColorFunction.getRedBlue(6);
+		return PalletedColorFunction.getIceFire(6);
 	}
 
 	public ComplexFractal.FractalType getSuggestedFractalType() {

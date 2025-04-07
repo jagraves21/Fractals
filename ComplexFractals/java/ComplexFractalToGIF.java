@@ -13,9 +13,16 @@ import javax.swing.JFrame;
 
 public class ComplexFractalToGIF extends ComplexFractal
 {
-	int maxIterations;
-	int curIteration;
-	AnimatedGifEncoder gifEncoder;
+	protected int maxIterations;
+	protected boolean reflect;
+	protected double xZoom;
+	protected double yZoom;
+	protected double multiplier;
+	protected int startZoom;
+	protected int stopZoom;
+
+	protected int curIteration;
+	protected AnimatedGifEncoder gifEncoder;
 
 	public ComplexFractalToGIF(
 		double x,
@@ -26,11 +33,53 @@ public class ComplexFractalToGIF extends ComplexFractal
 		ColorFunction colorFunction,
 		FractalType fractalType,
 		FractalStyle fractalStyle,
-		boolean colorsCycle
+		boolean cycleColors,
+		int maxIterations,
+		boolean reflect,
+		double xZoom,
+		double yZoom,
+		double multiplier,
+		int startZoom,
+		int stopZoom
 	) {
-		super(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle, colorsCycle);
+		super(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle, cycleColors);
+		this.maxIterations = maxIterations;
+		this.reflect = reflect;
+		this.xZoom = xZoom;
+		this.yZoom = yZoom;
+		this.multiplier = multiplier;
+		this.startZoom = startZoom;
+		this.stopZoom = stopZoom;
+	}
 
-		maxIterations = 120;
+	public static void printProgressBar(int count, int total) {
+		int totalBars = 50;
+		int percent = 100 * count / total;
+		int filledBars = (percent * totalBars) / 100;
+
+		StringBuilder bar = new StringBuilder();
+		if (count != 0) {
+			bar.append("\r");
+		}
+		bar.append("[");
+		for (int i = 0; i < filledBars; i++) {
+			bar.append("=");
+		}
+		for (int i = filledBars; i < totalBars; i++) {
+			bar.append(" ");
+		}
+		bar.append("] ").append(
+			String.format("%" + 3 + "d", percent)
+		).append("%");
+		
+		bar.append(" (").append(
+			String.format("%" + String.valueOf(total).length() + "d", count)
+		).append(" / ").append(total).append(")");
+		System.out.print(bar.toString());
+		System.out.flush();
+		if (count == total) {
+			System.out.println();
+		}
 	}
 
 	public void start() {
@@ -50,6 +99,15 @@ public class ComplexFractalToGIF extends ComplexFractal
 	}
 
 	public void draw(Graphics g, int gWidth, int gHeight) {
+		/*if(curIteration == 0) {
+			for(int ii=0; ii<50; ii++) {
+				step(gWidth, gHeight);
+			}
+			windowWidth = 4000;
+			synchronized (lock) {
+				totalIterations = 0;
+			}
+		}*/
 		step(gWidth, gHeight);
 
 		BufferedImage img = new BufferedImage(gWidth, gHeight, BufferedImage.TYPE_INT_RGB);
@@ -57,13 +115,22 @@ public class ComplexFractalToGIF extends ComplexFractal
 		drawFractal(imageGraphics, gWidth, gHeight);
 		imageGraphics.dispose();
 
-		if (curIteration % 2 == 0) {
-			gifEncoder.addFrame(img);
-		}
-
+		gifEncoder.addFrame(img);
 		g.drawImage(img, 0, 0, null);
 
-		System.out.println(curIteration + " curIteration");
+		printProgressBar(curIteration, maxIterations);
+		if (curIteration > startZoom && curIteration < stopZoom) {
+			double x = xZoom;
+			double y = yZoom;
+			double windowHeight = (getHeight()/(double)getWidth())*windowWidth;
+			originX = x - multiplier * (x - originX);
+			originY = y - multiplier * (y - originY);
+			windowWidth *= multiplier;
+			synchronized (lock) {
+				totalIterations = 0;
+			}
+		}
+
 		if(curIteration++ == maxIterations) {
 			gifEncoder.finish();
 			System.exit(0);
@@ -80,9 +147,16 @@ public class ComplexFractalToGIF extends ComplexFractal
 			null,
 			null,
 			null,
-			false
+			false,
+			200,
+			false,
+			0.0,
+			0.0,
+			1.0,
+			0,
+			Integer.MAX_VALUE
 		);
-		argumentParser.parseArguments(args, true, false);
+		argumentParser.parseArguments(args, true, true);
 
 		ClassLoader classLoader = ComplexFractalToGIF.class.getClassLoader();
 		for (String className : argumentParser.classes) {
@@ -116,7 +190,14 @@ public class ComplexFractalToGIF extends ComplexFractal
 					colorFunction,
 					fractalType,
 					fractalStyle,
-					argumentParser.colorsCycle
+					argumentParser.cycleColors,
+					argumentParser.iterations,
+					argumentParser.reflect,
+					argumentParser.xZoom,
+					argumentParser.yZoom,
+					argumentParser.multiplier,
+					argumentParser.startZoom,
+					argumentParser.stopZoom
 				);
 				JFrame frame = AnimatedPanel.display(
 					animatedPanel,
@@ -124,9 +205,7 @@ public class ComplexFractalToGIF extends ComplexFractal
 					argumentParser.height
 				);
 
-
 				final CountDownLatch latch = new CountDownLatch(1);
-
 				frame.addWindowListener(new WindowAdapter() {
 					public void windowClosed(WindowEvent e) {
 						latch.countDown();

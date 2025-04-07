@@ -30,7 +30,7 @@ public class JuliaFunction extends AbstractComplexFunction {
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return SmoothColorFunction.getBlackRedYellow(15);
+		return SmoothColorFunction.getLava(15);
 	}
 
 	public ComplexFractal.FractalType getSuggestedFractalType() {

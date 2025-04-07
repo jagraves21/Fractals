@@ -81,7 +81,16 @@ public class ComplexFractal extends AnimatedPanel {
 	}
 
 	public ComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle) {
-		this(0, 0, 3, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle);
+		this(
+			complexFunction == null ? 0 : complexFunction.getOriginX(),
+			complexFunction == null ? 0 : complexFunction.getOriginY(),
+			complexFunction == null ? 0 : complexFunction.getWindowWidth(),
+			complexFunction,
+			convergenceFunction,
+			colorFunction,
+			fractalType,
+			fractalStyle
+		);
 	}
 
 	public ComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction) {
@@ -127,9 +136,20 @@ public class ComplexFractal extends AnimatedPanel {
 
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				originX = originX + (((double)e.getX())/getWidth()) * windowWidth - windowWidth/2;
-				originY = originY + (((double)e.getY())/getHeight()) * windowWidth - windowWidth/2;
+				originX = originX + (e.getX()/(double)getWidth()) * windowWidth - windowWidth/2.0;
+				originY = originY + (e.getY()/(double)getHeight()) * windowWidth - windowWidth/2.0;
+				synchronized (lock) {
+					totalIterations = 0;
+				}
+				System.out.println("Center: " + originX + " " + originY);
+			}
+		});
 
+		addMouseWheelListener(new MouseAdapter() {
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				double rotation = e.getPreciseWheelRotation();
+				double scalingFactor = (rotation < 0) ? 0.95 : 1.05;
+				double multiplier = Math.pow((rotation < 0) ? 0.95 : 1.05, Math.abs(rotation));
 				double widthScale, heightScale;
 				if(getWidth() < getHeight()) {
 					widthScale = 1;
@@ -140,49 +160,22 @@ public class ComplexFractal extends AnimatedPanel {
 					heightScale = 1;
 				}
 
+				double x0 = e.getX()/(double)getWidth() * widthScale*windowWidth - widthScale*windowWidth/2;
+				double y0 = e.getY()/(double)getHeight() * heightScale*windowWidth - heightScale*windowWidth/2;
+				System.out.println("Scale Point? " + windowWidth + " " + x0 + " " + y0);
+				originX += x0;
+				originY += y0;
+
+				windowWidth *= (multiplier*e.getScrollAmount());
+
+				x0 = e.getX()/(double)getWidth() * widthScale*windowWidth - widthScale*windowWidth/2;
+				y0 = e.getY()/(double)getHeight() * heightScale*windowWidth - heightScale*windowWidth/2;
+
+				originX -= x0;
+				originY -= y0;
+
 				synchronized (lock) {
 					totalIterations = 0;
-				}
-
-				System.out.println("Center: " + originX + " " + originY);
-			}
-		});
-
-		addMouseWheelListener(new MouseAdapter() {
-			public void mouseWheelMoved(MouseWheelEvent e) {
-				double rotation = e.getPreciseWheelRotation();
-				double scalingFactor = (rotation < 0) ? 0.95 : 1.05;
-				double multiplier = Math.pow((rotation < 0) ? 0.95 : 1.05, Math.abs(rotation));
-
-				if(e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
-
-					double widthScale, heightScale;
-					if(getWidth() < getHeight()) {
-						widthScale = 1;
-						heightScale = getHeight()/(double)getWidth();
-					}
-					else {
-						widthScale = getWidth()/(double)getHeight();
-						heightScale = 1;
-					}
-
-					double x0 = e.getX()/(double)getWidth() * widthScale*windowWidth - widthScale*windowWidth/2;
-					double y0 = e.getY()/(double)getHeight() * heightScale*windowWidth - heightScale*windowWidth/2;
-
-					originX += x0;
-					originY += y0;
-
-					windowWidth *= (multiplier*e.getScrollAmount());
-
-					x0 = e.getX()/(double)getWidth() * widthScale*windowWidth - widthScale*windowWidth/2;
-					y0 = e.getY()/(double)getHeight() * heightScale*windowWidth - heightScale*windowWidth/2;
-
-					originX -= x0;
-					originY -= y0;
-
-					synchronized (lock) {
-						totalIterations = 0;
-					}
 				}
 			}
 		});
@@ -194,11 +187,9 @@ public class ComplexFractal extends AnimatedPanel {
 
 	public void setComplexFunction(ComplexFunction complexFunction) {
 		this.complexFunction = complexFunction;
-
 		synchronized (lock) {
 			totalIterations = 0;
 		}
-
 		if(complexFunction != null) {
 			complexFunction.init();
 		}
@@ -210,7 +201,6 @@ public class ComplexFractal extends AnimatedPanel {
 
 	public void setConvergenceFunction(ConvergenceFunction convergenceFunction) {
 		this.convergenceFunction = convergenceFunction;
-
 		synchronized (lock) {
 			totalIterations = 0;
 		}

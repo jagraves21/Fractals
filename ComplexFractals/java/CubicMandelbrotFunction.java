@@ -24,7 +24,7 @@ public class CubicMandelbrotFunction extends MandelbrotFunction {
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return PalletedColorFunction.getRedBlue(5);
+		return PalletedColorFunction.getIceFire(5);
 	}
 
 	public String toString() {

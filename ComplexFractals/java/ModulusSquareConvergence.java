@@ -1,4 +1,4 @@
-public class ModulusSquare implements ConvergenceFunction {
+public class ModulusSquareConvergence implements ConvergenceFunction {
 	public boolean escaped(Complex z) {
 		return Math.abs(z.re) > 2 || Math.abs(z.im) > 2;
 	}

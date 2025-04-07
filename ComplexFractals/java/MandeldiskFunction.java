@@ -24,7 +24,7 @@ public class MandeldiskFunction extends InvertedMandelbrotFunction {
 
 	public ColorFunction getSuggestedColorFunction() {
 		//return PalletedColorFunction.getRainbow(13);
-		return new SmoothColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.BLACK_RED_YELLOW, 20));
+		return new SmoothColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.LAVA, 20));
 	}
 
 	public String toString() {

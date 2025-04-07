@@ -1,4 +1,4 @@
-public class ModulusFifty implements ConvergenceFunction {
+public class ModulusFiftyConvergence  implements ConvergenceFunction {
 	public boolean escaped(Complex z) {
 		return z.re*z.re + z.im*z.im > 50*50;
 	}

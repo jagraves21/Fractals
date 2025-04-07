@@ -31,7 +31,7 @@ public class ManowarFunction extends AbstractComplexFunction {
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return PalletedColorFunction.getBlackRedYellow(10);
+		return PalletedColorFunction.getLava(10);
 	}
 
 	public String toString() {

@@ -34,11 +34,11 @@ public class ModifiedCollatzFunction extends AbstractComplexFunction {
 	}
 
 	public ConvergenceFunction getSuggestedConvergenceFunction() {
-		return new ModulusFifty();
+		return new ModulusFiftyConvergence();
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return PalletedColorFunction.getRedBlue(3);
+		return PalletedColorFunction.getIceFire(3);
 	}
 
 	public String toString() {

@@ -29,12 +29,12 @@ public class CosMandelbrotFunction extends MandelbrotFunction {
 	}
 
 	public ConvergenceFunction getSuggestedConvergenceFunction() {
-		return new ModulusFiftyMod();
+		return new ImAbsFiftyConvergence();
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
 		return new PalletedColorFunction(
-			PalletedColorFunction.getColorSpan(PalletedColorFunction.BLACK_RED_YELLOW, 10)
+			PalletedColorFunction.getColorSpan(PalletedColorFunction.LAVA, 10)
 		);
 	}
 

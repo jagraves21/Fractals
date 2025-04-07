@@ -1,45 +1,44 @@
-public class BurningShip extends AbstractComplexFunction {
-	public BurningShip() {
+public class TricornFunction extends AbstractComplexFunction {
+	public TricornFunction() {
 		super();
 		init();
 	}
 
 	public double getOriginX() {
-		return -1.7526674680844139;
+		return -0.35;
 	}
 	public double getOriginY() {
-		return -0.036522864408293804;
+		return 0;
 	}
 	public double getWindowWidth() {
-		return 0.10082811617813109;
+		return 3.75;
 	}
 
 	public void init() {
 		super.init();
-		thetaOff = 0.005;
-		c.re = 0; c.im = 0;
 	}
 
 	public void convert(Complex z, Complex mu) {
-		mu.re = z.re + c.re;
-		mu.im = z.im + c.re;
+		mu.re = z.re;
+		mu.im = z.im;
 	}
 
 	public void next(Complex z, Complex mu) {
 		double temp = z.re*z.re - z.im*z.im;
-		z.im = 2*Math.abs(z.re*z.im);
+		z.im = -2*z.re*z.im;
 		z.re = temp;
 
-		z.re += mu.re;
-		z.im += mu.im;
+		z.re += mu.re + c.re;
+		z.im += mu.im + c.im;
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return SmoothColorFunction.getIceFire(10);
+		return PalletedColorFunction.getRainbow(5);
+		//return SmoothColorFunction.getRainbow(5);
 	}
 
 	public String toString() {
-		return "Burning Ship";
+		return "Tricorn Set";
 	}
 
 	public static void main(String[] args) {

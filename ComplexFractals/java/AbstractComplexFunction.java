@@ -61,7 +61,7 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 	public abstract void next(Complex z, Complex mu);
 
 	public ConvergenceFunction getSuggestedConvergenceFunction() {
-		return new ModulusTwo();
+		return new ModulusTwoConvergence();
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
@@ -106,7 +106,7 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 				argumentParser.colorFunction,
 				argumentParser.fractalType,
 				argumentParser.fractalStyle,
-				argumentParser.colorsCycle
+				argumentParser.cycleColors
 			);
 			AnimatedPanel.display(
 				animatedPanel,

@@ -24,7 +24,7 @@ public class CollatzFunction extends AbstractComplexFunction {
 	}
 
 	public ConvergenceFunction getSuggestedConvergenceFunction() {
-		return new ModulusFifty();
+		return new ModulusFiftyConvergence();
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
