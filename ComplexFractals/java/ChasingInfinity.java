@@ -106,20 +106,38 @@ public class ChasingInfinity extends JPanel {
 	}
 
 	public void addFractalFunctions() {
-		fractalFunctions.addItem(new ManowarFunction());
-		fractalFunctions.addItem(new MandelbrotFunction());
-		fractalFunctions.addItem(new JuliaFunction());
 		fractalFunctions.addItem(new BurningShip());
-		fractalFunctions.addItem(new Spider());
 		fractalFunctions.addItem(new CollatzFunction());
 		fractalFunctions.addItem(new ModifiedCollatzFunction());
-		fractalFunctions.addItem(new Infinity());
-		fractalFunctions.addItem(new TricornFunction());
-		fractalFunctions.addItem(new SierpinskiFunction());
 		fractalFunctions.addItem(new GlynnFunction());
-		//fractalFunctions.addItem(new TreeFunction());
+		fractalFunctions.addItem(new Infinity());
+		fractalFunctions.addItem(new ManowarFunction());
+		fractalFunctions.addItem(new SierpinskiFunction());
+		fractalFunctions.addItem(new Spider());
+		fractalFunctions.addItem(new TricornFunction());
 		fractalFunctions.addItem(new VortexFunction());
+
+		fractalFunctions.addItem(new JuliaFunction());
+		fractalFunctions.addItem(new InvertedJuliaFunction());
+		fractalFunctions.addItem(new LambdaJuliaFunction());
+		fractalFunctions.addItem(new InvertedLambdaJuliaFunction());
+		fractalFunctions.addItem(new CubicJuliaFunction());
+		fractalFunctions.addItem(new QuarticJuliaFunction());
+		fractalFunctions.addItem(new SinJuliaFunction());
+		fractalFunctions.addItem(new CosJuliaFunction());
+		fractalFunctions.addItem(new TanJuliaFunction());
+
+		fractalFunctions.addItem(new MandelbrotFunction());
+		fractalFunctions.addItem(new InvertedMandelbrotFunction());
+		fractalFunctions.addItem(new LambdaMandelbrotFunction());
+		fractalFunctions.addItem(new InvertedLambdaMandelbrotFunction());
+		fractalFunctions.addItem(new MandeldiskFunction());
+		fractalFunctions.addItem(new MandeldropFunction());
+		fractalFunctions.addItem(new CubicMandelbrotFunction());
+		fractalFunctions.addItem(new QuarticMandelbrotFunction());
+		fractalFunctions.addItem(new SinMandelbrotFunction());
 		fractalFunctions.addItem(new CosMandelbrotFunction());
+		fractalFunctions.addItem(new TanMandelbrotFunction());
 	}
 
 	public void addConvergentFunctions() {
@@ -369,9 +387,12 @@ public class ChasingInfinity extends JPanel {
 		fractalStyles.addItem(fractalStyle);
 	}
 
-	public static void main(String[] args){
-		ChasingInfinity content = new ChasingInfinity();
-		final JFrame frame = new JFrame("Chasing Infinity");
+	public String getGUIName() {
+		return "Chasing Infinity";
+	}
+
+	public static void displayGUI(ChasingInfinity content) {
+		final JFrame frame = new JFrame(content.getGUIName());
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.add(content);
@@ -413,5 +434,9 @@ public class ChasingInfinity extends JPanel {
 		});
 
 		frame.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		ChasingInfinity.displayGUI(new ChasingInfinity());
 	}
 }

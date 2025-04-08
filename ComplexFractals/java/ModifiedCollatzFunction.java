@@ -5,6 +5,7 @@ public class ModifiedCollatzFunction extends AbstractComplexFunction {
 	}
 
 	public double getOriginX() {
+		System.out.println("HERE");
 		//return -7.7124366603572145;
 		return 3.94939259635873;
 	}
