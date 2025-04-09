@@ -16,11 +16,11 @@ public class Complex implements Comparable<Complex> {
 		return re == 1 && im == 0;
 	}
 
-	public double mod() {
-		return Math.sqrt(modSquare());
+	public double modulus() {
+		return Math.sqrt(modulusSquared());
 	}
 
-	public double modSquare() {
+	public double modulusSquared() {
 		return re*re + im*im;
 	}
 
@@ -89,11 +89,11 @@ public class Complex implements Comparable<Complex> {
 	}
 
 	public Complex log() {
-		return new Complex(Math.log(this.mod()),this.arg());
+		return new Complex(Math.log(this.modulus()),this.arg());
 	}
 
 	public Complex sqrt() {
-		double r = Math.sqrt(mod());
+		double r = Math.sqrt(modulus());
 		double theta = arg()/2;
 		return new Complex(r*Math.cos(theta), r*Math.sin(theta));
 	}
