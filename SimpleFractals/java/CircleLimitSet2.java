@@ -218,7 +218,7 @@ public class CircleLimitSet2 extends SimpleFractal {
 	}
 
 	public String toString() {
-		return "Circle Limit Set";
+		return "Circle Limit Set 2";
 	}
 
 	public static void main(String[] args) {
