@@ -85,7 +85,7 @@ public class SmoothColorFunction extends PalletedColorFunction {
 	}
 
 	public Color getDivergentColor(Complex complex, int n, int n2) {
-		double d = (double)(n + 1) - Math.log(Math.log(complex.mod())) / Math.log(2.0);
+		double d = (double)(n + 1) - Math.log(Math.log(complex.modulus())) / Math.log(2.0);
 		if (d < 0.0) {
 			d = 0.0;
 		}

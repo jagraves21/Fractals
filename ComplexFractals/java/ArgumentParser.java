@@ -147,6 +147,10 @@ public class ArgumentParser {
             stringBuilder.append(key);
 			stringBuilder.append("'");
         }
+		if (stringBuilder.length() != 0) {
+			stringBuilder.append(", ");
+		}
+		stringBuilder.append("'cyclic-colors', 'cosine-colors'");
 		return "[" + stringBuilder.toString() + "]";	
 	}
 
@@ -491,6 +495,13 @@ public class ArgumentParser {
 	}
 
 	protected ColorFunction parseColorArgument(String argument) throws IllegalArgumentException {
+		if (argument.equals("cyclic-colors")) {
+			return new CyclicColorFunction();
+		}
+		else if (argument.equals("cosine-colors")) {
+			return new CosineColorFunction();
+		}
+
 		String regx = "^(" + String.join("|", colorNames) + ")(\\d+)?(s)?$";
 		Pattern pattern = Pattern.compile(regx);
 		Matcher matcher = pattern.matcher(argument);

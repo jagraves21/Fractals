@@ -234,7 +234,7 @@ public class PalletedColorFunction implements ColorFunction {
 	}
 
 	public Color getDivergentColor(Complex z, int iteration, int maxIteration) {
-		double s1 = iteration + 1 - Math.log(Math.log(z.mod())) / Math.log(2);
+		double s1 = iteration + 1 - Math.log(Math.log(z.modulus())) / Math.log(2);
 
 		if (s1 < 0) {
 			s1 = 0;
