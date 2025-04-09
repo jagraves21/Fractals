@@ -156,7 +156,7 @@ public class GUI extends JPanel implements ActionListener {
 		fractalList.add(new TriCircle());
 		fractalList.add(new TriangleFlake());
 
-		System.out.println(fractalList.size() + " fractals.");
+		System.out.println(fractalList.size() + " fractals");
 
 		JFrame frame = new JFrame("Fractals");
 		// frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
