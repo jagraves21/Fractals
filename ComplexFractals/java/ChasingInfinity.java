@@ -323,7 +323,7 @@ public class ChasingInfinity extends JPanel {
 			}
 		});
 		
-		addColorFunction(new CosColorFunction());
+		addColorFunction(new CosineColorFunction());
 		addColorFunction(new CyclicColorFunction());
 	}
 
