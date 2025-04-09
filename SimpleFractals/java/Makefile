@@ -9,9 +9,9 @@ FractalToSVG = FractalToSVG
 JAR_NAME = GUI.jar
 MAIN_CLASS = GUI
 
-EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree GUI LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
+FRACTALS = ApollonianGasket BoxFractal Branches CesaroFractal Christmas ChristmasApollonianGasket ChristmasKochSnowflake ChristmasSierpinskiCarpet ChristmasSierpinskiTriangle CircleInversion CircleInversion2 CircleInversion2Mod CircleInversionMod CircleLimitSet CircleLimitSet1 CircleLimitSet2 CircleLimitSet3 CircleLimitSet4 CircleLimitSetNew CirclePacking Circles Cross Cross2 Crosses Curlicue DimondFlake Dragon DragonColor DragonLSystem DragonMod Edge EdgeMod Fern HFractal HenonAttractor HexagonalTile HilbertCurve InwardCircle IslandsLakes KochAntisnowflake KochCubes KochCurve KochLine KochLineMod KochMoss KochSnowflake LRepTile LRepTileMod Lace LevyCurve LevyCurves LevyTapestry Lines MangoKolam MinkowskiLine MinkowskiSausage MooreCurve NestedPentagram OutwardCircle Peano PeanoGosperCurve PenroseTiling PentaFlake PentaFlakeMod PentaFractal PentaStar PentaStarMod Pentadentrite Pentagram Pentigree Plusses PythagorasShrub PythagorasTree QuadraticFlake RhombusFlake SierpinskiArrowhead SierpinskiCarpet SierpinskiMedian SierpinskiSquare SierpinskiTriangle SpiralSquare Square SquareFlake SquareMesh SquareStar SquareStar2 SquareTiling SquareTriangle SquareTriangleMod SquareTurn Squares Squares2 Squares2Mod SquaresMod TSquare TernaryTree TetraDragon Thorn ThreeBranch TornSquare Tree TreeBlue TreeMod TreePink TriCircle TriangleFlake
 
-FRACTAL_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
+FRACTAL_CLASSES = $(addsuffix .class, $(FRACTALS))
 
 %.class: %.java
 	$(JAVAC) $<
