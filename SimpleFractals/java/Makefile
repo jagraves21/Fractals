@@ -31,14 +31,9 @@ png: all
 svg: all
 	java $(FractalToSVG) $(FRACTAL_CLASSES)
 
-manifest.mf:
-	echo "Main-Class: $(MAIN_CLASS)" > manifest.mf
-	echo "" >> manifest.mf
-
 .PHONY: jar
-jar: all manifest.mf
-	jar -cvfm $(JAR_NAME) manifest.mf $(CLASSES) $(SRC)
-	rm -f manifest.mf
+jar: all
+	jar -cvfe $(JAR_NAME) $(MAIN_CLASS) *.class $(SRC)
 
 .PHONY: cleanclass
 cleanclass:
