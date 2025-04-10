@@ -37,26 +37,30 @@ $(JAR_NAME): all
 .PHONY: jar
 jar: $(JAR_NAME)
 
-.PHONY: cleanclass
-cleanclass:
+.PHONY: clean-class
+clean-class:
 	rm -f *.class
 
-.PHONY: cleanpng
-cleanpng:
-	rm -f *.png
-
-.PHONY: cleansvg
-cleansvg:
-	rm -f *.svg
-
-.PHONY: cleangif
-cleangif:
+.PHONY: clean-gif
+clean-gif:
 	rm -f *.gif
 
+.PHONY: clean-png
+clean-png:
+	rm -f *.png
+
+.PHONY: clean-svg
+clean-svg:
+	rm -f *.svg
+
+.PHONY: clean-jar
+clean-jar:
+	rm -f $(JAR_NAME)
+
 .PHONY: clean
-clean: cleanclass
+clean: clean-class
 
 .PHONY: veryclean
-veryclean: clean cleanpng cleansvg cleangif
+veryclean: clean clean-gif clean-png clean-svg clean-jar
 	rm -f $(JAR_NAME)
 
