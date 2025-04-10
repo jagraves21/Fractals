@@ -3,19 +3,36 @@ SRC = $(wildcard *.java)
 CLASSES = $(SRC:.java=.class)
 TAR_NAME = fractals.tar.gz
 
-FractalToGIF = FractalToGIF
-FractalToPNG = FractalToPNG
-FractalToSVG = FractalToSVG
+FRACTAL_TO_GIF = FractalToGIF
+FRACTAL_TO_PNG = FractalToPNG
+FRACTAL_TO_SVG = FractalToSVG
 
-EXCLUDE_CLASSES = AbstractFractal AnimatedGifEncoder Bubble Circle Fractal FractalPanel FractalShape FractalToGIF FractalToPNG FractalToSVG FractalTree LineSegment LSystem MyPoint Pentagon Polygon Rectangle SimpleFractal Triangle UnorderedLineSegment
+JULIA_MAIN = JuliaGUI
+JULIA_JAR = JuliaGUI.jar
 
-OTHER_CLASSES = $(filter-out $(EXCLUDE_CLASSES:%=%.class), $(CLASSES))
+MANDELBROT_MAIN = MandelbrotGUI
+MANDELBROT_JAR = MandelbrotGUI.jar
+
+CHASING_INFINITY_MAIN = ChasingInfinity
+CHASING_INFINITY_JAR= ChasingInfinity.jar
 
 .PHONY: all
 all: $(CLASSES)
 
 %.class: %.java
 	$(JAVAC) $<
+
+$(JULIA_JAR): all
+	jar -cfe $(JULIA_JAR) $(JULIA_MAIN) *.class *.java
+
+$(MANDELBROT_JAR): all
+	jar -cfe $(MANDELBROT_JAR) $(MANDELBROT_MAIN) *.class *.java
+
+$(CHASING_INFINITY_JAR): all
+	jar -cfe $(CHASING_INFINITY_JAR) $(CHASING_INFINITY_MAIN) *.class *.java
+
+.PHONY: jar
+jar: $(JULIA_JAR) $(MANDELBROT_JAR) $(CHASING_INFINITY_JAR)
 
 .PHONY: cleanclass
 cleanclass:
@@ -40,26 +57,7 @@ clean: cleanclass cleanjpg
 tar: all
 	tar -czf $(TAR_NAME) *.java *.class
 
-.PHONY: gif
-gif: all
-	java $(FractalToGIF) $(OTHER_CLASSES)
-	$(MAKE) cleanjpg
-
-.PHONY: png
-png: all
-	java $(FractalToPNG) $(OTHER_CLASSES)
-
-.PHONY: svg
-svg: all
-	java $(FractalToSVG) $(OTHER_CLASSES)
-
 .PHONY: veryclean
 veryclean: clean cleanpng cleangif
 	rm -f $(TAR_NAME)
-
-.PHONY: tell
-tell:
-	@echo $(EXCLUDE_CLASSES)
-	@echo ""
-	@echo $(OTHER_CLASSES)
 
