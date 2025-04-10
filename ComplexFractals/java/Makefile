@@ -1,7 +1,6 @@
 JAVAC = javac
 SRC = $(wildcard *.java)
 CLASSES = $(SRC:.java=.class)
-TAR_NAME = fractals.tar.gz
 
 FRACTAL_TO_GIF = FractalToGIF
 FRACTAL_TO_PNG = FractalToPNG
@@ -34,30 +33,19 @@ $(CHASING_INFINITY_JAR): all
 .PHONY: jar
 jar: $(JULIA_JAR) $(MANDELBROT_JAR) $(CHASING_INFINITY_JAR)
 
-.PHONY: cleanclass
-cleanclass:
+.PHONY: clean-class
+clean-class:
 	rm -f *.class
 
-.PHONY: cleanjpg
-cleanjpg:
-	rm -f *.jpg
-
-.PHONY: cleanpng
-cleanpng:
-	rm -f *.png
-
-.PHONY: cleangif
-cleangif:
-	rm -f *.gif
+.PHONY: clean-jar
+clean-jar:
+	rm -f $(JULIA_JAR)
+	rm -f $(MANDELBROT_JAR)
+	rm -f $(CHASING_INFINITY_JAR)
 
 .PHONY: clean
-clean: cleanclass cleanjpg
-
-.PHONY: tar
-tar: all
-	tar -czf $(TAR_NAME) *.java *.class
+clean: clean-class
 
 .PHONY: veryclean
-veryclean: clean cleanpng cleangif
-	rm -f $(TAR_NAME)
+veryclean: clean clean-jar
 
