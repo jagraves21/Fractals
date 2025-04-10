@@ -105,6 +105,16 @@ public class PalletedColorFunction implements ColorFunction {
 		VIOLET
 	};
 
+	public static final Color[] TWILIGHT = new Color[]{
+		TWILIGHT_LAVENDER,
+		TWILIGHT_PERIWINKLE,
+		TWILIGHT_SKY_BLUE,
+		BLUE_VIOLET,
+		OCEAN_DARK_SLATE_BLUE,
+		INDIGO,
+		DEEP_PURPLE
+	};
+
 	public static Color[] ICE_FIRE = new Color[]{
 		DARK_BLUE,
 		BLUE,
@@ -195,6 +205,10 @@ public class PalletedColorFunction implements ColorFunction {
 
 	public static PalletedColorFunction getSpace(int steps) {
 		return new PalletedColorFunction(PalletedColorFunction.getColorSpan(SPACE, steps));
+	}
+	
+	public static PalletedColorFunction getTwilight(int steps) {
+		return new PalletedColorFunction(PalletedColorFunction.getColorSpan(TWILIGHT, steps));
 	}
 
 	public static PalletedColorFunction getIceFire(int steps) {

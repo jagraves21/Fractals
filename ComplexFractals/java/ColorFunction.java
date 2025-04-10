@@ -77,6 +77,11 @@ public interface ColorFunction {
 	public static final Color PINK_SKY_BLUE_2  = new Color(135, 206, 250);    // Sky Blue
 	public static final Color PINK_SOFT_PINK   = new Color(255, 192, 203);    // Soft Pink
 
+	// Twilight Palette (blend of purples and blues, from deep night to bright horizon)
+	public static final Color TWILIGHT_LAVENDER   = new Color(230, 230, 250);  // Soft lavender
+	public static final Color TWILIGHT_SKY_BLUE   = new Color(80, 180, 255);   // Vibrant horizon blue
+	public static final Color TWILIGHT_PERIWINKLE = new Color(204, 204, 255);  // Gentle periwinkle
+
 	public Color getConvergentColor(Complex z, int iteration, int maxIteration);
 	public Color getDivergentColor(Complex z, int iteration, int maxIteration);
 }
