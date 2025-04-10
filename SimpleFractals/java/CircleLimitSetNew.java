@@ -99,6 +99,7 @@ public class CircleLimitSetNew extends CircleLimitSet {
 		currentCircles.addAll(basesCircles);
 
 		fractal.clear();
+		//fractal.addAll(basesCircles);
 		for (int ii=0; ii < 4; ii++) {
 			next2();
 		}
