@@ -4,11 +4,11 @@ import java.awt.RadialGradientPaint;
 import java.util.*;
 import javax.swing.*;
 
-public class CircleLimitSet1 extends CircleLimitSet {
+public class CircleLimitSet4Overlap extends CircleLimitSet {
 	protected Circle center;
 	protected List<Circle> movingCircles;
 
-	public CircleLimitSet1() {
+	public CircleLimitSet4Overlap() {
 		super();
 	}
 
@@ -36,7 +36,7 @@ public class CircleLimitSet1 extends CircleLimitSet {
 		);
 		movingCircles.add(movingBase);
 
-		int N = 1;
+		int N = 4;
 		for(int ii=0; ii < N; ii++) {
 			Circle tmpCircle = new Circle(
 				translate(
@@ -77,7 +77,7 @@ public class CircleLimitSet1 extends CircleLimitSet {
 	}
 
 	public String toString() {
-		return "Circle Limit Set 1";
+		return "Circle Limit Set 4 (Overlap)";
 	}
 
 	public static void main(String[] args) {
