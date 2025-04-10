@@ -31,9 +31,11 @@ png: all
 svg: all
 	java $(FractalToSVG) $(FRACTAL_CLASSES)
 
+$(JAR_NAME): all
+	jar -cfe $(JAR_NAME) $(MAIN_CLASS) *.class $(SRC)
+
 .PHONY: jar
-jar: all
-	jar -cvfe $(JAR_NAME) $(MAIN_CLASS) *.class $(SRC)
+jar: $(JAR_NAME)
 
 .PHONY: cleanclass
 cleanclass:
