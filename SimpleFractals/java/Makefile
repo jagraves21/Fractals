@@ -41,6 +41,10 @@ jar: $(JAR_NAME)
 clean-class:
 	rm -f *.class
 
+.PHONY: clean-jar
+clean-jar:
+	rm -f $(JAR_NAME)
+
 .PHONY: clean-gif
 clean-gif:
 	rm -f *.gif
@@ -53,13 +57,9 @@ clean-png:
 clean-svg:
 	rm -f *.svg
 
-.PHONY: clean-jar
-clean-jar:
-	rm -f $(JAR_NAME)
-
 .PHONY: clean
 clean: clean-class
 
 .PHONY: veryclean
-veryclean: clean clean-gif clean-png clean-svg clean-jar
+veryclean: clean clean-jar clean-gif clean-png clean-svg
 
