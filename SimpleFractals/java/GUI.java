@@ -65,8 +65,8 @@ public class GUI extends JPanel implements ActionListener {
 		fractalList.add(new CircleLimitSet());
 		fractalList.add(new CircleLimitSet1());
 		fractalList.add(new CircleLimitSet2());
-		fractalList.add(new CircleLimitSet3());
 		fractalList.add(new CircleLimitSet4());
+		fractalList.add(new CircleLimitSet4Overlap());
 		fractalList.add(new CircleLimitSetNew());
 		fractalList.add(new CirclePacking());
 		fractalList.add(new Circles());
