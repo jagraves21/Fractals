@@ -262,6 +262,16 @@ public class ChasingInfinity extends JPanel {
 				return "Space (S)";
 			}
 		});
+		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.TWILIGHT, 10)) {
+			public String toString() {
+				return "Twilight";
+			}
+		});
+		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.TWILIGHT, 10)) {
+			public String toString() {
+				return "Twilight (S)";
+			}
+		});
 		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.ICE_FIRE, 10)) {
 			public String toString() {
 				return "IceFire";
