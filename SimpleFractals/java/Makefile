@@ -62,5 +62,4 @@ clean: clean-class
 
 .PHONY: veryclean
 veryclean: clean clean-gif clean-png clean-svg clean-jar
-	rm -f $(JAR_NAME)
 
