@@ -97,6 +97,7 @@ public class ArgumentParser {
 		this.classes = new LinkedList<String>();
 		
 		palletedColorMap = new TreeMap<>();
+		palletedColorMap.put("test", PalletedColorFunction::getTEST);
 		palletedColorMap.put("rgb", PalletedColorFunction::getRGB);
 		palletedColorMap.put("rainbow", PalletedColorFunction::getRainbow);
 		palletedColorMap.put("spectrum", PalletedColorFunction::getSpectrum);
@@ -114,9 +115,12 @@ public class ArgumentParser {
 		palletedColorMap.put("candy-cane", PalletedColorFunction::getCandyCane);
 		palletedColorMap.put("magma", PalletedColorFunction::getMagma);
 		palletedColorMap.put("lava", PalletedColorFunction::getLava);
-		palletedColorMap.put("pink-blues", PalletedColorFunction::getPinkBlues);
+		palletedColorMap.put("pink-blue", PalletedColorFunction::getPinkBlue);
+		palletedColorMap.put("oil-slick", PalletedColorFunction::getOilSlick);
+		palletedColorMap.put("gas-on-water", PalletedColorFunction::getGasOnWater);
 
 		smoothColorMap = new TreeMap<>();
+		smoothColorMap.put("test", SmoothColorFunction::getTEST);
 		smoothColorMap.put("rgb", SmoothColorFunction::getRGB);
 		smoothColorMap.put("rainbow", SmoothColorFunction::getRainbow);
 		smoothColorMap.put("spectrum", SmoothColorFunction::getSpectrum);
@@ -134,7 +138,9 @@ public class ArgumentParser {
 		smoothColorMap.put("candy-cane", SmoothColorFunction::getCandyCane);
 		smoothColorMap.put("magma", SmoothColorFunction::getMagma);
 		smoothColorMap.put("lava", SmoothColorFunction::getLava);
-		smoothColorMap.put("pink-blues", SmoothColorFunction::getPinkBlues);
+		smoothColorMap.put("pink-blue", SmoothColorFunction::getPinkBlue);
+		smoothColorMap.put("oil-slick", SmoothColorFunction::getOilSlick);
+		smoothColorMap.put("gas-on-water", SmoothColorFunction::getGasOnWater);
         
 		colorNames = palletedColorMap.keySet();
 	}

@@ -33,9 +33,7 @@ public class CosMandelbrotFunction extends MandelbrotFunction {
 	}
 
 	public ColorFunction getSuggestedColorFunction() {
-		return new PalletedColorFunction(
-			PalletedColorFunction.getColorSpan(PalletedColorFunction.LAVA, 10)
-		);
+		return PalletedColorFunction.getLava(10);
 	}
 
 	public String toString() {

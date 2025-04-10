@@ -45,7 +45,7 @@ public class SierpinskiFunction extends AbstractComplexFunction {
 
 	public ColorFunction getSuggestedColorFunction() {
 		java.awt.Color[] c = {java.awt.Color.BLUE, java.awt.Color.YELLOW};
-		return new PalletedColorFunction(PalletedColorFunction.getColorSpan(
+		return new PalletedColorFunction(PalletedColorFunction.generateColorGradient(
 			c, 15
 		));
 	}

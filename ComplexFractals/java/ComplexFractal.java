@@ -64,23 +64,46 @@ public class ComplexFractal extends AnimatedPanel {
 	int[][] pointIterations;
 	Complex[][][] points;
 
-	public ComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction) {
+	public ComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction
+	) {
 		this(complexFunction, convergenceFunction, new PalletedColorFunction());
 	}
 
-	public ComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction) {
+	public ComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction
+	) {
 		this(complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE);
 	}
 
-	public ComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalStyle fractalStyle) {
+	public ComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalStyle fractalStyle
+	) {
 		this(complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, fractalStyle);
 	}
 
-	public ComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType) {
+	public ComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalType fractalType
+	) {
 		this(complexFunction, convergenceFunction, colorFunction, fractalType, FractalStyle.STANDARD);
 	}
 
-	public ComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle) {
+	public ComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalType fractalType,
+		FractalStyle fractalStyle
+	) {
 		this(
 			complexFunction == null ? 0 : complexFunction.getOriginX(),
 			complexFunction == null ? 0 : complexFunction.getOriginY(),
@@ -93,23 +116,65 @@ public class ComplexFractal extends AnimatedPanel {
 		);
 	}
 
-	public ComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction) {
+	public ComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction
+	) {
 		this(x, y, width, complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, FractalStyle.STANDARD);
 	}
 
-	public ComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType) {
+	public ComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalType fractalType
+	) {
 		this(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, FractalStyle.STANDARD);
 	}
 
-	public ComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalStyle fractalStyle) {
+	public ComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalStyle fractalStyle
+	) {
 		this(x, y, width, complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, fractalStyle);
 	}
 
-	public ComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle) {
+	public ComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalType fractalType,
+		FractalStyle fractalStyle
+	) {
 		this(x, y, width, complexFunction, convergenceFunction, colorFunction, FractalType.ITERATIVE, fractalStyle, false);
 	}
 
-	public ComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction colorFunction, FractalType fractalType, FractalStyle fractalStyle, boolean colorsCycle) {
+	public ComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		FractalType fractalType,
+		FractalStyle fractalStyle,
+		boolean colorsCycle
+	) {
 		super();
 
 		lock = new Object();

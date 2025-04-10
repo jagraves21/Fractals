@@ -152,186 +152,49 @@ public class ChasingInfinity extends JPanel {
 	}
 
 	public void addColorFunctions() {
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.RGB, 10)) {
-			public String toString() {
-				return "RGB";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.RGB, 10)) {
-			public String toString() {
-				return "RGB (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.RAINBOW, 10)) {
-			public String toString() {
-				return "Rainbow";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.RAINBOW, 10)) {
-			public String toString() {
-				return "Rainbow (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.SPECTRUM, 10)) {
-			public String toString() {
-				return "Spectrum";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.SPECTRUM, 10)) {
-			public String toString() {
-				return "Spectrum (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.FOREST, 10)) {
-			public String toString() {
-				return "Forest";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.FOREST, 10)) {
-			public String toString() {
-				return "Forest (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.SEAWEED, 10)) {
-			public String toString() {
-				return "Seaweed";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.SEAWEED, 10)) {
-			public String toString() {
-				return "Seaweed (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.OCEAN, 10)) {
-			public String toString() {
-				return "Ocean";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.OCEAN, 10)) {
-			public String toString() {
-				return "Ocean (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.AQUA, 10)) {
-			public String toString() {
-				return "Aqua";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.AQUA, 10)) {
-			public String toString() {
-				return "Aqua (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.SUNSET, 10)) {
-			public String toString() {
-				return "Sunset";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.SUNSET, 10)) {
-			public String toString() {
-				return "Sunset (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.TROPICAL, 10)) {
-			public String toString() {
-				return "Tropical";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.TROPICAL, 10)) {
-			public String toString() {
-				return "Tropical (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.NEON, 10)) {
-			public String toString() {
-				return "Neon";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.NEON, 10)) {
-			public String toString() {
-				return "Neon (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.SPACE, 10)) {
-			public String toString() {
-				return "Space";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.SPACE, 10)) {
-			public String toString() {
-				return "Space (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.TWILIGHT, 10)) {
-			public String toString() {
-				return "Twilight";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.TWILIGHT, 10)) {
-			public String toString() {
-				return "Twilight (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.ICE_FIRE, 10)) {
-			public String toString() {
-				return "IceFire";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.ICE_FIRE, 10)) {
-			public String toString() {
-				return "IceFire (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.ZEBRA, 10)) {
-			public String toString() {
-				return "Zebra";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.ZEBRA, 10)) {
-			public String toString() {
-				return "Zebra (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.CANDY_CANE, 10)) {
-			public String toString() {
-				return "CandyCane";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.CANDY_CANE, 10)) {
-			public String toString() {
-				return "CandyCane (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.MAGMA, 10)) {
-			public String toString() {
-				return "Magma";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.MAGMA, 10)) {
-			public String toString() {
-				return "Magma (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.LAVA, 10)) {
-			public String toString() {
-				return "Lava";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.LAVA, 10)) {
-			public String toString() {
-				return "Lava (S)";
-			}
-		});
-		addColorFunction(new PalletedColorFunction(PalletedColorFunction.getColorSpan(PalletedColorFunction.PINK_BLUES, 10)) {
-			public String toString() {
-				return "PinkBlues";
-			}
-		});
-		addColorFunction(new SmoothColorFunction(SmoothColorFunction.getColorSpan(SmoothColorFunction.PINK_BLUES, 10)) {
-			public String toString() {
-				return "PinkBlues (S)";
-			}
-		});
+		addColorFunction(PalletedColorFunction.getTEST(5));
+		addColorFunction(SmoothColorFunction.getTEST(10));
+
+		addColorFunction(PalletedColorFunction.getRGB(5));
+		addColorFunction(SmoothColorFunction.getRGB(10));
+		addColorFunction(PalletedColorFunction.getRainbow(5));
+		addColorFunction(SmoothColorFunction.getRainbow(10));
+		addColorFunction(PalletedColorFunction.getSpectrum(5));
+		addColorFunction(SmoothColorFunction.getSpectrum(10));
+		addColorFunction(PalletedColorFunction.getForest(5));
+		addColorFunction(SmoothColorFunction.getForest(10));
+		addColorFunction(PalletedColorFunction.getSeaweed(5));
+		addColorFunction(SmoothColorFunction.getSeaweed(10));
+		addColorFunction(PalletedColorFunction.getOcean(5));
+		addColorFunction(SmoothColorFunction.getOcean(10));
+		addColorFunction(PalletedColorFunction.getAqua(5));
+		addColorFunction(SmoothColorFunction.getAqua(10));
+		addColorFunction(PalletedColorFunction.getSunset(5));
+		addColorFunction(SmoothColorFunction.getSunset(10));
+		addColorFunction(PalletedColorFunction.getTropical(5));
+		addColorFunction(SmoothColorFunction.getTropical(10));
+		addColorFunction(PalletedColorFunction.getNeon(5));
+		addColorFunction(SmoothColorFunction.getNeon(10));
+		addColorFunction(PalletedColorFunction.getSpace(5));
+		addColorFunction(SmoothColorFunction.getSpace(10));
+		addColorFunction(PalletedColorFunction.getTwilight(5));
+		addColorFunction(SmoothColorFunction.getTwilight(10));
+		addColorFunction(PalletedColorFunction.getIceFire(5));
+		addColorFunction(SmoothColorFunction.getIceFire(10));
+		addColorFunction(PalletedColorFunction.getZebra(5));
+		addColorFunction(SmoothColorFunction.getZebra(10));
+		addColorFunction(PalletedColorFunction.getCandyCane(5));
+		addColorFunction(SmoothColorFunction.getCandyCane(10));
+		addColorFunction(PalletedColorFunction.getMagma(5));
+		addColorFunction(SmoothColorFunction.getMagma(10));
+		addColorFunction(PalletedColorFunction.getLava(5));
+		addColorFunction(SmoothColorFunction.getLava(10));
+		addColorFunction(PalletedColorFunction.getPinkBlue(5));
+		addColorFunction(SmoothColorFunction.getPinkBlue(10));
+		addColorFunction(PalletedColorFunction.getOilSlick(5));
+		addColorFunction(SmoothColorFunction.getOilSlick(10));
+		addColorFunction(PalletedColorFunction.getGasOnWater(5));
+		addColorFunction(SmoothColorFunction.getGasOnWater(10));
 		
 		addColorFunction(new CosineColorFunction());
 		addColorFunction(new CyclicColorFunction());
@@ -369,13 +232,13 @@ public class ChasingInfinity extends JPanel {
 		add(south, BorderLayout.SOUTH);
 		add(complexFractal, BorderLayout.CENTER);
 
-		PalletCreator palletCreator = new PalletCreator();
+		/*PalletCreator palletCreator = new PalletCreator();
 		palletCreator.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ColorFunction colorFunction = ((PalletCreator)e.getSource()).getColorFunction();
 				complexFractal.setColorFunction(colorFunction);
 			}
-		});
+		});*/
 		//add(palletCreator, BorderLayout.WEST);
 
 		/*SwingUtilities.invokeLater(new Runnable() {

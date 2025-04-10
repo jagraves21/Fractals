@@ -119,9 +119,9 @@ public class PalletCreator extends JPanel {
             }
         }
         if (this.smoothCheckBox.isSelected()) {
-            return new SmoothColorFunction(PalletedColorFunction.getColorSpan(colorArray, 10));
+            return new SmoothColorFunction(SmoothColorFunction.generateColorGradient(colorArray, 10));
         }
-        return new PalletedColorFunction(PalletedColorFunction.getColorSpan(colorArray, 10));
+        return new PalletedColorFunction(PalletedColorFunction.generateColorGradient(colorArray, 10));
     }
 
     public void addActionListener(ActionListener actionListener) {
