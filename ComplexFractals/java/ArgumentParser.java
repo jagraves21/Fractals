@@ -108,6 +108,7 @@ public class ArgumentParser {
 		palletedColorMap.put("tropical", PalletedColorFunction::getTropical);
 		palletedColorMap.put("neon", PalletedColorFunction::getNeon);
 		palletedColorMap.put("space", PalletedColorFunction::getSpace);
+		palletedColorMap.put("twilight", PalletedColorFunction::getTwilight);
 		palletedColorMap.put("ice-fire", PalletedColorFunction::getIceFire);
 		palletedColorMap.put("zebra", PalletedColorFunction::getZebra);
 		palletedColorMap.put("candy-cane", PalletedColorFunction::getCandyCane);
@@ -127,6 +128,7 @@ public class ArgumentParser {
 		smoothColorMap.put("tropical", SmoothColorFunction::getTropical);
 		smoothColorMap.put("neon", SmoothColorFunction::getNeon);
 		smoothColorMap.put("space", SmoothColorFunction::getSpace);
+		smoothColorMap.put("twilight", SmoothColorFunction::getTwilight);
 		smoothColorMap.put("ice-fire", SmoothColorFunction::getIceFire);
 		smoothColorMap.put("zebra", SmoothColorFunction::getZebra);
 		smoothColorMap.put("candy-cane", SmoothColorFunction::getCandyCane);

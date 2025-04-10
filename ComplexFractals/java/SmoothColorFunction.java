@@ -52,6 +52,10 @@ public class SmoothColorFunction extends PalletedColorFunction {
 		return new SmoothColorFunction(SmoothColorFunction.getColorSpan(SPACE, steps));
 	}
 
+	public static SmoothColorFunction getTwilight(int steps) {
+		return new SmoothColorFunction(SmoothColorFunction.getColorSpan(TWILIGHT, steps));
+	}
+
 	public static SmoothColorFunction getIceFire(int steps) {
 		return new SmoothColorFunction(SmoothColorFunction.getColorSpan(ICE_FIRE, steps));
 	}

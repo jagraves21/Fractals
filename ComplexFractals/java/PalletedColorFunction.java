@@ -112,7 +112,13 @@ public class PalletedColorFunction implements ColorFunction {
 		BLUE_VIOLET,
 		OCEAN_DARK_SLATE_BLUE,
 		INDIGO,
-		DEEP_PURPLE
+		DEEP_PURPLE,
+		INDIGO,
+		OCEAN_DARK_SLATE_BLUE,
+		BLUE_VIOLET,
+		TWILIGHT_SKY_BLUE,
+		TWILIGHT_PERIWINKLE,
+		TWILIGHT_LAVENDER
 	};
 
 	public static Color[] ICE_FIRE = new Color[]{
