@@ -3,6 +3,14 @@ public class Complex implements Comparable<Complex> {
 	public double re;
 	public double im;
 
+	public Complex() {
+		this(0, 0);
+	}
+
+	public Complex(Complex z) {
+		this(z.re, z.im);
+	}
+
 	public Complex(double re, double im) {
 		this.re = re;
 		this.im = im;
@@ -110,7 +118,7 @@ public class Complex implements Comparable<Complex> {
 		return (this.sin()).divide(this.cos());
 	}
 
-	private double cosh(double theta) {
+	public static double cosh(double theta) {
 		return (Math.exp(theta)+Math.exp(-theta))/2;
 	}
 
@@ -118,7 +126,7 @@ public class Complex implements Comparable<Complex> {
 		return new Complex(cosh(re)*Math.cos(im),sinh(re)*Math.sin(im));
 	}
 
-	private double sinh(double theta) {
+	public static double sinh(double theta) {
 		return (Math.exp(theta)-Math.exp(-theta))/2;
 	}
 
@@ -165,9 +173,18 @@ public class Complex implements Comparable<Complex> {
 		if(res == 0) {
 			res = Double.compare(this.im, that.im);
 		}
-
 		return res;
 	}
+
+	public boolean equals(Object that) {
+        if(this == that) {
+			return true;
+		} else if (!(that instanceof Complex)) {
+			return false;
+		} else {
+			return this.compareTo((Complex)that) == 0;
+		}
+    }
 
 	public String toString() {
 		if(re != 0 && im != 0) {

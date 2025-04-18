@@ -4,15 +4,7 @@ public class JuliaGUI extends ChasingInfinity {
 	}
 
 	public void addFractalFunctions() {
-		fractalFunctions.addItem(new JuliaFunction());
-		fractalFunctions.addItem(new InvertedJuliaFunction());
-		fractalFunctions.addItem(new LambdaJuliaFunction());
-		fractalFunctions.addItem(new InvertedLambdaJuliaFunction());
-		fractalFunctions.addItem(new CubicJuliaFunction());
-		fractalFunctions.addItem(new QuarticJuliaFunction());
-		fractalFunctions.addItem(new SinJuliaFunction());
-		fractalFunctions.addItem(new CosJuliaFunction());
-		fractalFunctions.addItem(new TanJuliaFunction());
+        addJuliaFractalsFunctions();
 	}
 
 	public String getGUIName() {

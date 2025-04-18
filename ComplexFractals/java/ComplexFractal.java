@@ -224,7 +224,7 @@ public class ComplexFractal extends AnimatedPanel {
 		this.colorFunction = colorFunction;
 		this.fractalType = fractalType;
 		this.fractalStyle = fractalStyle;
-		this.
+		this.cycleColors = cycleColors;
 
 		shift = 0;
 

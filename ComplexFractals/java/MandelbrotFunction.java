@@ -21,11 +21,12 @@ public class MandelbrotFunction extends AbstractComplexFunction {
 	}
 
 	public void next(Complex z, Complex mu) {
+		//Complex res = z.power(2).plus(mu);
 		double temp = z.re*z.re - z.im*z.im + mu.re;
 		z.im = 2*z.re*z.im + mu.im;
 		z.re = temp;
 	}
-
+	
 	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(25);
 	}

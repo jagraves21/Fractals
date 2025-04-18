@@ -439,7 +439,7 @@ public class MultiComplexFractal extends ComplexFractal {
 			fractalStyle,
 			cycleColors
 		);
-
+		
 		allNull = color2 == null && color3 == null && color4 == null;
 		boolean noneNull = color2 != null && color3 != null && color4 != null;
 		if (!(allNull || noneNull)) {

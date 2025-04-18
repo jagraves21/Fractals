@@ -104,8 +104,8 @@ public class ChasingInfinity extends JPanel {
 			fractalStyles.getItemAt(0)
 		);
 	}
-
-	public void addFractalFunctions() {
+	
+	protected void addMiscellaneousFractalFunctions() {
 		fractalFunctions.addItem(new BurningShip());
 		fractalFunctions.addItem(new CollatzFunction());
 		fractalFunctions.addItem(new ModifiedCollatzFunction());
@@ -116,17 +116,9 @@ public class ChasingInfinity extends JPanel {
 		fractalFunctions.addItem(new Spider());
 		fractalFunctions.addItem(new TricornFunction());
 		fractalFunctions.addItem(new VortexFunction());
-
-		fractalFunctions.addItem(new JuliaFunction());
-		fractalFunctions.addItem(new InvertedJuliaFunction());
-		fractalFunctions.addItem(new LambdaJuliaFunction());
-		fractalFunctions.addItem(new InvertedLambdaJuliaFunction());
-		fractalFunctions.addItem(new CubicJuliaFunction());
-		fractalFunctions.addItem(new QuarticJuliaFunction());
-		fractalFunctions.addItem(new SinJuliaFunction());
-		fractalFunctions.addItem(new CosJuliaFunction());
-		fractalFunctions.addItem(new TanJuliaFunction());
-
+	}
+		
+	protected void addMandelbrotFractalsFunctions() {
 		fractalFunctions.addItem(new MandelbrotFunction());
 		fractalFunctions.addItem(new InvertedMandelbrotFunction());
 		fractalFunctions.addItem(new LambdaMandelbrotFunction());
@@ -140,7 +132,26 @@ public class ChasingInfinity extends JPanel {
 		fractalFunctions.addItem(new TanMandelbrotFunction());
 	}
 
-	public void addConvergentFunctions() {
+	protected void addJuliaFractalsFunctions() {
+		fractalFunctions.addItem(new JuliaFunction());
+		fractalFunctions.addItem(new InvertedJuliaFunction());
+		fractalFunctions.addItem(new LambdaJuliaFunction());
+		fractalFunctions.addItem(new InvertedLambdaJuliaFunction());
+		fractalFunctions.addItem(new CubicJuliaFunction());
+		fractalFunctions.addItem(new QuarticJuliaFunction());
+		fractalFunctions.addItem(new ExponentialCubicJuliaFunction());
+		fractalFunctions.addItem(new SinJuliaFunction());
+		fractalFunctions.addItem(new CosJuliaFunction());
+		fractalFunctions.addItem(new TanJuliaFunction());
+	}
+
+	protected void addFractalFunctions() {
+		addMiscellaneousFractalFunctions();
+		addMandelbrotFractalsFunctions();
+		addJuliaFractalsFunctions();
+	}
+
+	protected void addConvergentFunctions() {
 		convergenceFunctions.addItem(new ModulusTwoConvergence());
 		convergenceFunctions.addItem(new ModulusFourConvergence());
 		convergenceFunctions.addItem(new ModulusTwoPIConvergence());
@@ -151,7 +162,7 @@ public class ChasingInfinity extends JPanel {
 		convergenceFunctions.addItem(new ModulusSquareConvergence());
 	}
 
-	public void addColorFunctions() {
+	protected void addColorFunctions() {
 		addColorFunction(PalletedColorFunction.getTEST(5));
 		addColorFunction(SmoothColorFunction.getTEST(10));
 
@@ -200,13 +211,13 @@ public class ChasingInfinity extends JPanel {
 		addColorFunction(new CyclicColorFunction());
 	}
 
-	public void addFractalTypes() {
+	protected void addFractalTypes() {
 		addFractalType(ComplexFractal.FractalType.ITERATIVE);
 		addFractalType(ComplexFractal.FractalType.MOVING);
 		addFractalType(ComplexFractal.FractalType.RANDOM);
 	}
 
-	public void addFractalStyles() {
+	protected void addFractalStyles() {
 		fractalStyles.addItem(ComplexFractal.FractalStyle.STANDARD);
 		fractalStyles.addItem(ComplexFractal.FractalStyle.CONTOURED);
 		fractalStyles.addItem(ComplexFractal.FractalStyle.FREQUENCY);
