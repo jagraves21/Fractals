@@ -84,7 +84,11 @@ public class ExponentialCubicJuliaFunction extends AbstractComplexFunction {
 	public ColorFunction getSuggestedColorFunction() {
 		return PalletedColorFunction.getRainbow(5);
 	}
-	
+
+	public ComplexFractal.FractalType getSuggestedFractalType() {
+		return ComplexFractal.FractalType.MOVING;
+	}
+
 	public ComplexFractal.FractalStyle getSuggestedFractalStyle() {
 		return ComplexFractal.FractalStyle.CONTOURED;
 	}
