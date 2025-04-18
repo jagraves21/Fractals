@@ -92,18 +92,40 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 				600,
 				complexFunction.getSuggestedConvergenceFunction(),
 				complexFunction.getSuggestedColorFunction(),
+				null,
+				null,
+				null,
 				complexFunction.getSuggestedFractalType(),
 				complexFunction.getSuggestedFractalStyle(),
 				false
 			);
 			argumentParser.parseArguments(args);
-			AnimatedPanel animatedPanel = new ComplexFractal(
+
+			if(
+				argumentParser.colorFunction2 != null ||
+				argumentParser.colorFunction3 != null ||
+				argumentParser.colorFunction4 != null
+			) {
+				if(argumentParser.colorFunction2 == null) {
+					argumentParser.colorFunction2 = new PalletedColorFunction();	   
+				}
+				if(argumentParser.colorFunction3 == null) {
+					argumentParser.colorFunction3 = new PalletedColorFunction();	   
+				}
+				if(argumentParser.colorFunction4 == null) {
+					argumentParser.colorFunction4 = new PalletedColorFunction();	   
+				}
+			}
+			AnimatedPanel animatedPanel = new MultiComplexFractal(
 				complexFunction.getOriginX(),
 				complexFunction.getOriginY(),
 				complexFunction.getWindowWidth(),
 				complexFunction,
 				argumentParser.convergenceFunction,
 				argumentParser.colorFunction,
+				argumentParser.colorFunction2,
+				argumentParser.colorFunction3,
+				argumentParser.colorFunction4,
 				argumentParser.fractalType,
 				argumentParser.fractalStyle,
 				argumentParser.cycleColors

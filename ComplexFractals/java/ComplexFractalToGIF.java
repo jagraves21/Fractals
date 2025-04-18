@@ -1,8 +1,10 @@
+import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.awt.Window;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JFrame;
 
-public class ComplexFractalToGIF extends ComplexFractal
+public class ComplexFractalToGIF extends MultiComplexFractal
 {
 	protected int maxIterations;
 	protected boolean reflect;
@@ -31,6 +33,9 @@ public class ComplexFractalToGIF extends ComplexFractal
 		ComplexFunction complexFunction,
 		ConvergenceFunction convergenceFunction,
 		ColorFunction colorFunction,
+		ColorFunction colorFunction2,
+		ColorFunction colorFunction3,
+		ColorFunction colorFunction4,
 		FractalType fractalType,
 		FractalStyle fractalStyle,
 		boolean cycleColors,
@@ -42,7 +47,20 @@ public class ComplexFractalToGIF extends ComplexFractal
 		int startZoom,
 		int stopZoom
 	) {
-		super(x, y, width, complexFunction, convergenceFunction, colorFunction, fractalType, fractalStyle, cycleColors);
+		super(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			colorFunction,
+			colorFunction2,
+			colorFunction3,
+			colorFunction4,
+			fractalType,
+			fractalStyle,
+			cycleColors
+		);
 		this.maxIterations = maxIterations;
 		this.reflect = reflect;
 		this.xZoom = xZoom;
@@ -103,16 +121,14 @@ public class ComplexFractalToGIF extends ComplexFractal
 			for(int ii=0; ii<50; ii++) {
 				step(gWidth, gHeight);
 			}
-			windowWidth = 4000;
 			synchronized (lock) {
 				totalIterations = 0;
 			}
 		}*/
-		step(gWidth, gHeight);
 
 		BufferedImage img = new BufferedImage(gWidth, gHeight, BufferedImage.TYPE_INT_RGB);
 		Graphics imageGraphics = img.createGraphics();
-		drawFractal(imageGraphics, gWidth, gHeight);
+		super.draw(imageGraphics, gWidth, gHeight);
 		imageGraphics.dispose();
 
 		gifEncoder.addFrame(img);
@@ -120,20 +136,20 @@ public class ComplexFractalToGIF extends ComplexFractal
 
 		printProgressBar(curIteration, maxIterations);
 		if (curIteration > startZoom && curIteration < stopZoom) {
-			double x = xZoom;
-			double y = yZoom;
-			double windowHeight = (getHeight()/(double)getWidth())*windowWidth;
-			originX = x - multiplier * (x - originX);
-			originY = y - multiplier * (y - originY);
-			windowWidth *= multiplier;
-			synchronized (lock) {
-				totalIterations = 0;
-			}
+			double newOriginX = xZoom - multiplier * (xZoom - originX);
+			double newOriginY = yZoom - multiplier * (yZoom - originY);
+			double newViewWidth = viewWidth * multiplier;
+			setWindow(newOriginX, newOriginY, newViewWidth);
 		}
 
 		if(curIteration++ == maxIterations) {
-			gifEncoder.finish();
-			System.exit(0);
+			Component comp = this;
+			while (comp != null && !(comp instanceof Window)) {
+				comp = comp.getParent();
+			}
+			if (comp != null) {
+				((Window) comp).dispose();//setVisible(false);
+			}
 		}
 	}
 
@@ -157,6 +173,21 @@ public class ComplexFractalToGIF extends ComplexFractal
 			Integer.MAX_VALUE
 		);
 		argumentParser.parseArguments(args, true, true);
+		if(
+			argumentParser.colorFunction2 != null ||
+			argumentParser.colorFunction3 != null ||
+			argumentParser.colorFunction4 != null
+		) {
+			if(argumentParser.colorFunction2 == null) {
+				argumentParser.colorFunction2 = new PalletedColorFunction();
+			}
+			if(argumentParser.colorFunction3 == null) {
+				argumentParser.colorFunction3 = new PalletedColorFunction();
+			}
+			if(argumentParser.colorFunction4 == null) {
+				argumentParser.colorFunction4 = new PalletedColorFunction();
+			}
+		}
 
 		ClassLoader classLoader = ComplexFractalToGIF.class.getClassLoader();
 		for (String className : argumentParser.classes) {
@@ -188,6 +219,9 @@ public class ComplexFractalToGIF extends ComplexFractal
 					complexFunction,
 					convergenceFunction,
 					colorFunction,
+					argumentParser.colorFunction2,
+					argumentParser.colorFunction3,
+					argumentParser.colorFunction4,
 					fractalType,
 					fractalStyle,
 					argumentParser.cycleColors,
@@ -217,8 +251,6 @@ public class ComplexFractalToGIF extends ComplexFractal
 				} catch (InterruptedException ie) {
 
 				}
-
-				System.out.println("Window closed. Proceeding.");
 			} catch (ClassNotFoundException e) {
 				System.out.println("Class not found: " + className);
 			} catch (InstantiationException

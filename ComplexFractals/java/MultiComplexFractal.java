@@ -4,453 +4,558 @@ import java.awt.Image;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
+
+import java.awt.image.BufferedImage;
 
 public class MultiComplexFractal extends ComplexFractal {
+
 	protected ColorFunction color1;
 	protected ColorFunction color2;
 	protected ColorFunction color3;
 	protected ColorFunction color4;
+	boolean allNull;
 
-	public MultiComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction) {
-		this(complexFunction, convergenceFunction, PalletedColorFunction.getRainbow(10), PalletedColorFunction.getRedBlue(10), PalletedColorFunction.getBlues(10), new PalletedColorFunction());
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			PalletedColorFunction.getRainbow(10)
+		);
+	}
+	
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction()
+		);
 	}
 
-	public MultiComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4) {
-		this(complexFunction, convergenceFunction, color1, color2, color3, color4, FractalType.ITERATIVE);
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4
+	) {
+		this(
+			complexFunction, 
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			FractalType.ITERATIVE
+		);
+	}
+	
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalStyle fractalStyle
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalStyle
+		);
 	}
 
-	public MultiComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4, FractalStyle fractalStyle) {
-		this(complexFunction, convergenceFunction, color1, color2, color3, color4, FractalType.ITERATIVE, fractalStyle);
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalStyle fractalStyle
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			FractalType.ITERATIVE,
+			fractalStyle
+		);
 	}
 
-	public MultiComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4, FractalType fractalType) {
-		this(complexFunction, convergenceFunction, color1, color2, color3, color4, fractalType, FractalStyle.STANDARD);
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalType fractalType
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalType
+		);
+	}
+	
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalType fractalType
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			fractalType,
+			FractalStyle.STANDARD
+		);
+	}
+	
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalType fractalType,
+		FractalStyle fractalStyle
+	) {
+		this(
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalType,
+			fractalStyle
+		);
 	}
 
-	public MultiComplexFractal(ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4, FractalType fractalType, FractalStyle fractalStyle) {
-		this(0, 0, 3, complexFunction, convergenceFunction, color1, color2, color3, color4, fractalType, fractalStyle);
+	public MultiComplexFractal(
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalType fractalType,
+		FractalStyle fractalStyle
+	) {
+		this(
+			0,
+			0,
+			3,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			fractalType,
+			fractalStyle
+		);
 	}
 
-	public MultiComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4) {
-		this(x, y, width, complexFunction, convergenceFunction, color1, color2, color3, color4, FractalType.ITERATIVE, FractalStyle.STANDARD);
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction
+		complexFunction,
+		ConvergenceFunction
+		convergenceFunction,
+		ColorFunction color1
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction()
+		);
 	}
 
-	public MultiComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4, FractalType fractalType) {
-		this(x, y, width, complexFunction, convergenceFunction, color1, color2, color3, color4, fractalType, FractalStyle.STANDARD);
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction
+		complexFunction,
+		ConvergenceFunction
+		convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			FractalType.ITERATIVE,
+			FractalStyle.STANDARD
+		);
 	}
 
-	public MultiComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4, FractalStyle fractalStyle) {
-		this(x, y, width, complexFunction, convergenceFunction, color1, color2, color3, color4, FractalType.ITERATIVE, fractalStyle);
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalType fractalType
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalType
+		);
+	}
+	
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalType fractalType
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			fractalType,
+			FractalStyle.STANDARD
+		);
+	}
+	
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalStyle fractalStyle
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalStyle
+		);
 	}
 
-	public MultiComplexFractal(double x, double y, double width, ComplexFunction complexFunction, ConvergenceFunction convergenceFunction, ColorFunction color1, ColorFunction color2, ColorFunction color3, ColorFunction color4, FractalType fractalType, FractalStyle fractalStyle) {
-		super(x,y,width,complexFunction,convergenceFunction,color1,fractalType,fractalStyle);
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalStyle fractalStyle
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			FractalType.ITERATIVE,
+			fractalStyle
+		);
+	}
+	
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalType fractalType,
+		FractalStyle fractalStyle
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalType,
+			fractalStyle
+		);
+	}
 
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalType fractalType,
+		FractalStyle fractalStyle
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			color2,
+			color3,
+			color4,
+			fractalType,
+			fractalStyle,
+			false
+		);
+	}
+	
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		FractalType fractalType,
+		FractalStyle fractalStyle,
+		boolean cycleColors
+	) {
+		this(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			PalletedColorFunction.getIceFire(10),
+			PalletedColorFunction.getNeon(10),
+			new PalletedColorFunction(),
+			fractalType,
+			fractalStyle,
+			cycleColors
+		);
+	}
+	
+	public MultiComplexFractal(
+		double x,
+		double y,
+		double width,
+		ComplexFunction complexFunction,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction color1,
+		ColorFunction color2,
+		ColorFunction color3,
+		ColorFunction color4,
+		FractalType fractalType,
+		FractalStyle fractalStyle,
+		boolean cycleColors
+	) {
+		super(
+			x,
+			y,
+			width,
+			complexFunction,
+			convergenceFunction,
+			color1,
+			fractalType,
+			fractalStyle,
+			cycleColors
+		);
+
+		allNull = color2 == null && color3 == null && color4 == null;
+		boolean noneNull = color2 != null && color3 != null && color4 != null;
+		if (!(allNull || noneNull)) {
+			throw new IllegalArgumentException("Either all colors must be null, or none of them.");
+		}
 		this.color1 = color1;
 		this.color2 = color2;
 		this.color3 = color3;
 		this.color4 = color4;
+	}
 
-		MouseListener[] mouseListeners = getMouseListeners();
-		for(int ii=0; ii < mouseListeners.length; ii++) {
-			removeMouseListener(mouseListeners[ii]);
+	protected void addMouseListeners() {
+		if(allNull) {
+			super.addMouseListeners();
+			return;
 		}
-
-		MouseWheelListener[] wheelListeners = getMouseWheelListeners();
-		for(int ii=0; ii < wheelListeners.length; ii++) {
-			removeMouseWheelListener(wheelListeners[ii]);
-		}
-
-		MouseAdapter mouseAdapter = new MouseAdapter() {
+		
+		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("HERE");
-				double newMaxWidth = getWidth()/2; double newMaxHeight = getHeight()/2;
-				int newX = e.getX() % (int)(getWidth()/2);
-				int newY = e.getY() % (int)(getHeight()/2);
+				double localWidth = getWidth()/2.0;
+				double localHeight = getHeight()/2.0;
 
-				originX = originX + (((double)newX)/newMaxWidth) * windowWidth - windowWidth/2;
-				originY = originY + (((double)newY)/newMaxHeight) * windowWidth - windowWidth/2;
+				int localX = e.getX() % (int)localWidth;
+				int localY = e.getY() % (int)localHeight;
 
-				synchronized (lock) {
-					totalIterations = 0;
-				}
+				double widthScale = (localWidth < localHeight) ? 1.0 : localWidth / (double) localHeight;
+				double heightScale = (localWidth < localHeight) ? localHeight / (double) localWidth : 1.0;
 
-				System.out.println("Center: " + originX + " " + originY);
+				double mouseFracX = (localX/localWidth) * widthScale * viewWidth - (widthScale*viewWidth/2);
+				double mouseFracY = (localY/localHeight) * heightScale * viewWidth - (heightScale*viewWidth/2);
+
+				double newOriginX = originX + mouseFracX;
+				double newOriginY = originY + mouseFracY;
+				
+				setWindow(newOriginX, newOriginY, viewWidth);
 			}
+		});
 
+		addMouseWheelListener(new MouseAdapter() {
 			public void mouseWheelMoved(MouseWheelEvent e) {
-				int newX;
-				int newY;
-				double newMaxWidth;
-				double newMaxHeight;
-				double multiplier = (e.getWheelRotation() < 0) ? 0.95 : 1.05;
+				double rotation = e.getPreciseWheelRotation();
+				double scaleBase = (rotation < 0) ? 0.95 : 1.05;
+				double zoomFactor = Math.pow(scaleBase, Math.abs(rotation)) * e.getScrollAmount();
 
-				if(e.getScrollType() == MouseWheelEvent.WHEEL_UNIT_SCROLL) {
+				double localWidth = getWidth()/2.0;
+				double localHeight = getHeight()/2.0;
 
-					double widthScale, heightScale;
-					if(getWidth() < getHeight()) {
-						widthScale = 1;
-						heightScale = getHeight()/(double)getWidth();
-					}
-					else {
-						widthScale = getWidth()/(double)getHeight();
-						heightScale = 1;
-					}
+				int localX = e.getX() % (int)localWidth;
+				int localY = e.getY() % (int)localHeight;
 
-					newMaxWidth = getWidth()/2; newMaxHeight = getHeight()/2;
+				double widthScale = (localWidth < localHeight) ? 1.0 : localWidth / (double) localHeight;
+				double heightScale = (localWidth < localHeight) ? localHeight / (double) localWidth : 1.0;
 
-					newX = e.getX() % (int)(getWidth()/2);
-					newY = e.getY() % (int)(getHeight()/2);
+				double mouseFracX = (localX/localWidth) * widthScale * viewWidth - (widthScale*viewWidth/2);
+				double mouseFracY = (localY/localHeight) * heightScale * viewWidth - (heightScale*viewWidth/2);
 
-					double x0 = newX/(double)newMaxWidth * widthScale*windowWidth - widthScale*windowWidth/2;
-					double y0 = newY/(double)newMaxHeight * heightScale*windowWidth - heightScale*windowWidth/2;
+				double newOriginX = originX + mouseFracX;
+				double newOriginY = originY + mouseFracY;
 
-					originX += x0;
-					originY += y0;
+				double newViewWidth = viewWidth * zoomFactor;
 
-					windowWidth *= (multiplier*e.getScrollAmount());
+				mouseFracX = (localX/localWidth) * widthScale * newViewWidth - (widthScale*newViewWidth/2);
+				mouseFracY = (localY/localHeight) * heightScale * newViewWidth - (heightScale*newViewWidth/2);
 
-					x0 = newX/(double)newMaxWidth * widthScale*windowWidth - widthScale*windowWidth/2;
-					y0 = newY/(double)newMaxHeight * heightScale*windowWidth - heightScale*windowWidth/2;
+				newOriginX -= mouseFracX;
+				newOriginY -= mouseFracY;
 
-					originX -= x0;
-					originY -= y0;
-
-					synchronized (lock) {
-						totalIterations = 0;
-					}
-				}
+				setWindow(newOriginX, newOriginY, newViewWidth);
 			}
-		};
-
-		addMouseListener(mouseAdapter);
-		addMouseWheelListener(mouseAdapter);
+		});
 	}
 
-	protected void allocateComplexMatrices(double originX, double originY, double windowWidth, double maxWidth, double maxHeight, double widthScale, double heightScale) {
-		double newMaxWidth = maxWidth/2;
-		double newMaxHeight = maxHeight/2;
-		double newWidth, newHeight;
-
-		if(points.length != maxWidth || (points.length > 0 && points[0].length != maxHeight)) {
-			points = new Complex[(int)maxWidth][(int)maxHeight][2];
-			pointIterations = new int[(int)maxWidth][(int)maxHeight];
-		}
-
-		for(int width=0; width < maxWidth; width++) {
-			for(int height=0; height < maxHeight; height++) {
-				points[width][height][0] = new Complex(0,0);
-				points[width][height][1] = new Complex(0,0);
-
-				newWidth = width % (int)(maxWidth/2);
-				newHeight = height % (int)(maxHeight/2);
-				points[width][height][0].re = originX + newWidth/newMaxWidth * widthScale*windowWidth - widthScale*windowWidth/2;
-				points[width][height][0].im = originY + newHeight/newMaxHeight * heightScale*windowWidth - heightScale*windowWidth/2;
-
-				complexFunction.convert(points[width][height][0], points[width][height][1]);
-
-				pointIterations[width][height] = 0;
-			}
-		}
-	}
-
-	protected void initializeComplexMatrices(double originX, double originY, double windowWidth, double maxWidth, double maxHeight, double widthScale, double heightScale) {
-		double newMaxWidth = maxWidth/2;
-		double newMaxHeight = maxHeight/2;
-		double newWidth, newHeight;
-
-		for(int width=0; width < maxWidth; width++) {
-			for(int height=0; height < maxHeight; height++) {
-				newWidth = width % (int)(maxWidth/2);
-				newHeight = height % (int)(maxHeight/2);
-				points[width][height][0].re = originX + newWidth/newMaxWidth * widthScale*windowWidth - widthScale*windowWidth/2;
-				points[width][height][0].im = originY + newHeight/newMaxHeight * heightScale*windowWidth - heightScale*windowWidth/2;
-
-				complexFunction.convert(points[width][height][0], points[width][height][1]);
-
-				pointIterations[width][height] = 0;
-			}
-		}
-	}
-
-	public synchronized void drawFractal(Graphics g, int gWidth, int gHeight) {
-		Complex z = null;
-		Complex mu = null;
-		double widthScale, heightScale;
-		int iteration;
-
-		int totalIterations;
-		double originX = this.originX;
-		double originY = this.originY;
-		double windowWidth = this.windowWidth;
-		double maxWidth = gWidth;
-		double maxHeight = gHeight;
-		double newMaxWidth = maxWidth/2;
-		double newMaxHeight = maxHeight/2;
-		ComplexFunction complexFunction = this.complexFunction;
-		ConvergenceFunction convergenceFunction = this.convergenceFunction;
-		ColorFunction colorFunction = this.colorFunction;
-		FractalStyle fractalStyle = this.fractalStyle;
-
-		synchronized (lock) {
-			totalIterations = this.totalIterations++;
-		}
-
-		if(complexFunction == null || convergenceFunction == null || colorFunction == null) {
+	public void draw(Graphics g, int gWidth, int gHeight) {
+		if(allNull) {
+			super.draw(g, gWidth, gHeight);
 			return;
 		}
 
-		if(newMaxWidth < newMaxHeight) {
-			widthScale = 1;
-			heightScale = newMaxHeight/newMaxWidth;
-		}
-		else {
-			widthScale = newMaxWidth/newMaxHeight;
-			heightScale = 1;
-		}
+		step(gWidth/2, gHeight/2);
 
-		if(points.length != maxWidth || (points.length > 0 && points[0].length != maxHeight)) {
-	 		allocateComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
-	 		totalIterations = 0;
-		}
-		else if(totalIterations == 0) {
-			initializeComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
-		}
+		BufferedImage img = new BufferedImage(gWidth, gHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics imageGraphics = img.createGraphics();
+	
+		colorFunction = color1;	
+		drawFractal(imageGraphics, gWidth/2, gHeight/2);
+		g.drawImage(img, 0, 0, null);
+		
+		colorFunction = color2;	
+		drawFractal(imageGraphics, gWidth/2, gHeight/2);
+		g.drawImage(img, gWidth/2, 0, null);
+		
+		colorFunction = color3;	
+		drawFractal(imageGraphics, gWidth/2, gHeight/2);
+		g.drawImage(img, 0, gHeight/2, null);
+		
+		colorFunction = color4;	
+		drawFractal(imageGraphics, gWidth/2, gHeight/2);
+		g.drawImage(img, gWidth/2, gHeight/2, null);
+		
+		imageGraphics.dispose();
+		
+		/*
+		g.setColor(Color.WHITE);
+        g.drawLine(gWidth / 2, 0, gWidth / 2, gHeight);
+        g.drawLine(0, gHeight / 2, gWidth, gHeight / 2);
+        g.drawLine(0, 0, gWidth, gHeight);
+        g.drawLine(0, gHeight, gWidth, 0);
+		
+		g.setColor(Color.RED);
+        g.drawLine((int)(gWidth * 1.0/4.0), 0, (int)(gWidth * 1.0/4.0), gHeight);
+        g.drawLine((int)(gWidth * 3.0/4.0), 0, (int)(gWidth * 3.0/4.0), gHeight);
+        g.drawLine(0, (int)(gHeight * 1.0/4.0), gWidth, (int)(gHeight * 1.0/4.0));
+        g.drawLine(0, (int)(gHeight * 3.0/4.0), gWidth, (int)(gHeight * 3.0/4.0));
+		*/
+	}
 
-		if(fractalType == FractalType.ITERATIVE) {
-			maxIteration++;
-
-			if(fractalStyle == FractalStyle.FREQUENCY) {
-				maxIteration += 1000;
-			}
-		}
-		else if(fractalType == FractalType.MOVING)
-		{
-			complexFunction.move();
-			maxIteration = 100;
-
-			if(totalIterations != 0) {
-				initializeComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
-				totalIterations = 0;
-			}
-		}
-		else if(fractalType == FractalType.RANDOM)
-		{
-			maxIteration++;
-
-			if(prevIterationSum/(double)curIterationSum > 0.95) {
-				complexFunction.random();
-				maxIteration = 0;
-
-				if(totalIterations != 0) {
-					initializeComplexMatrices(originX, originY, windowWidth, maxWidth, maxHeight, widthScale, heightScale);
-					totalIterations = 0;
-				}
-			}
-		}
-
-		prevIterationSum = curIterationSum;
-		curIterationSum = 0;
-		for(int width=0; width < maxWidth; width++) {
-			for(int height=0; height < maxHeight; height++) {
-				z = points[width][height][0];
-				mu = points[width][height][1];
-
-				iteration = totalIterations;
-
-				if(width < maxWidth/2) {
-					if(height < maxHeight/2) {
-						colorFunction = color1;
-						convergenceFunction = this.convergenceFunction;
-					}
-					else {
-						colorFunction = color2;
-						convergenceFunction = this.convergenceFunction;
-					}
-				}
-				else {
-					if(height < maxHeight/2) {
-						colorFunction = color3;
-						convergenceFunction = this.convergenceFunction;
-					}
-					else {
-						colorFunction = color4;
-						convergenceFunction = new HalfPlaneColorFunction();
-					}
-				}
-
-				while(!convergenceFunction.escaped(z) && iteration < maxIteration) {
-					complexFunction.next(z, mu);
-					iteration++;
-
-					pointIterations[width][height]++;
-				}
-
-				if(convergenceFunction.escaped(z)) {
-					curIterationSum += iteration;
-				}
-			}
-		}
-
-		synchronized (lock) {
-			if(this.totalIterations != 0) {
-				this.totalIterations = maxIteration;
-			}
-		}
-
-		if(fractalStyle == FractalStyle.STANDARD) {
-			for(int width=0; width < maxWidth; width++) {
-				for(int height=0; height < maxHeight; height++) {
-					z = points[width][height][0];
-					mu = points[width][height][1];
-
-					if(width < maxWidth/2) {
-						if(height < maxHeight/2) {
-							colorFunction = color1;
-							convergenceFunction = this.convergenceFunction;
-						}
-						else {
-							colorFunction = color2;
-							convergenceFunction = this.convergenceFunction;
-						}
-					}
-					else {
-						if(height < maxHeight/2) {
-							colorFunction = color3;
-							convergenceFunction = this.convergenceFunction;
-						}
-						else {
-							colorFunction = color4;
-							convergenceFunction = new HalfPlaneColorFunction();
-						}
-					}
-
-					if(!convergenceFunction.escaped(z)) {
-						g.setColor(colorFunction.getConvergentColor(z,pointIterations[width][height],maxIteration));
-					}
-					else {
-						g.setColor(colorFunction.getDivergentColor(z,pointIterations[width][height],maxIteration));
-					}
-
-					g.drawLine(width,height,width,height);
-				}
-			}
-		}
-		else if(fractalStyle == FractalStyle.CONTOURED) {
-			g.setColor(Color.BLACK);
-			g.drawRect(0,0,(int)maxWidth-1,(int)maxHeight-1);
-			for(int width=1; width < maxWidth-1; width++) {
-				for(int height=1; height < maxHeight-1; height++) {
-					if(pointIterations[width][height] != pointIterations[width-1][height] ||
-						pointIterations[width][height] != pointIterations[width+1][height] ||
-						pointIterations[width][height] != pointIterations[width][height-1] ||
-						pointIterations[width][height] != pointIterations[width][height+1])
-					{
-						z = points[width][height][0];
-						mu = points[width][height][1];
-
-						if(width < maxWidth/2) {
-							if(height < maxHeight/2) {
-								colorFunction = color1;
-								convergenceFunction = this.convergenceFunction;
-							}
-							else {
-								colorFunction = color2;
-								convergenceFunction = this.convergenceFunction;
-							}
-						}
-						else {
-							if(height < maxHeight/2) {
-								colorFunction = color3;
-								convergenceFunction = this.convergenceFunction;
-							}
-							else {
-								colorFunction = color4;
-								convergenceFunction = new HalfPlaneColorFunction();
-							}
-						}
-
-						if(!convergenceFunction.escaped(z)) {
-							g.setColor(colorFunction.getConvergentColor(z,pointIterations[width][height],maxIteration));
-						}
-						else {
-							g.setColor(colorFunction.getDivergentColor(z,pointIterations[width][height],maxIteration));
-						}
-					}
-					else {
-						g.setColor(Color.BLACK);
-					}
-
-					g.drawLine(width,height,width,height);
-				}
-			}
-		}
-		else if(fractalStyle == FractalStyle.FREQUENCY) {
-			int[][] field = new int[(int)maxWidth][(int)maxHeight];
-			for(int width=0; width < maxWidth; width++) {
-				for(int height=0; height < maxHeight; height++) {
-					field[width][height] = 1;
-				}
-			}
-
-			z = new Complex(0,0);
-			mu = new Complex(0,0);
-			int x, y;
-			double LOG_MAX = 1;
-			for(int width=0; width < maxWidth; width++) {
-				for(int height=0; height < maxHeight; height++) {
-					if(convergenceFunction.escaped(points[width][height][0])) {
-						z.re = originX + width/maxWidth * widthScale*windowWidth - widthScale*windowWidth/2;
-						z.im = originY + height/maxHeight * heightScale*windowWidth - heightScale*windowWidth/2;
-						complexFunction.convert(z, mu);
-
-						iteration = 0;
-
-						while(!convergenceFunction.escaped(z) && iteration < maxIteration) {
-							complexFunction.next(z, mu);
-							iteration++;
-
-							x = (int)Math.round((z.re - (originX - ((windowWidth * widthScale) / 2)))/(windowWidth * widthScale) * maxWidth);
-							y = (int)Math.round((z.im - (originY - ((windowWidth * heightScale) / 2)))/(windowWidth * heightScale) * maxHeight);
-
-							if(x >= 0 && x < maxWidth && y >= 0 && y < maxHeight) {
-								field[x][y]++;
-								if(field[x][y] > LOG_MAX) {
-									LOG_MAX = field[x][y];
-								}
-							}
-						}
-					}
-				}
-			}
-
-			LOG_MAX = Math.log(LOG_MAX);
-			double M = (LOG_MAX) / 255.0;
-			double logVal;
-			for(int width=0; width < maxWidth; width++) {
-				for(int height=0; height < maxHeight; height++) {
-					logVal = Math.log(field[width][height]);
-					logVal = logVal / M;
-
-					x = (int)Math.round(logVal);
-
-					g.setColor(new Color(x,x,x));
-					g.drawLine(width,height,width,height);
-				}
-			}
-		}
-
-		/*if(complexFunction instanceof AbstractComplexFunction) {
-			mu = ((AbstractComplexFunction)complexFunction).c;
-			z.re = ((mu.re - (originX - (widthScale*windowWidth*0.5))) / (widthScale*windowWidth)) * maxWidth;
-			z.im = ((mu.im - (originY - (heightScale*windowWidth*0.5))) / (heightScale*windowWidth)) * maxHeight;
-
-			System.out.println(z + " <- " + mu);
-			g.setColor(Color.GREEN);
-			g.fillRect((int)z.re-1,(int)z.im-1,3,3);
-		}*/
+	public String toString() {
+		return complexFunction.toString();
 	}
 }

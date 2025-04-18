@@ -154,7 +154,7 @@ public class PalletedColorFunction extends AbstractColorFunction {
 	}
 	
 	public PalletedColorFunction() {
-		this(RAINBOW, "Rainbow");
+		this(ZEBRA, "Default");
 	}
 	
 	public PalletedColorFunction(Color[] pallet) {

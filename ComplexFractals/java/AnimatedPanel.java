@@ -44,9 +44,8 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 				try {
 					animationThread.join(100);
 					break;
-				}
-				catch(InterruptedException ie) {
-
+				} catch(InterruptedException ie) {
+					//ie.printStackTrace();
 				}
 			}
 		}
@@ -61,9 +60,15 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 					bufferStrategy = getBufferStrategy();
 				}
 				render(bufferStrategy);
-			}
-			catch (IllegalStateException ise) {
-
+				
+				try {
+					Thread.sleep(10);
+				} catch(InterruptedException ie) {
+					//ie.printStackTrace();
+					Thread.currentThread().interrupt();
+				}
+			} catch(IllegalStateException ise) {
+				//ise.printStackTrace();
 			}
 		}
 	}
@@ -98,7 +103,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 				} while(bs.contentsRestored());
 				bs.show();
 			} while(bs.contentsLost());
-		} catch (IllegalStateException e) {
+		} catch(IllegalStateException e) {
 
 		}
 	}

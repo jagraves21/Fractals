@@ -16,6 +16,9 @@ public class ArgumentParser {
 	public int height;
 	public ConvergenceFunction convergenceFunction;
 	public ColorFunction colorFunction;
+	public ColorFunction colorFunction2;
+	public ColorFunction colorFunction3;
+	public ColorFunction colorFunction4;
 	public ComplexFractal.FractalType fractalType;
 	public ComplexFractal.FractalStyle fractalStyle;
 	public boolean cycleColors;
@@ -32,7 +35,7 @@ public class ArgumentParser {
 	Set<String> colorNames;	
 	Map<String, Function<Integer, ColorFunction>> palletedColorMap;
 	Map<String, Function<Integer, ColorFunction>> smoothColorMap;
-
+	
 	public ArgumentParser(
 		String callerName,
 		int width,
@@ -49,6 +52,37 @@ public class ArgumentParser {
 			height,
 			convergenceFunction,
 			colorFunction,
+			null,
+			null,
+			null,
+			fractalType,
+			fractalStyle,
+			cycleColors
+		);
+	}
+
+	public ArgumentParser(
+		String callerName,
+		int width,
+		int height,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		ColorFunction colorFunction2,
+		ColorFunction colorFunction3,
+		ColorFunction colorFunction4,
+		ComplexFractal.FractalType fractalType,
+		ComplexFractal.FractalStyle fractalStyle,
+		boolean cycleColors
+	) {
+		this(
+			callerName,
+			width,
+			height,
+			convergenceFunction,
+			colorFunction,
+			null,
+			null,
+			null,
 			fractalType,
 			fractalStyle,
 			cycleColors,
@@ -79,11 +113,56 @@ public class ArgumentParser {
 		int startZoom,
 		int stopZoom
 	) {
+		this(
+			callerName,
+			width,
+			height,
+			convergenceFunction,
+			colorFunction,
+			null,
+			null,
+			null,
+			fractalType,
+			fractalStyle,
+			cycleColors,
+			iterations,
+			reflect,
+			xZoom,
+			yZoom,
+			multiplier,
+			startZoom,
+			stopZoom
+		);	
+	}
+	
+	public ArgumentParser(
+		String callerName,
+		int width,
+		int height,
+		ConvergenceFunction convergenceFunction,
+		ColorFunction colorFunction,
+		ColorFunction colorFunction2,
+		ColorFunction colorFunction3,
+		ColorFunction colorFunction4,
+		ComplexFractal.FractalType fractalType,
+		ComplexFractal.FractalStyle fractalStyle,
+		boolean cycleColors,
+		int iterations,
+		boolean reflect,
+		double xZoom,
+		double yZoom,
+		double multiplier,
+		int startZoom,
+		int stopZoom
+	) {
 		this.callerName = callerName;
 		this.width = width;
 		this.height = height;
 		this.convergenceFunction = convergenceFunction;
 		this.colorFunction = colorFunction;
+		this.colorFunction2 = colorFunction2;
+		this.colorFunction3 = colorFunction3;
+		this.colorFunction4 = colorFunction4;
 		this.fractalType = fractalType;
 		this.fractalStyle = fractalStyle;
 		this.cycleColors = cycleColors;
@@ -95,7 +174,12 @@ public class ArgumentParser {
 		this.startZoom = startZoom;
 		this.stopZoom = stopZoom;
 		this.classes = new LinkedList<String>();
-		
+
+		initColorMaps();	
+		colorNames = palletedColorMap.keySet();
+	}
+
+	public void initColorMaps() {	
 		palletedColorMap = new TreeMap<>();
 		palletedColorMap.put("test", PalletedColorFunction::getTEST);
 		palletedColorMap.put("rgb", PalletedColorFunction::getRGB);
@@ -141,8 +225,6 @@ public class ArgumentParser {
 		smoothColorMap.put("pink-blue", SmoothColorFunction::getPinkBlue);
 		smoothColorMap.put("oil-slick", SmoothColorFunction::getOilSlick);
 		smoothColorMap.put("gas-on-water", SmoothColorFunction::getGasOnWater);
-        
-		colorNames = palletedColorMap.keySet();
 	}
 
 	public String getColorChoices() {
@@ -176,6 +258,9 @@ public class ArgumentParser {
 		System.out.println("                                         Format: <color>[n][s]");
 		System.out.println("                                         [n] is an optional number for color count");
 		System.out.println("                                         [s] is an optional 's' to enable smooth colors");
+		System.out.println("  -c2, --color2 <color>[n][s]?           Set the color palette for fractal two");
+		System.out.println("  -c3, --color3 <color>[n][s]?           Set the color palette for fractal three");
+		System.out.println("  -c4, --color4 <color>[n][s]?           Set the color palette for fractal four");
 		System.out.println("  -t, --fractal-type <type>              Set the fractal type");
 		System.out.println("  -s, --fractal-style <style>            Set the fractal style");
 		System.out.println("  --cycle-colors                         Enable color cycling (optional)");
@@ -184,6 +269,7 @@ public class ArgumentParser {
 			System.out.println("  -r, --reflect                          Reflect GIF animation (default: no reflection)");
 			System.out.println("  -x, --x-zoom                           x location to zoom (default: 0)");
 			System.out.println("  -y, --y-zoom                           y location to zoom (default: 0)");
+			System.out.println("  -v, --view-width                       y location to zoom (default: 0)");
 			System.out.println("  -m, --multiplier                       Zooming multiplier (default: 1.0)");
 			System.out.println("  --start-zoom                           Iteration to start zooming (default: 0)");
 			System.out.println("  --stop-zoom                            Iteration to start zooming (default: max int)");
@@ -310,7 +396,64 @@ public class ArgumentParser {
 								System.exit(-1);
 							}
 						} else {
-							System.out.println("No value provided for fractal type.");
+							System.out.println("No color value provided.");
+							System.out.println();
+							printHelp(withClasses, withZoom);
+							System.exit(-1);
+						}
+						break;
+					case "-c2":
+					case "--color2":
+						if (ii + 1 < args.length) {
+							try {
+								colorFunction2 = parseColorArgument(args[ii + 1]);
+								ii++;
+							} catch (IllegalArgumentException iae) {
+								System.out.println(iae.getMessage());
+								System.out.println();
+								printHelp(withClasses, withZoom);
+								System.exit(-1);
+							}
+						} else {
+							System.out.println("No value provided for color 2.");
+							System.out.println();
+							printHelp(withClasses, withZoom);
+							System.exit(-1);
+						}
+						break;
+					case "-c3":
+					case "--color3":
+						if (ii + 1 < args.length) {
+							try {
+								colorFunction3 = parseColorArgument(args[ii + 1]);
+								ii++;
+							} catch (IllegalArgumentException iae) {
+								System.out.println(iae.getMessage());
+								System.out.println();
+								printHelp(withClasses, withZoom);
+								System.exit(-1);
+							}
+						} else {
+							System.out.println("No value provided for color 3.");
+							System.out.println();
+							printHelp(withClasses, withZoom);
+							System.exit(-1);
+						}
+						break;
+					case "-c4":
+					case "--color4":
+						if (ii + 1 < args.length) {
+							try {
+								colorFunction4 = parseColorArgument(args[ii + 1]);
+								ii++;
+							} catch (IllegalArgumentException iae) {
+								System.out.println(iae.getMessage());
+								System.out.println();
+								printHelp(withClasses, withZoom);
+								System.exit(-1);
+							}
+						} else {
+							System.out.println("No value provided for color 4.");
 							System.out.println();
 							printHelp(withClasses, withZoom);
 							System.exit(-1);
