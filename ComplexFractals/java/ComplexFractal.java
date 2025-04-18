@@ -107,7 +107,7 @@ public class ComplexFractal extends AnimatedPanel {
 		this(
 			complexFunction == null ? 0 : complexFunction.getOriginX(),
 			complexFunction == null ? 0 : complexFunction.getOriginY(),
-			complexFunction == null ? 0 : complexFunction.getWindowWidth(),
+			complexFunction == null ? 0 : complexFunction.getViewWidth(),
 			complexFunction,
 			convergenceFunction,
 			colorFunction,

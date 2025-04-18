@@ -4,7 +4,7 @@ public class Infinity extends AbstractComplexFunction {
 		init();
 	}
 
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 5;
 	}
 

@@ -28,7 +28,7 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 	public double getOriginY() {
 		return 0;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 3;
 	}
 
@@ -119,7 +119,7 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 			AnimatedPanel animatedPanel = new MultiComplexFractal(
 				complexFunction.getOriginX(),
 				complexFunction.getOriginY(),
-				complexFunction.getWindowWidth(),
+				complexFunction.getViewWidth(),
 				complexFunction,
 				argumentParser.convergenceFunction,
 				argumentParser.colorFunction,

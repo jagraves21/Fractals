@@ -4,7 +4,7 @@ public class QuarticJuliaFunction extends JuliaFunction {
 		init();
 	}
 
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 2.75;
 	}
 

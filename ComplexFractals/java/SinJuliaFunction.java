@@ -4,7 +4,7 @@ public class SinJuliaFunction extends JuliaFunction {
 		init();
 	}
 
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 12.0;
 	}
 

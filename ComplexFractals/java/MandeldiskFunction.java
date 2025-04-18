@@ -9,7 +9,7 @@ public class MandeldiskFunction extends InvertedMandelbrotFunction {
 	public double getOriginY() {
 		return 0;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 8;
 	}
 

@@ -137,7 +137,7 @@ public abstract class AnimatedPanel extends Canvas implements Runnable {
 				}.execute();
 			}
 
-			public void windowClosing(WindowEvent e) {
+			public void windowClosed(WindowEvent e) {
 				new SwingWorker<Void, Void>() {
 					protected Void doInBackground() throws Exception {
 						animatedPanel.stop();

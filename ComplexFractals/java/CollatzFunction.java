@@ -8,7 +8,7 @@ public class CollatzFunction extends AbstractComplexFunction {
 		return 0.25;
 	}
 
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 2;
 	}
 

@@ -10,7 +10,7 @@ public class SinMandelbrotFunction extends MandelbrotFunction {
 	public double getOriginY() {
 		return 0;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 6;
 	}
 

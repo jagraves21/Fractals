@@ -10,7 +10,7 @@ public class TricornFunction extends AbstractComplexFunction {
 	public double getOriginY() {
 		return 0;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 3.75;
 	}
 

@@ -1,7 +1,7 @@
 public interface ComplexFunction {
 	public double getOriginX();
 	public double getOriginY();
-	public double getWindowWidth();
+	public double getViewWidth();
 	public void init();
 	public void random();
 	public void move();

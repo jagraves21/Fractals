@@ -4,7 +4,7 @@ public class TanJuliaFunction extends JuliaFunction {
 		init();
 	}
 
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 4.0;
 	}
 

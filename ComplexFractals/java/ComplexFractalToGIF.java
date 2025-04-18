@@ -1,9 +1,13 @@
+import javax.swing.*;
+import java.awt.event.*;
+
 import java.awt.Component;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferStrategy;
 import java.awt.Window;
 
 import java.lang.reflect.InvocationTargetException;
@@ -116,6 +120,24 @@ public class ComplexFractalToGIF extends MultiComplexFractal
 		super.stop();
 	}
 
+	/* The base class run uses a sleep in between rendering.
+	 * Uncommenting this can help speed up creating GIFs.
+     **/
+	public void run() {
+        BufferStrategy bufferStrategy = null;
+        while(!Thread.currentThread().isInterrupted()) {
+            try {
+                if(bufferStrategy == null || bufferStrategy.contentsLost()) {
+                    createBufferStrategy(2);
+                    bufferStrategy = getBufferStrategy();
+                }
+                render(bufferStrategy);
+            } catch(IllegalStateException ise) {
+                //ise.printStackTrace();
+            }
+        }
+    }
+
 	public void draw(Graphics g, int gWidth, int gHeight) {
 		/*if(curIteration == 0) {
 			for(int ii=0; ii<50; ii++) {
@@ -168,6 +190,7 @@ public class ComplexFractalToGIF extends MultiComplexFractal
 			false,
 			0.0,
 			0.0,
+			-1.0,
 			1.0,
 			0,
 			Integer.MAX_VALUE
@@ -195,6 +218,10 @@ public class ComplexFractalToGIF extends MultiComplexFractal
 				Class<?> aClass = classLoader.loadClass(className);
 				AbstractComplexFunction complexFunction = (AbstractComplexFunction) aClass.getDeclaredConstructor().newInstance();
 
+				double viewWidth = 
+					argumentParser.viewWidth > 0.0 
+					? argumentParser.viewWidth 
+					: complexFunction.getViewWidth();
 				ConvergenceFunction convergenceFunction = 
 					argumentParser.convergenceFunction != null 
 					? argumentParser.convergenceFunction 
@@ -215,7 +242,7 @@ public class ComplexFractalToGIF extends MultiComplexFractal
 				AnimatedPanel animatedPanel = new ComplexFractalToGIF(
 					complexFunction.getOriginX(),
 					complexFunction.getOriginY(),
-					complexFunction.getWindowWidth(),
+					viewWidth,
 					complexFunction,
 					convergenceFunction,
 					colorFunction,
@@ -245,7 +272,7 @@ public class ComplexFractalToGIF extends MultiComplexFractal
 						latch.countDown();
 					}
 				});
-	
+
 				try {
 					latch.await();
 				} catch (InterruptedException ie) {

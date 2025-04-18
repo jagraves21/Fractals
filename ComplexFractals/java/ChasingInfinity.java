@@ -50,7 +50,7 @@ public class ChasingInfinity extends JPanel {
 					try {
 						complexFractal.stop();
 						complexFractal.setMaxIteration(0);
-						complexFractal.setWindow(complexFunction.getOriginX(), complexFunction.getOriginY(), complexFunction.getWindowWidth());
+						complexFractal.setWindow(complexFunction.getOriginX(), complexFunction.getOriginY(), complexFunction.getViewWidth());
 						complexFractal.setComplexFunction(complexFunction);
 						complexFractal.start();
 					} catch(Exception ex) {

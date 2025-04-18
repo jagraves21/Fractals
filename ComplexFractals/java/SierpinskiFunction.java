@@ -10,7 +10,7 @@ public class SierpinskiFunction extends AbstractComplexFunction {
 	public double getOriginY() {
 		return 0.5;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 1.2;
 	}
 

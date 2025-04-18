@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseListener;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -448,14 +449,17 @@ public class MultiComplexFractal extends ComplexFractal {
 		this.color2 = color2;
 		this.color3 = color3;
 		this.color4 = color4;
+
+		if(noneNull) {
+			addNewMouseListeners();
+		}
 	}
 
-	protected void addMouseListeners() {
-		if(allNull) {
-			super.addMouseListeners();
-			return;
+	protected void addNewMouseListeners() {
+		for (MouseListener listener : getMouseListeners()) {
+			removeMouseListener(listener);
 		}
-		
+			
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				double localWidth = getWidth()/2.0;

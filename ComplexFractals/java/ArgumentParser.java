@@ -26,6 +26,7 @@ public class ArgumentParser {
 	public boolean reflect;
 	public double xZoom;
 	public double yZoom;
+	public double viewWidth;
 	public double multiplier;
 	public int startZoom;
 	public int stopZoom;
@@ -88,8 +89,9 @@ public class ArgumentParser {
 			cycleColors,
 			200,
 			false,
-			0,
-			0,
+			0.0,
+			0.0,
+			1.0,
 			1.0,
 			0,
 			Integer.MAX_VALUE
@@ -109,6 +111,7 @@ public class ArgumentParser {
 		boolean reflect,
 		double xZoom,
 		double yZoom,
+		double viewWidth,
 		double multiplier,
 		int startZoom,
 		int stopZoom
@@ -129,6 +132,7 @@ public class ArgumentParser {
 			reflect,
 			xZoom,
 			yZoom,
+			viewWidth,
 			multiplier,
 			startZoom,
 			stopZoom
@@ -151,6 +155,7 @@ public class ArgumentParser {
 		boolean reflect,
 		double xZoom,
 		double yZoom,
+		double viewWidth,
 		double multiplier,
 		int startZoom,
 		int stopZoom
@@ -170,6 +175,7 @@ public class ArgumentParser {
 		this.reflect = reflect;
 		this.xZoom = xZoom;
 		this.yZoom = yZoom;
+		this.viewWidth = viewWidth;
 		this.multiplier = multiplier;
 		this.startZoom = startZoom;
 		this.stopZoom = stopZoom;
@@ -267,9 +273,9 @@ public class ArgumentParser {
 		if (withZoom) {
 			System.out.println("  -i, --iterations                       Number of ierations for animation (default: 200)");
 			System.out.println("  -r, --reflect                          Reflect GIF animation (default: no reflection)");
-			System.out.println("  -x, --x-zoom                           x location to zoom (default: 0)");
-			System.out.println("  -y, --y-zoom                           y location to zoom (default: 0)");
-			System.out.println("  -v, --view-width                       y location to zoom (default: 0)");
+			System.out.println("  -x, --x-zoom                           x location to zoom");
+			System.out.println("  -y, --y-zoom                           y location to zoom");
+			System.out.println("  -v, --view-width                       view width");
 			System.out.println("  -m, --multiplier                       Zooming multiplier (default: 1.0)");
 			System.out.println("  --start-zoom                           Iteration to start zooming (default: 0)");
 			System.out.println("  --stop-zoom                            Iteration to start zooming (default: max int)");
@@ -516,6 +522,7 @@ public class ArgumentParser {
 					case "-r": case "--reflect":
 					case "-x": case "--x-zoom":
 					case "-y": case "--y-zoom":
+					case "-v": case "--view-width":
 					case "-m": case "--multiplier":
 					case "--start-zoom":
 					case "--stop-zoom":
@@ -573,6 +580,24 @@ public class ArgumentParser {
 										}
 									} else {
 										System.out.println("No value provided for y zoom.");
+										System.out.println();
+										printHelp(withClasses, withZoom);
+										System.exit(-1);
+									}
+									break;
+								case "-v": case "--view-width":
+									if (ii + 1 < args.length) {
+										try {
+											viewWidth = Double.parseDouble(args[ii + 1]);
+											ii++;
+										} catch (NumberFormatException e) {
+											System.out.println("Invalid view width value. Must be a double.");
+											System.out.println();
+											printHelp(withClasses, withZoom);
+											System.exit(-1);
+										}
+									} else {
+										System.out.println("No value provided for view-width.");
 										System.out.println();
 										printHelp(withClasses, withZoom);
 										System.exit(-1);

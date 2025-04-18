@@ -7,7 +7,7 @@ public class MandeldropFunction extends MandelbrotFunction {
 	public double getOriginX() {
 		return 1.4;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 6;
 	}
 

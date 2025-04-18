@@ -10,7 +10,7 @@ public class BurningShip extends AbstractComplexFunction {
 	public double getOriginY() {
 		return -0.036522864408293804;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 0.10082811617813109;
 	}
 

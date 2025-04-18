@@ -7,7 +7,7 @@ public class LambdaJuliaFunction extends JuliaFunction {
 	public double getOriginX() {
 		return -1;
 	}
-	public double getWindowWidth() {
+	public double getViewWidth() {
 		return 6;
 	}
 
