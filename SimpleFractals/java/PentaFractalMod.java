@@ -4,7 +4,7 @@ import java.awt.RadialGradientPaint;
 import java.util.*;
 import javax.swing.*;
 
-public class PentaFractal extends SimpleFractal {
+public class PentaFractalMod extends SimpleFractal {
 	public static final double r108 = (108 * Math.PI / 180.0);
 	public static final double s108 = Math.sin(r108);
 	public static final double c108 = Math.cos(r108);
@@ -18,7 +18,7 @@ public class PentaFractal extends SimpleFractal {
 	protected List<Pentagon> nextPentagons;
 	protected int iteration;
 
-	public PentaFractal() {
+	public PentaFractalMod() {
 		pentagons = new LinkedList<FractalShape>();
 		nextPentagons = new LinkedList<Pentagon>();
 		iteration = 0;
@@ -60,7 +60,7 @@ public class PentaFractal extends SimpleFractal {
 		MyPoint p1 = translate(p2, p3, radius, -r108);
 		MyPoint p5 = translate(p1, p2, radius, -r108);
 
-		Pentagon pent = new Pentagon(p1, p2, p3, p4, p5, colors[0], false);
+		Pentagon pent = new Pentagon(p1, p2, p3, p4, p5, colors[0], true);
 		pentagons.clear();
 		pentagons.add(pent);
 		nextPentagons.clear();
@@ -105,7 +105,7 @@ public class PentaFractal extends SimpleFractal {
 				np3 = translate(np2, np1, radius, r108);
 				np4 = translate(np3, np2, radius, r108);
 				np5 = translate(np4, np3, radius, r108);
-				pent = new Pentagon(np1, np2, np3, np4, np5, color, false);
+				pent = new Pentagon(np1, np2, np3, np4, np5, color, true);
 				pentagons.add(pent);
 				newPentagons.add(pent);
 			}
@@ -115,7 +115,7 @@ public class PentaFractal extends SimpleFractal {
 			np3 = translate(np2, np1, radius, r108);
 			np4 = translate(np3, np2, radius, r108);
 			np5 = translate(np4, np3, radius, r108);
-			pent = new Pentagon(np1, np2, np3, np4, np5, color, false);
+			pent = new Pentagon(np1, np2, np3, np4, np5, color, true);
 			pentagons.add(pent);
 			newPentagons.add(pent);
 
@@ -124,7 +124,7 @@ public class PentaFractal extends SimpleFractal {
 			np3 = translate(np2, np1, radius, r108);
 			np4 = translate(np3, np2, radius, r108);
 			np5 = translate(np4, np3, radius, r108);
-			pent = new Pentagon(np1, np2, np3, np4, np5, color, false);
+			pent = new Pentagon(np1, np2, np3, np4, np5, color, true);
 			pentagons.add(pent);
 			newPentagons.add(pent);
 
@@ -133,7 +133,7 @@ public class PentaFractal extends SimpleFractal {
 			np3 = translate(np2, np1, radius, r108);
 			np4 = translate(np3, np2, radius, r108);
 			np5 = translate(np4, np3, radius, r108);
-			pent = new Pentagon(np1, np2, np3, np4, np5, color, false);
+			pent = new Pentagon(np1, np2, np3, np4, np5, color, true);
 			pentagons.add(pent);
 			newPentagons.add(pent);
 
@@ -142,7 +142,7 @@ public class PentaFractal extends SimpleFractal {
 			np3 = translate(np2, np1, radius, r108);
 			np4 = translate(np3, np2, radius, r108);
 			np5 = translate(np4, np3, radius, r108);
-			pent = new Pentagon(np1, np2, np3, np4, np5, color, false);
+			pent = new Pentagon(np1, np2, np3, np4, np5, color, true);
 			pentagons.add(pent);
 			newPentagons.add(pent);
 		}
@@ -151,7 +151,7 @@ public class PentaFractal extends SimpleFractal {
 	}
 
 	public String toString() {
-		return "Pentagon Fractal";
+		return "Pentagon Fractal Mod";
 	}
 
 	public static void main(String[] args) {

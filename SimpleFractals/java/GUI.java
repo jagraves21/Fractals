@@ -114,6 +114,7 @@ public class GUI extends JPanel implements ActionListener {
 		fractalList.add(new PentaFlake());
 		fractalList.add(new PentaFlakeMod());
 		fractalList.add(new PentaFractal());
+		fractalList.add(new PentaFractalMod());
 		fractalList.add(new PentaStar());
 		fractalList.add(new PentaStarMod());
 		fractalList.add(new Pentadentrite());
@@ -129,6 +130,7 @@ public class GUI extends JPanel implements ActionListener {
 		fractalList.add(new SierpinskiMedian());
 		fractalList.add(new SierpinskiSquare());
 		fractalList.add(new SierpinskiTriangle());
+		fractalList.add(new SierpinskiTriangleOutter());
 		fractalList.add(new SpiralSquare());
 		fractalList.add(new Square());
 		fractalList.add(new SquareFlake());
@@ -143,6 +145,7 @@ public class GUI extends JPanel implements ActionListener {
 		fractalList.add(new Squares2());
 		fractalList.add(new Squares2Mod());
 		fractalList.add(new SquaresMod());
+		fractalList.add(new Triangles());
 		fractalList.add(new TSquare());
 		fractalList.add(new TernaryTree());
 		fractalList.add(new TetraDragon());

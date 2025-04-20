@@ -1,0 +1,110 @@
+import java.awt.Color;
+import java.awt.Paint;
+import java.awt.RadialGradientPaint;
+import java.util.*;
+import javax.swing.*;
+
+public class Triangles extends SimpleFractal {
+	protected List<FractalShape> triangles;
+	protected List<Triangle> nextTriangles;
+
+	public Triangles() {
+		super();
+		triangles = new LinkedList<FractalShape>();
+		nextTriangles = new LinkedList<Triangle>();
+		createBase();
+	}
+
+	protected Paint getForeground() {
+		MyPoint mid = newMinPoint.midPoint(newMaxPoint);
+		mid.y += mid.y * (1.0 / 10.0);
+
+		float[] dist = {0.3f, 1.0f};
+		Color[] colors = {Color.BLUE, Color.RED};
+
+		RadialGradientPaint paint =
+				new RadialGradientPaint(
+						(float) mid.x,
+						(float) mid.y,
+						(float) (mid.distance(newMinPoint) * (6.0 / 10.0)),
+						dist,
+						colors);
+		return paint;
+	}
+
+	public List<FractalShape> getFractal() {
+		return triangles;
+	}
+
+	public void clearFractal() {
+		createBase();
+	}
+
+	protected void createBase() {
+		MyPoint p2 = new MyPoint(0, HEIGHT);
+		MyPoint p3 = new MyPoint(WIDTH, HEIGHT);
+		MyPoint p1 = translate(p2, p3, p2.distance(p3), r60);
+
+		Triangle tri = new Triangle(p1, p2, p3);
+
+		triangles.clear();
+		triangles.add(tri);
+
+		nextTriangles.clear();
+		nextTriangles.add(tri);
+	}
+
+	public void next() {
+		MyPoint p1;
+		MyPoint p2;
+		MyPoint p3;
+		MyPoint m1;
+		MyPoint m2;
+		MyPoint m3;
+
+		List<Triangle> newTriangles = new LinkedList<Triangle>();
+		for(Triangle tri : nextTriangles) {
+			p1 = tri.p1;
+			p2 = tri.p2;
+			p3 = tri.p3;
+
+			m1 = p2.midPoint(p3);
+			m2 = p3.midPoint(p1);
+			m3 = p1.midPoint(p2);
+			
+			tri = new Triangle(
+				translate(p1, m3, p1.distance(m3), r180),
+				translate(p1, m2, p1.distance(m2), r180),
+				p1
+			);
+			newTriangles.add(tri);
+			triangles.add(tri);
+			
+			tri = new Triangle(
+				translate(p2, m1, p2.distance(m1), r180),
+				translate(p2, m3, p2.distance(m3), r180),
+				p2
+			);
+			newTriangles.add(tri);
+			triangles.add(tri);
+			
+			tri = new Triangle(
+				translate(p3, m2, p3.distance(m2), r180),
+				translate(p3, m1, p3.distance(m1), r180),
+				p3
+			);
+			newTriangles.add(tri);
+			triangles.add(tri);
+		}
+
+		nextTriangles = newTriangles;
+	}
+
+	public String toString() {
+		return "Triangles";
+	}
+
+	public static void main(String[] args) {
+		SimpleFractal.main(args);
+	}
+}
