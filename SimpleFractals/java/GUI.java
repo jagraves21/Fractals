@@ -95,6 +95,7 @@ public class GUI extends JPanel implements ActionListener {
 		fractalList.add(new KochLineMod());
 		fractalList.add(new KochMoss());
 		fractalList.add(new KochSnowflake());
+		fractalList.add(new KochTriangles());
 		fractalList.add(new LRepTile());
 		fractalList.add(new LRepTileMod());
 		fractalList.add(new Lace());
