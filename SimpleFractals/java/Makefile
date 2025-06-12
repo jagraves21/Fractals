@@ -1,4 +1,4 @@
-JAVAC = javac
+JAVAC = javac --release 8
 SRC = $(wildcard *.java)
 CLASSES = $(SRC:.java=.class)
 
