@@ -18,7 +18,7 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 	protected Random random;
 
 	public AbstractComplexFunction() {
-		c = new Complex(0,0);
+		c = new Complex();
 		random = new Random(0);
 	}
 
@@ -32,18 +32,18 @@ public abstract class AbstractComplexFunction implements ComplexFunction {
 		return 3;
 	}
 
-	public void random() {
-		c.re = random.nextDouble() * 2 - 1;
-		c.im = random.nextDouble() * 2 - 1;
-	}
-
-	public  void init() {
+	public void init() {
 		a = 0;
 		b = 0.01;
 		theta = 0;
 		thetaOff = 0.1;
 		c.re = 0; c.im = 0;
 		random.setSeed(0);
+	}
+
+	public void random() {
+		c.re = random.nextDouble() * 2 - 1;
+		c.im = random.nextDouble() * 2 - 1;
 	}
 
 	public void move() {
