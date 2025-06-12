@@ -84,9 +84,9 @@ public class Complex implements Comparable<Complex> {
 	}
 
 	public Complex divide(Complex that) {
-		if(that.isZero()) {
+		/*if(that.isZero()) {
 			throw new ArithmeticException("division by zero");
-		}
+		}*/
 
 		double d = that.re * that.re + that.im * that.im;
 		return new Complex((this.re * that.re + this.im * that.im)/d, (this.im*that.re - this.re*that.im)/d);
